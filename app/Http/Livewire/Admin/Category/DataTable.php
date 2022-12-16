@@ -73,7 +73,7 @@ class DataTable extends Component
         $this->getCacheData();
         $items = $this->getModelProperty();
 
-        return view('livewire.admin.' . $this->that . '.data-table', compact('items', $items))
+        return view('livewire.admin.' . $this->that . '.data-table', compact('items'))
             ->layout('layouts.admin');
     }
 }

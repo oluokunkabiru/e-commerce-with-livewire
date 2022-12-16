@@ -60,7 +60,7 @@ class Admin extends Component
                 }
             }
 
-            for ($i = 1, $k = $k; $i <= $m; $i++, $k++) {
+            for ($i = 1, $k = 1; $i <= $m; $i++, $k++) {
                 $days                      = $this->daysInMonth($i, $y);
                 $end                       = $y . '-' . $i . '-' . $days . ' 23:59:59';
                 $start                     = $y . '-' . $i . '-1 00:00:00';
