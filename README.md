@@ -1,5 +1,4 @@
-<p align="center"><a href="https://penielfabrics.com" target="_blank">
-<img width="60%" src="https://i.ibb.co/dmzR5sC/laravel-e-commerce-example-screenshot.png" alt="screenshot" border="0"></a></p>
+<p align="center"><a href="https://penielfabrics.com" target="_blank"><img width="60%" src="https://i.ibb.co/dmzR5sC/laravel-e-commerce-example-screenshot.png" alt="screenshot" border="0"></a></p>
 
 ### <a href="https://penielfabrics.com/dashboard" target="_blank">Live site</a>
 
