@@ -8,13 +8,13 @@ use CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine;
 class MediaController extends Controller
 {
     public function __construct(
-        public $modelType,
-        public $file = null,
-        public $path = null,
-        public $folder = null,
-        public $publicId = null,
+         $modelType,
+        $file = null,
+        $path = null,
+        $folder = null,
+        $publicId = null
     ) {
-        //
+
     }
 
     public static function set($modelType, $file = null, $folder = null, $filename = null)
