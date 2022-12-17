@@ -257,7 +257,7 @@ class DataEntry extends Component
 
                     if ($attribute['photo'] && method_exists($attribute['photo'], 'storeAs')) {
                         $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
-                        $media?->replace($attribute['id']);
+                        $media->replace($attribute['id']);
                     }
 
                     if ($productDetailUpdate) {
@@ -275,7 +275,7 @@ class DataEntry extends Component
                 } else {
                     $id    = $this->storeDetail($this->editId, $attribute, $key);
                     $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
-                    $media?->upload($id);
+                    $media->upload($id);
                 }
             }
 
@@ -290,7 +290,7 @@ class DataEntry extends Component
                     $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $product->slug . '__' . $key);
 
                     $id = $this->storeDetail($product->id, $attribute, $key);
-                    $media?->upload($id);
+                    $media->upload($id);
                 }
             }
         }

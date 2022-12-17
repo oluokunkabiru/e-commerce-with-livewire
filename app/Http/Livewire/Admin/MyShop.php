@@ -72,15 +72,15 @@ class MyShop extends Component
         ]);
 
         $media = MediaController::set('logo_primary', $validatedData['logo_primary'], 'My Shop', 'logo_primary');
-        $media?->replace(1);
+        $media->replace(1);
         unset($validatedData['logo_primary']);
 
         $media = MediaController::set('logo_secondary', $validatedData['logo_secondary'], 'My Shop', 'logo_secondary');
-        $media?->replace(1);
+        $media->replace(1);
         unset($validatedData['logo_secondary']);
 
         $media = MediaController::set('favicon', $validatedData['favicon'], 'My Shop', 'favicon');
-        $media?->replace(1);
+        $media->replace(1);
         unset($validatedData['favicon']);
 
         if (can('manage my shop')) {
