@@ -48,5 +48,6 @@ class Cart extends Component
         return view('livewire.cart')
             ->extends('layouts.app')
             ->section('contents');
+            
     }
 }

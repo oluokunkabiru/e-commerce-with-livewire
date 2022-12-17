@@ -50,9 +50,9 @@
         </div>
 
         <div class="d-flex">
-            <p class="smaller-font mr-3 text-gray text-line-through">${{ $attributeArr->price }}
+            <p class="smaller-font mr-3 text-gray text-line-through">₦{{ number_format($attributeArr->price2) }}
             </p>
-            <p class="smaller-font text-black">${{ $attributeArr->price }}</p>
+            <p class="smaller-font text-black">₦{{ number_format($attributeArr->price, 2) }}</p>
         </div>
 
         <div class="mb-2 editor-text">

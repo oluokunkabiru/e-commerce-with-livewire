@@ -25,23 +25,35 @@ class CheckoutForm extends Component
 
     protected $listeners = ["submit"];
 
+
+    // protected $rules = [
+
+    //     'name' => 'required|min:6',
+
+    //     'email' => 'required|email',
+
+    // ];
+
+
     public function rules()
     {
-        return [
-            'name'     => "required",
+        return
+        [
+            'name'     => "required|string",
             'email'    => "required|email",
-            'mobile'   => "required",
+            'mobile'   => "required|string",
             'zip'      => "required|numeric",
-            'address'  => "required",
-            'city'     => "required",
-            "state"    => "required",
-            "company"  => "nullable",
+            'address'  => "required|string",
+            'city'     => "required|string",
+            "state"    => "required|string",
+            "company"  => "nullable|string",
             "password" => Rule::requiredIf(!auth()->check()),
         ];
     }
 
-    public function submit($stripeToken)
+    public function submit($token)
     {
+        // dd($token);
         $validatedData = $this->validate();
 
         $credentials = [
@@ -90,18 +102,19 @@ class CheckoutForm extends Component
             $message = null;
 
             try {
-                Stripe::charges()->create([
-                    'amount'        => $order->final_price,
-                    'currency'      => 'USD',
-                    'source'        => $stripeToken["id"],
-                    'description'   => 'This payments belongs to order id ' . $order->id,
-                    'receipt_email' => $order->email,
-                    'metadata'      => [],
-                ]);
+
+                // Stripe::charges()->create([
+                //     'amount'        => $order->final_price,
+                //     'currency'      => 'USD',
+                //     'source'        => $stripeToken["id"],
+                //     'description'   => 'This payments belongs to order id ' . $order->id,
+                //     'receipt_email' => $order->email,
+                //     'metadata'      => [],
+                // ]);
 
                 Order::find($order->id)->update([
-                    'payment_status' => 'success',
-                    'payment_type'   => $stripeToken["type"],
+                    'payment_status' => $token['status'],
+                    'payment_type'   => $token["message"],
                 ]);
             } catch (CardErrorException $e) {
                 $message = $e->getMessage();

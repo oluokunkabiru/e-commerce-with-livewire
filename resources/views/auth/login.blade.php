@@ -22,8 +22,8 @@
           <form method="POST" action="{{ route('login') }}" class="p-relative" id="login-form">
             @csrf
 
-            <x-input value="{{ old('email') ?? 'ecom@mail.com' }}" type="email" name="email" />
-            <x-input value="secret" type="password" name="password" />
+            <x-input value="{{ old('email') }}" type="email" name="email" />
+            <x-input type="password" name="password" />
 
             <a href="{{ route('password.request') }}" class="text-black smaller-font float-end mt-2">Forgot
               password?</a>

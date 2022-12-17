@@ -46,7 +46,7 @@
                             </td>
 
                             <td>
-                                <p class="small-font text-black f-300">${{ $cart->attribute->price * $cart->qty }}</p>
+                                <p class="small-font text-black f-300">₦{{ number_format($cart->attribute->price * $cart->qty, 2) }}</p>
                             </td>
                             <td class="text-right">
                                 <button data-id="{{ $cart->id }}"
@@ -62,7 +62,7 @@
                 <div class="p-4 bg-light smallest-font text-uppercase">
                     <div class="d-flex justify-content-between">
                         <p>Cart total</p>
-                        <p class="f-500">${{ $total }}</p>
+                        <p class="f-500">₦{{ number_format($total, 2) }}</p>
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <a href="{{ route('shop') }}" class="btn btn-lg btn-dark">

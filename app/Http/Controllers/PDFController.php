@@ -11,9 +11,9 @@ class PDFController extends Controller
     {
         $order = new Order;
 
-        if (!isAdminLogin()) {
-            $order = $order->where("user_id", auth()->id());
-        }
+        // if (!isAdminLogin()) {
+        //     $order = $order->where("user_id", auth()->id());
+        // }
 
         $order = $order->with("details")->findOrFail($id);
 

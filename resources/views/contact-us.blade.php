@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div id="goggleMap">
-                    {{ $myShop->map }}
+                    {!! $myShop->map !!}
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">

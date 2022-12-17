@@ -37,9 +37,9 @@
     </div>
 
     <div class="h-25px d-flex justify-content-center">
-        <p class="text-line-through smaller-font f-500 mr-3 text-gray">${{ $product->onSaleAttributes->first()->mrp }}
+        <p class="text-line-through smaller-font f-500 mr-3 text-gray">₦{{ number_format($product->onSaleAttributes->first()->mrp, 2) }}
         </p>
-        <p class="smaller-font text-black f-600">${{ $product->onSaleAttributes->first()->price }}</p>
+        <p class="smaller-font text-black f-600">₦{{ number_format($product->onSaleAttributes->first()->price) }}</p>
     </div>
     <p class="smaller-font pb-3 {{ $moreAttr > 0 ? 'text-black' : 'invisible' }}">{{ $moreAttr }} more
         attribute{{ $moreAttr > 1 ? 's' : '' }}</p>

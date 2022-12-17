@@ -18,7 +18,7 @@
         </div>
         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
             @forelse ($mails as $mail)
-                <a href="{{ route('dashboard.contacts_detail', $mail->id) }}" class="mdc-list-item" role="menuitem">
+                <a href="{{ route('dashboard.contacts.detail', $mail->id) }}" class="mdc-list-item" role="menuitem">
                     <div class="item-content d-flex align-items-start flex-column justify-content-center">
                         <h6 class="item-subject font-weight-normal">{{ substr($mail->body, 0, 30) }}</h6>
                         <small class="text-muted"> {{ $mail->created_at->diffForHumans() }} </small>

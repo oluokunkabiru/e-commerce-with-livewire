@@ -38,8 +38,8 @@
                 <div class="">
                     <div id="priceRangeSlider" class="mb-3 front-range-slider"></div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="smaller-font f-500 m-0">$<span id="leftValue">{{ $minPrice }}</span> - $<span
-                                id="rightValue">{{ $maxPrice }}</span>
+                        <p class="smaller-font f-500 m-0">₦<span id="leftValue">{{ number_format($minPrice,2) }}</span> - ₦<span
+                                id="rightValue">{{ number_format($maxPrice, 2) }}</span>
                         </p>
                         <button id="priceFilterBtn" class="btn btn-dark btn-sm" disabled>ok</button>
                     </div>

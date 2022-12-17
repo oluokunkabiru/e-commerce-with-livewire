@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             <span
-                                class="rounded-3 p-2 f-500 text-light text-uppercase m-0 smaller-font bg-{{ $order->order_status }}">
+                                class="rounded-3 p-2 f-500 text-light text-uppercase m-0 smaller-font bg-{{ $order->order_status=="success"?"success":"warning" }}">
                                 {{ $order->order_status }}
                                 @if ($order->cancel_by)
                                     by {{ $order->cancel_by }}
@@ -52,17 +52,17 @@
                         </td>
                         <td>
                             <span
-                                class="rounded-3 p-2 f-500 text-light text-uppercase m-0 smaller-font bg-{{ $order->payment_status }}">{{ $order->payment_status }}</span>
+                                class="rounded-3 p-2 f-500 text-light text-uppercase m-0 smaller-font bg-{{ $order->payment_status=="success"?"success":"danger" }}">{{ $order->payment_status }}</span>
                         </td>
                         <td class="action-td text-right justify-content-end align-items-center d-flex">
                             @if ($order->cancel_by && $order->cancel_by != 'admin' && $order->order_status != 'success')
                                 <button wire:click="reOrder({{ $order->id }})"
-                                    class="btn mr-2 btn-floating btn-light btn-sm" data-mdb-toggle="tooltip"
+                                    class="btn mr-2 btn-floating btn-danger btn-sm" data-mdb-toggle="tooltip"
                                     title="Order again"><i class="fas fa-undo"></i></button>
                             @elseif($order->order_status != 'success' && $order->order_status != 'waiting' &&
                                 $order->cancel_by != 'admin')
                                 <button wire:click="cancelOrder({{ $order->id }})"
-                                    class="btn mr-2 btn-floating btn-light btn-sm" data-mdb-toggle="tooltip"
+                                    class="btn mr-2 btn-floating btn-info btn-sm" data-mdb-toggle="tooltip"
                                     title="Cancel Order"><i class="fas fa-times"></i></button>
                             @endif
                             <a target="_self" href="{{ route('pdf', $order->id) }}"

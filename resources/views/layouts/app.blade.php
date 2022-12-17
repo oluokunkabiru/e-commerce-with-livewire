@@ -150,7 +150,7 @@
     @livewire('child.footer')
 
     <div class="p-4 text-center bg-black w-100">
-        <h4 class="small-font text-light p-4 f-300">Copyright&copy; <a href="{{ route('home') }}" class="text__primary">e-com</a> {{ date('Y') }}. All
+        <h4 class="small-font text-light p-4 f-300">Copyright&copy; <a href="{{ route('home') }}" class="text__primary">{{ config('app.name') }}</a> {{ date('Y') }}. All
             Right
             Reserved.</h4>
     </div>

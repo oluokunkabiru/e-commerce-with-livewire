@@ -223,14 +223,14 @@
                             <tr>
                                 <td class="text-left">
                                     <h4>{{ $item->product->name }}</h4>
-                                    <p>${{ $item->productDetails->price }}</p>
+                                    <p><span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($item->productDetails->price,2) }}</p>
                                 </td>
                                 <td class="unit">
                                     <p class="small-font text-black f-300">{{ $item->qty }}</p>
                                 </td>
                                 <td class="qty">
                                     <p class="small-font text-black f-300">
-                                        ${{ $item->productDetails->price * $item->qty }}</p>
+                                        <span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($item->productDetails->price * $item->qty, 2) }}</p>
                                 </td>
                             </tr>
                         @endforeach
@@ -238,21 +238,21 @@
                     <tfoot>
                         <tr>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>${{ $order->total_price }}</td>
+                            <td><span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($order->total_price,2) }}</td>
                         </tr>
                         <tr>
-                            <td colspan="2">TAX 25%</td>
-                            <td>$0.00</td>
+                            <td colspan="2">TAX </td>
+                            <td><span style="font-family: DejaVu Sans;">&#x20A6;</span> 0.00</td>
                         </tr>
                         @if ($order->total_price - $order->final_price > 0)
                             <tr>
                                 <td colspan="2">Discount</td>
-                                <td>${{ $order->total_price - $order->final_price }}</td>
+                                <td><span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($order->total_price - $order->final_price, 2) }}</td>
                             </tr>
                         @endif
                         <tr>
                             <td colspan="2">GRAND TOTAL</td>
-                            <td>${{ $order->final_price }}</td>
+                            <td><span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($order->final_price) }}</td>
                         </tr>
                     </tfoot>
                 </table>

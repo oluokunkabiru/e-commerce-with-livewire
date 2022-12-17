@@ -8,7 +8,7 @@ Dashboard
         <div class="mdc-layout-grid__inner">
 
             @include('admin.dashboard.overview-card', ['key' => 'one', "label" => "Earning", "value" =>
-            $totalEarning, "logo" => "attach_money", "tooltip" => "this month", "type" => "success"])
+            $totalEarning, "logo" => "₦", "tooltip" => "this month", "type" => "success"])
 
             @include('admin.dashboard.overview-card', ['key' => 'two', "label" => "Order delivered", "value" =>
             $totalOrder, "logo" => "check_circle", "tooltip" => "this month", "type" => "primary"])

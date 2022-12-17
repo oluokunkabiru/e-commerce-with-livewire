@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Child;
 
 use App\Models\Cart;
 use App\Models\ProductDetail;
-use App\Models\wishlist;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -101,12 +101,12 @@ class ProductDetailPartial extends Component
         $aid = '' != $aid ? $aid : $this->attribute;
 
         if (auth()->check()) {
-            $wishlist = wishlist::where('user_id', auth()->user()->id)
+            $wishlist = Wishlist::where('user_id', auth()->user()->id)
                 ->where('product_id', $pid)
                 ->where('product_attr_id', $aid)->first();
 
             if (!$wishlist) {
-                wishlist::create([
+                Wishlist::create([
                     'user_id'         => auth()->user()->id,
                     'product_id'      => $pid,
                     'product_attr_id' => $aid,
