@@ -62,13 +62,13 @@ class DataEntry extends Component
         $status = "added";
 
         if ('' != $this->editId && $this->brand && can('edit brand')) {
-            $media?->replace($this->editId);
+            $media??$media->replace($this->editId);
 
             $this->brand->update($form);
             $status = "updated";
         } else if (can('add brand')) {
             $brand = Brand::create($form);
-            $media?->upload($brand->id);
+            $media??$media->upload($brand->id);
         }
 
         session()->flash('success_msg', $this->thatUp . ' ' . $status);

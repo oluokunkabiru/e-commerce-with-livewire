@@ -68,13 +68,13 @@ class DataEntry extends Component
 
         if ('' != $this->editId && $this->category && can('edit category')) {
 
-            $media?->replace($this->editId);
+            $media?? $media->replace($this->editId);
 
             $this->category->update($form);
             $status = "updated";
         } else if (can('add category')) {
             $category = Category::create($form);
-            $media?->upload($category->id);
+            $media??$media->upload($category->id);
         }
 
         session()->flash('success_msg', 'Category ' . $status);
