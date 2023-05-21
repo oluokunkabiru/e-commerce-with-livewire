@@ -34,7 +34,13 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-
+        'media' => [
+            'driver' => 'local',
+            'root'   => public_path('uploads/media'),
+            'url'   => '/uploads/media',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

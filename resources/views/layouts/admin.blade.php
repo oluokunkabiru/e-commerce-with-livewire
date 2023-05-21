@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('admins/css/custom.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ config('app.favicon') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ @settings()->getMedia('favicon')->first()->getFullUrl() }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
     @yield('extra-css')
@@ -34,7 +34,10 @@
         <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
             <div class="mdc-drawer__header">
                 <a href="{{ route('dashboard.home') }}" class="brand-logo">
-                    <img class="img-fluid" src="{{ config('app.secondary_logo') }}" alt="logo">
+                    <img class="img-fluid" src="{{ @settings()->getMedia('logo_secondary')->first()->getFullUrl() }}" alt="{{ settings()->name }}">
+
+
+
                 </a>
             </div>
             <div class="mdc-drawer__content">

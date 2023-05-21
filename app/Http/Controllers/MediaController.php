@@ -33,6 +33,7 @@ class MediaController extends Controller
         }
     }
 
+    
     public function upload($modelId)
     {
         if ($this->file) {

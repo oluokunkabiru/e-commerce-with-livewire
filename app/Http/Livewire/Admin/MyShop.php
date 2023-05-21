@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Http\Controllers\MediaController;
+use App\Models\MyShop as ModelsMyShop;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -11,7 +12,6 @@ use Livewire\WithFileUploads;
 class MyShop extends Component
 {
     use WithFileUploads;
-
     public $name;
     public $short_description;
     public $mobile1;
@@ -32,11 +32,14 @@ class MyShop extends Component
     public $timezone;
     public $timezones;
 
+
     public $logoPrimaryPreview;
     public $logoSecondaryPreview;
     public $faviconPreview;
 
+
     public $myShop;
+
 
     public function photoValidation($attribute, $value, $fail)
     {
@@ -70,25 +73,78 @@ class MyShop extends Component
             'logo_secondary'    => 'nullable|image|mimes:jpeg,png,jpg,svg',
             'favicon'           => 'nullable|mimes:jpeg,png,jpg,svg,ico',
         ]);
+        // return $validatedData;
 
-        $media = MediaController::set('logo_primary', $validatedData['logo_primary'], 'My Shop', 'logo_primary');
-        $media??$media->replace(1);
-        unset($validatedData['logo_primary']);
+        // $media = MediaController::set('logo_primary', $validatedData['logo_primary'], 'My Shop', 'logo_primary');
 
-        $media = MediaController::set('logo_secondary', $validatedData['logo_secondary'], 'My Shop', 'logo_secondary');
-        $media??$media->replace(1);
-        unset($validatedData['logo_secondary']);
+        // $media??$media->replace(1);
+        // unset($validatedData['logo_primary']);
 
-        $media = MediaController::set('favicon', $validatedData['favicon'], 'My Shop', 'favicon');
-        $media??$media->replace(1);
-        unset($validatedData['favicon']);
+        // $media = MediaController::set('logo_secondary', $validatedData['logo_secondary'], 'My Shop', 'logo_secondary');
+        // $media??$media->replace(1);
+        // unset($validatedData['logo_secondary']);
+
+        // $media = MediaController::set('favicon', $validatedData['favicon'], 'My Shop', 'favicon');
+        // $media??$media->replace(1);
+        // unset($validatedData['favicon']);
+
+        // $setting->addMediaFromRequest('head_master_signature')
+        // ->usingFileName("head_master_signature.png")
+        // ->toMediaCollection("head_master_signature");
 
         if (can('manage my shop')) {
             if ($this->myShop) {
+                if ($validatedData['favicon']) {
+                    $this->myShop->clearMediaCollection('favicon');
+                    $this->myShop->addMedia($validatedData['favicon'])
+                        ->usingFileName("favicon.png")
+                        ->toMediaCollection("favicon");
+                }
+
+                if ($validatedData['logo_secondary']) {
+                    $this->myShop->clearMediaCollection('logo_secondary');
+                    $this->myShop->addMedia($validatedData['logo_secondary'])
+                        ->usingFileName("logo_secondary.png")
+                        ->toMediaCollection("logo_secondary");
+                }
+
+                if ($validatedData['logo_primary']) {
+                    $this->myShop->clearMediaCollection('logo_primary');
+                    $this->myShop->addMedia($validatedData['logo_primary'])
+                        ->usingFileName("logo_primary.png")
+                        ->toMediaCollection("logo_primary");
+                }
+
+                unset($validatedData['favicon']);
+                unset($validatedData['logo_primary']);
+                unset($validatedData['logo_secondary']);
                 $this->myShop->update($validatedData);
+
             } else {
-                \App\Models\MyShop::create($validatedData);
+                ModelsMyShop::create($validatedData)
+                    ->addMedia($validatedData['logo_primary'])
+                    ->usingFileName("logo_primary.png")
+                    ->toMediaCollection("logo_primary")
+
+                    ->addMedia($validatedData['logo_secondary'])
+                    ->usingFileName("logo_secondary.png")
+                    ->toMediaCollection("logo_secondary")
+
+                    ->addMedia($validatedData['favicon'])
+                    ->usingFileName("favicon.png")
+                    ->toMediaCollection("favicon");
+
+
+
+
+
+
+
+                unset($validatedData['favicon']);
+                unset($validatedData['logo_primary']);
+                unset($validatedData['logo_secondary']);
             }
+
         }
 
         Cache::forget('app.info');
@@ -101,7 +157,7 @@ class MyShop extends Component
         $this->timezone  = config('app.timezone');
         $this->timezones = timezone_identifiers_list();
 
-        $this->myShop = \App\Models\MyShop::with(['logoPrimary', 'logoSecondary', 'favicon'])->first();
+        $this->myShop = ModelsMyShop::with(['logoPrimary', 'logoSecondary', 'favicon'])->first();
         if ($this->myShop) {
             $this->name                 = $this->myShop->name;
             $this->short_description    = $this->myShop->short_description;
@@ -128,5 +184,9 @@ class MyShop extends Component
     {
         return view('livewire.admin.my-shop')
             ->layout('layouts.admin');
+
+            // $setting->addMediaFromRequest('head_master_signature')
+            // ->usingFileName("head_master_signature.png")
+            // ->toMediaCollection("head_master_signature");
     }
 }

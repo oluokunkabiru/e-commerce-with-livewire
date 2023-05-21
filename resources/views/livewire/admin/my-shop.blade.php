@@ -13,6 +13,8 @@
         <div class="mdc-card">
           <h6 class="card-title">
             My Shop
+
+
           </h6>
           <div class="template-demo">
             <form wire:submit.prevent='submit'>

@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>@yield('title') - {{ config('app.name') }}</title>
+    <title>@yield('title') - {{ settings()->name }}</title>
     <!-- fabicon -->
-    <link rel="shortcut icon" href="{{ config('app.favicon') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ @settings()->getMedia('favicon')->first()->getFullUrl() }}" type="image/x-icon" />
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
