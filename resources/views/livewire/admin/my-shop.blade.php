@@ -302,6 +302,7 @@
                 </div>
 
                 @if ($logo_secondary)
+                <h1>{{ $logo_secondary }}   {{ $logo_secondary->temporaryUrl() }}</h1>
                   @if ($logoSecondaryPreview == '')
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
