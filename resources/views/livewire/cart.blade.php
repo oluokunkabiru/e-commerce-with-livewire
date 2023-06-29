@@ -33,7 +33,7 @@
                             <td class="image-td"><a
                                     href="{{ route('product.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
                                     class="btn btn-transparent p-0 shadow-0">
-                                    <img src="{{ $cart->attribute->photo->url }}" class="img-fluid">
+                                    <img src="{{ $cart->attribute->getMedia('products')->first() !=null ? $cart->attribute->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid">
                                 </a></td>
                             <td>
                                 <h4 class="small-font f-500 text-nowrap">{{ $cart->product->name }}</h4>

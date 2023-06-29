@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="logo-container">
-                    <img src="{{ config('app.secondary_logo') }}" class="img-fluid" alt="e-com">
+                    <img src="{{ @settings()->getMedia('logo_secondary')->first()!=null?@settings()->getMedia('logo_secondary')->first()->getFullUrl():null }}" class="img-fluid" alt="e-com">
                 </div>
                 <p class="smallest-font text-light mt-4">{{ $myShop->short_description }}</p>
                 <div class="d-flex mt-4">

@@ -29,7 +29,7 @@
               <td class="image-td"><a
                   href="{{ route('product.detail', $wishlist->product->slug) . '?attribute=' . $wishlist->attribute->id }}"
                   class="btn btn-transparent p-0 shadow-0">
-                  <img src="{{ $wishlist->attribute->photo->url }}" class="img-fluid">
+                  <img src="{{ $wishlist->attribute->getMedia('products')->first() !=null ? $wishlist->attribute->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid">
                 </a></td>
               <td>
                 <h4 class="small-font f-500 text-nowrap">{{ $wishlist->product->name }}</h4>

@@ -9,7 +9,7 @@
               <div class="col-md-12">
                 <div class="slide">
                   <div class="slider__inner">
-                    <img src="{{ $brand->photo->url }}" alt="" class="img-fluid">
+                    <img src="{{ $brand->getMedia('brands')->first()!=null?$brand->getMedia('brands')->first()->getFullUrl():null  }}" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>

@@ -7,7 +7,7 @@
             @foreach ($product->details as $attr)
                 <div class="tab-pane fade {{ $attr->id == $attribute ? 'show active' : '' }}" id="img{{ $attr->id }}"
                     role="tabpanel" aria-labelledby="img{{ $attr->id }}">
-                    <img observe="true" observe-src="{{ $attr->photo->url }}" class="img-fluid" alt="">
+                    <img observe="true" observe-src="{{  $attr->getMedia('products')->first() !=null ?$attr->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
                     <div style="height: 450px;" class="img-progress">
                         <div class="spinner-border text__primary" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -26,7 +26,7 @@
                         class="nav-link {{ $attr->id == $attribute ? 'active' : '' }} btn p-0 btn-transparent"
                         id="img-link{{ $attr->id }}" data-mdb-toggle="tab" href="#img{{ $attr->id }}" role="tab"
                         aria-selected="true">
-                        <img observe="true" observe-src="{{ $attr->photo->url }}" class="img-fluid"
+                        <img observe="true" observe-src="{{  $attr->getMedia('products')->first() !=null ?$attr->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid"
                             alt="">
                         <div style="height: 10px;" class="img-progress">
                             <div class="spinner-border text__primary" role="status">

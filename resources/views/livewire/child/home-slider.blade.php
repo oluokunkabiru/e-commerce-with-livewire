@@ -17,7 +17,7 @@
             </div>
             <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
               <div class="slide__thumb">
-                <img class="img-fluid" src="{{ $slider->photo->url }}">
+                <img class="img-fluid" src="{{  $slider->getMedia('slider')->first() !=null ?$slider->getMedia('slider')->first()->getFUllUrl():null }}">
               </div>
             </div>
           </div>

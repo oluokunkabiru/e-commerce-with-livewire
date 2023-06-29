@@ -8,7 +8,7 @@
         <div class="my-2 d-flex justify-content-between align-items-center">
             <a href="{{ route('product.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
                 class="btn btn-transparent p-0 shadow-0">
-                <img src="{{ $cart->attribute->photo->url }}" alt="" width="60px" class="img-fluid">
+                <img src="{{ $cart->attribute->getMedia('products')->first() !=null ? $cart->attribute->getMedia('products')->first()->getFUllUrl():null }}" alt="" width="60px" class="img-fluid">
             </a>
             <div class="">
                 <p class="smallest-font mb-0">{{ $cart->product->name }}({{ $cart->qty }})</p>
