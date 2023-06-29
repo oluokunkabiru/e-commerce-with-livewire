@@ -35,7 +35,7 @@
 
                                 @if ($hasAttr)
                                     <div class="d-content" wire:sortable='resortAttr'>
-
+                                        {{-- {{ print_r($attributes) }} --}}
                                         @foreach ($attributes as $loopIndex => $attribute)
 
                                             <div wire:sortable.item="{{ $loopIndex }}" wire:key='{{ $loopIndex }}'
@@ -56,8 +56,8 @@
                                                     wire:click="$emit('removeAttribute', {{ $loopIndex }})"
                                                     class="removeButton text-dark btn-responsive mdc-icon-button material-icons">close</button>
 
-                                                <img src="{{ $attribute['src'] }}" alt="" class="img-fluid">
-
+                                                <img src="{{ $attribute['src'] }}" alt="good day" class="img-fluid">
+                                                    {{-- <p>{{ print_r($attribute) }}</p> --}}
                                                 @error('attributes.' . $loopIndex . '.photo')
                                                     <p class="text-danger m-0">{{ $message }}</p>
                                                 @enderror

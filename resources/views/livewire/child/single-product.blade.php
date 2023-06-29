@@ -22,7 +22,8 @@
 
     <a class="btn mb-2 btn-light p-0 shadow-0"
         href="{{ route('product.detail', [$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id]) }}">
-        <img observe="true" observe-src="{{ $product->onSaleAttributes->first()->photo->url }}"
+        <img observe="true" observe-src="{{ ($product->onSaleAttributes->first()) }}"
+        {{-- <img observe="true" observe-src="{{ $product->onSaleAttributes->first()->photo->url }}" --}}
             class="img-fluid my-4" alt="">
         <div style="height: 255px;" class="img-progress">
             <div class="spinner-border text__primary" role="status">

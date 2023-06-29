@@ -8,42 +8,51 @@ use CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine;
 class MediaController extends Controller
 {
     public function __construct(
-        public $modelType,
-        public $file = null,
-        public $path = null,
-        public $folder = null,
-        public $publicId = null,
-    ) {
+         $modelType,
+         $file = null,
+         $collection = null,
+         $name = null
+    )
+
+    {
         //
     }
 
-    public static function set($modelType, $file = null, $folder = null, $filename = null)
+    public static function set($modelType, $file = null, $collection = null, $filename=null)
     {
         if ($file) {
             $name = $filename . '-' . time();
             // $name = $filename . '-' . time() . '.' . $file->extension();
             // $path = $file->storeAs($folder, $name, 'public');
 
-            $result = $file->storeOnCloudinaryAs($folder, $name);
+            // $result = $file->storeOnCloudinaryAs($folder, $name);
 
-            $pid  = $result->getPublicId();
-            $path = $result->getSecurePath();
+            // $pid  = $result->getPublicId();
+            // $path = $result->getSecurePath();
 
-            return new static($modelType, $file, $path, $folder, $pid);
+
+            return new static($modelType, $file, $collection, $name);
+            // ModelsMyShop::create($validatedData)
+        //    $modelType->addMedia($$file)
+        //     ->usingFileName($name)
+        //     ->toMediaCollection($collection)
         }
     }
 
-    
+
     public function upload($modelId)
     {
-        if ($this->file) {
-            Media::create([
-                'model_id'   => $modelId,
-                'model_type' => $this->modelType,
-                'url'        => $this->path,
-                'public_id'  => $this->publicId,
-            ]);
-        }
+        // if ($this->file) {
+        //     Media::create([
+        //         'model_id'   => $modelId,
+        //         'model_type' => $this->modelType,
+        //         'url'        => $this->path,
+        //         'public_id'  => $this->publicId,
+        //     ]);
+        // }
+       $this->modelType->addMedia($this->file)
+        ->usingFileName($this->name)
+        ->toMediaCollection($this->collection);
     }
 
     public function replace($modelId)

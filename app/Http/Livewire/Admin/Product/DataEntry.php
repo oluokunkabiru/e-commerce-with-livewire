@@ -247,17 +247,20 @@ class DataEntry extends Component
         ];
         $status = "added";
 
-        if ('' != $this->editId && $this->product && can('edit product')) {
+        if ($this->editId !='' && $this->product && can('edit product')) {
             $this->product->update($form);
 
             foreach ($this->attributes as $key => $attribute) {
-                if ('' != $attribute['id']) {
+                if ($attribute['id']!='') {
 
                     $productDetailUpdate = ProductDetail::where('product_id', $this->editId)->where('id', $attribute['id'])->first();
 
                     if ($attribute['photo'] && method_exists($attribute['photo'], 'storeAs')) {
-                        $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
-                        $media??$media->replace($attribute['id']);
+                        $productDetailUpdate->clearMediaCollection('products');
+                        $productDetailUpdate->addMedia($attribute['photo'])
+                        ->toMediaCollection('products');
+                        // $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
+                        // $media??$media->replace($attribute['id']);
                     }
 
                     if ($productDetailUpdate) {
@@ -273,9 +276,12 @@ class DataEntry extends Component
                         ]);
                     }
                 } else {
-                    $id    = $this->storeDetail($this->editId, $attribute, $key);
-                    $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
-                    $media??$media->upload($id);
+                    ProductDetail::where('product_id', $this->editId)->first();
+                    // ->addMedia($attribute['photo'])
+                    // ->toMediaCollection('products');
+                    $this->storeDetail($this->editId, $attribute, $key);
+                    // $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
+                    // $media??$media->upload($id);
                 }
             }
 
@@ -287,10 +293,14 @@ class DataEntry extends Component
 
             if ($this->hasAttr) {
                 foreach ($this->attributes as $key => $attribute) {
-                    $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $product->slug . '__' . $key);
+                    // $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $product->slug . '__' . $key);
 
-                    $id = $this->storeDetail($product->id, $attribute, $key);
-                    $media??$media->upload($id);
+                    $this->storeDetail($product->id, $attribute, $key);
+                    // $media??$media->upload($id);
+
+                    // ProductDetail::addMedia($attribute['photo'])
+                    // ->toMediaCollection('products');
+
                 }
             }
         }
@@ -302,7 +312,7 @@ class DataEntry extends Component
     public function storeDetail($pid, $attribute, $key)
     {
         if (can('add product')) {
-            $product = ProductDetail::create([
+            $pro = ProductDetail::create([
                 'sku'        => $attribute['sku'],
                 'mrp'        => $attribute['mrp'],
                 'price'      => $attribute['price'],
@@ -312,9 +322,10 @@ class DataEntry extends Component
                 'product_id' => $pid,
                 'order_id'   => $key + 1,
                 'status'     => $attribute['status'],
-            ]);
+            ])->addMedia($attribute['photo'])
+            ->toMediaCollection('products');
 
-            return $product->id;
+            return $pro->id;
         }
     }
 
@@ -349,7 +360,7 @@ class DataEntry extends Component
                 foreach ($this->product->productDetails as $key => $productDetailDt) {
                     $this->attributes[$key] = [
                         'photo'     => $productDetailDt->photos,
-                        'src'       => $productDetailDt->photo->url,
+                        'src'       => $productDetailDt->getMedia('products')->first()!=null ? $productDetailDt->getMedia('products')->first()->getFullUrl():null,
                         'color'     => $productDetailDt->color_id,
                         'size'      => $productDetailDt->size_id,
                         'sku'       => $productDetailDt->sku,

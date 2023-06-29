@@ -252,14 +252,14 @@
                 </div>
 
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
-                  <input wire:loading.attr='disabled' type="file" wire:target='logo_primary' class="d-none"
+                  <input wire:loading.attr='disabled' type="file" accept="image/*" wire:target='logo_primary' class="d-none"
                     wire:model='logo_primary' id="logo_primary">
                   <label for="logo_primary" wire:loading.class='disabled' wire:target='logo_primary'
                     class="mdc-button mdc-button--unelevated filled-button--success mdc-ripple-upgraded text-uppercase w-100 py-4">
                     primary logo</label>
                 </div>
 
-                @if ($logo_primary)
+                @if ($logo_primary && $logo_primary->temporaryUrl())
                   @if ($logoPrimaryPreview == '')
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
@@ -294,15 +294,15 @@
                 @enderror
 
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
-                  <input wire:loading.attr='disabled' type="file" wire:target='logo_secondary' class="d-none"
+                  <input wire:loading.attr='disabled' type="file"  accept="image/*" wire:target='logo_secondary' class="d-none"
                     wire:model='logo_secondary' id="logo_secondary">
                   <label for="logo_secondary" wire:loading.class='disabled' wire:target='logo_secondary'
                     class="mdc-button mdc-button--unelevated filled-button--dark mdc-ripple-upgraded text-uppercase w-100 py-4">
                     Secondary logo</label>
                 </div>
 
-                @if ($logo_secondary)
-                <h1>{{ $logo_secondary }}   {{ $logo_secondary->temporaryUrl() }}</h1>
+                @if ($logo_secondary && $logo_secondary->temporaryUrl())
+                {{-- <h1>{{ $logo_secondary }}   {{ $logo_secondary->temporaryUrl() }}</h1> --}}
                   @if ($logoSecondaryPreview == '')
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
@@ -337,7 +337,7 @@
 
 
                 <div class="d-flex align-items-center mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
-                  <h3 class="mr-3">Fabicon</h3> <input wire:loading.attr='disabled' type="file" wire:target='favicon'
+                  <h3 class="mr-3">Fabicon</h3> <input wire:loading.attr='disabled'  accept="image/*" type="file" wire:target='favicon'
                     wire:model='favicon' class="image-input" id="favicon">
                 </div>
                 @if ($faviconPreview != '')
