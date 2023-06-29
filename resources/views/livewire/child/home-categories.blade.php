@@ -4,7 +4,7 @@
             <div class="product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
                 <a class="btn mb-1 btn-light p-0 shadow-0" href="{{ route('category', $category->slug) }}">
                     <img
-                        observe='true' observe-src="{{  $category->getMedia('category')->first() !=null ?$category->getMedia('category')->first()->getFUllUrl():null }}" class="img-fluid"
+                        observe='true' observe-src="{{  $category->getMedia('category')->first() !=null ?$category->getMedia('category')->first()->getFUllUrl():null }}" style="width:100%; height:150px; object-fit:cover" class="img-fluid"
                         alt="">
                     <div style="height: 395px;" class="img-progress">
                         <div class="spinner-border text__primary" role="status">

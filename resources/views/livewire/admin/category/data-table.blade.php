@@ -87,7 +87,7 @@
                                         </td>
 
                                         <td class="mdc-data-table__cell img-td">
-                                            <img observe='true' observe-src="{{ $item->photo->url }}" alt=""
+                                            <img observe='true' observe-src="{{ $item->getMedia('category')->first() !=null ?$item->getMedia('category')->first()->getFUllUrl():null }}" alt=""
                                                 class="img-fluid">
                                         </td>
                                         @include('admin.data-table.basic-tbody-right')

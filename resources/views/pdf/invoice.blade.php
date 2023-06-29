@@ -214,6 +214,7 @@
                     <thead>
                         <tr>
                             <th>Product</th>
+                            <th>Image</th>
                             <th>Qty</th>
                             <th>Final price</th>
                         </tr>
@@ -224,6 +225,12 @@
                                 <td class="text-left">
                                     <h4>{{ $item->product->name }}</h4>
                                     <p><span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($item->productDetails->price,2) }}</p>
+                                </td>
+                                <td class="unit">
+                                    <p class="small-font text-black f-300">
+                                        {{ $item->productDetails->getMedia('products')->first() !=null ? $item->productDetails->getMedia('products')->first()->getFUllUrl():null }}
+                                        {{-- <img src="{{ $item->productDetails->getMedia('products')->first() !=null ? $item->productDetails->getMedia('products')->first()->getFUllUrl():null }}" style="width: 100%; height:40px; object-fit:cover" alt=""> --}}
+                                    </p>
                                 </td>
                                 <td class="unit">
                                     <p class="small-font text-black f-300">{{ $item->qty }}</p>

@@ -71,13 +71,20 @@ class DataEntry extends Component
         $status = "added";
 
         if ('' != $this->editId && $this->slider && can('edit slider')) {
-            $media??$media->replace($this->editId);
+            // $media??$media->replace($this->editId);
 
             $this->slider->update($form);
+            if ($this->photo && method_exists($this->photo, 'storeAs')) {
+                $this->slider->clearMediaCollection('slider');
+                $this->slider->addMedia($this->photo)
+                ->toMediaCollection('slider');
+            }
             $status = "updated";
         } else if ('add slider') {
             $slider = Slider::create($form);
-            $media??$media->upload($slider->id);
+            $slider->addMedia($this->photo)
+                ->toMediaCollection('slider');
+            // $media??$media->upload($slider->id);
         }
 
         session()->flash('success_msg', $this->thatUp . ' ' . $status);

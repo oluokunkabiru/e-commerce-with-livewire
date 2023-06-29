@@ -259,8 +259,6 @@ class DataEntry extends Component
                         $productDetailUpdate->clearMediaCollection('products');
                         $productDetailUpdate->addMedia($attribute['photo'])
                         ->toMediaCollection('products');
-                        // $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
-                        // $media??$media->replace($attribute['id']);
                     }
 
                     if ($productDetailUpdate) {

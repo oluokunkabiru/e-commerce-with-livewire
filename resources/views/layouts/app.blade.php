@@ -68,7 +68,7 @@
                         <i class="fa fa-bars m-0" aria-hidden="true"></i>
                     </button>
                     <div class="logo-container">
-                        <img src="{{ config('app.logo') }}" class="img-fluid" alt="e-com">
+                        <img src="{{ @settings()->getMedia('logo_primary')->first()!=null?@settings()->getMedia('logo_primary')->first()->getFullUrl():null }}" class="img-fluid" alt="{{ settings()->name }}">
                     </div>
                 </div>
                 <div class="link-container z-8 bg-body">

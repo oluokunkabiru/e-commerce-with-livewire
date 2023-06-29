@@ -46,13 +46,14 @@ class FrontController extends Controller
     public function shop()
     {
         $categories = Category::withCount('products')
-            ->with('photo')
+            // ->with('photo')
             ->has('products')
             ->where('status', 1)
             ->where('in_home_page', 1)
-            ->whereHas('photo')
+            // ->whereHas('photo')
             ->orderBy('products_count', 'desc')
             ->get();
+            // return $categories;
 
         return view('shop', ['categories' => $categories]);
     }

@@ -28,7 +28,7 @@
             <div wire:key='{{ $loop->index }}' class="my-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
               <div class="product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
                 <a class="btn mb-1 btn-light p-0 shadow-0" href="{{ route('category', $category->slug) }}"><img
-                    observe='true' observe-src="{{ $category->getMedia('products')->first() !=null ? $category->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
+                    observe='true' observe-src="{{ $category->getMedia('category')->first() !=null ? $category->getMedia('category')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
                   <div style="height: 395px;" class="img-progress">
                     <div class="spinner-border text__primary" role="status">
                       <span class="visually-hidden">Loading...</span>

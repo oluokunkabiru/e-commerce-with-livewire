@@ -55,7 +55,7 @@ class DataEntry extends Component
 
         $this->validate($validationArr);
 
-        $media = MediaController::set(Category::class, $this->photo, 'category', $this->slug);
+        // $media = MediaController::set(Category::class, $this->photo, 'category', $this->slug);
 
         $form = [
             'name'            => $this->name,
@@ -68,13 +68,22 @@ class DataEntry extends Component
 
         if ('' != $this->editId && $this->category && can('edit category')) {
 
-            $media?? $media->replace($this->editId);
+            // $media?? $media->replace($this->editId);
 
             $this->category->update($form);
+            if ($this->photo && method_exists($this->photo, 'storeAs')) {
+                $this->category->clearMediaCollection('category');
+                $this->category->addMedia($this->photo)
+                ->toMediaCollection('category');
+            }
             $status = "updated";
         } else if (can('add category')) {
             $category = Category::create($form);
-            $media??$media->upload($category->id);
+            $category->addMedia($this->photo)
+            ->toMediaCollection('category');
+
+
+            // $media??$media->upload($category->id);
         }
 
         session()->flash('success_msg', 'Category ' . $status);
@@ -84,7 +93,7 @@ class DataEntry extends Component
     public function mount($id = '')
     {
         if ('' != $id) {
-            $this->category        = Category::with('photo')->where('id', $id)->firstOrFail();
+            $this->category        = Category::where('id', $id)->firstOrFail();
             $this->name            = $this->category->name;
             $this->slug            = $this->category->slug;
             $this->photoPreview    = $this->category->photo->url;

@@ -97,7 +97,7 @@
                                         <a target="_blank" href="{{ $item->link }}">{{ $item->link_text }}</a>
                                     </td>
                                     <td class="mdc-data-table__cell img-td">
-                                        <img observe='true' observe-src="{{ $item->photo->url }}" alt=""
+                                        <img observe='true' observe-src="{{ $item->getMedia('slider')->first() !=null ?$item->getMedia('slider')->first()->getFUllUrl():null }}" alt=""
                                             class="img-fluid">
                                     </td>
                                     <td class="mdc-data-table__cell product-status-td">

@@ -34,7 +34,7 @@
         <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
             <div class="mdc-drawer__header">
                 <a href="{{ route('dashboard.home') }}" class="brand-logo">
-                    <img class="img-fluid" src="{{ @settings()->getMedia('logo_secondary')->first()!=null?@settings()->getMedia('logo_secondary')->first()->getFullUrl():null }}" alt="{{ settings()->name }}">
+                    <img class="img-fluid" src="{{ @settings()->getMedia('logo_primary')->first()!=null?@settings()->getMedia('logo_primary')->first()->getFullUrl():null }}" alt="{{ settings()->name }}">
 
 
 
