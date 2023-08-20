@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Product;
+namespace App\Http\Livewire\Admin\Property;
 
 use Livewire\Component;
 use App\Admin\WithProductDataTable;
 
 class DataTable extends Component
 {
-    public $that = 'product';
-    public $model = 'Product';
+    public $that = 'property';
+    public $model = 'Property';
 
     public $promotional;
     public $featured;
@@ -81,13 +81,21 @@ class DataTable extends Component
     {
         $obj = $this->obj;
 
-        $qry = $obj->with('category', 'brand')->withCount('productDetails')->where(function ($query) {
+        $qry = $obj->with(['category', 'country', 'state', 'city'])->withCount('propertyDetails')->where(function ($query) {
             $query->where('name', 'like', '%' . $this->search . '%')
                 ->orWhereHas('category', function ($qry) {
                     $qry->where('name', 'like', '%' . $this->search . '%')
                         ->orWhere('slug', 'like', '%' . $this->search . '%');
                 })
-                ->orWhereHas('brand', function ($qry) {
+                ->orWhereHas('country', function ($qry) {
+                    $qry->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('slug', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('state', function ($qry) {
+                    $qry->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('slug', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('city', function ($qry) {
                     $qry->where('name', 'like', '%' . $this->search . '%')
                         ->orWhere('slug', 'like', '%' . $this->search . '%');
                 })
@@ -96,9 +104,9 @@ class DataTable extends Component
                 ->orWhere('short_description', 'like', '%' . $this->search . '%')
                 ->orWhere('description', 'like', '%' . $this->search . '%')
                 ->orWhere('keywords', 'like', '%' . $this->search . '%')
-                ->orWhere('technical_specification', 'like', '%' . $this->search . '%')
-                ->orWhere('usage', 'like', '%' . $this->search . '%')
-                ->orWhere('warrenty', 'like', '%' . $this->search . '%')
+                // ->orWhere('technical_specification', 'like', '%' . $this->search . '%')
+                // ->orWhere('usage', 'like', '%' . $this->search . '%')
+                // ->orWhere('warrenty', 'like', '%' . $this->search . '%')
                 ->orWhere('id', 'like', '%' . $this->search . '%');
         });
 

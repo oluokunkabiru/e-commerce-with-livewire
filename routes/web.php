@@ -8,8 +8,8 @@ use App\Http\Livewire\Admin\Brand\DataEntry as BrandDataEntry;
 use App\Http\Livewire\Admin\Brand\DataTable as BrandDataTable;
 use App\Http\Livewire\Admin\Category\DataEntry as CategoryDataEntry;
 use App\Http\Livewire\Admin\Category\DataTable as CategoryDataTable;
-use App\Http\Livewire\Admin\Color\DataEntry as ColorDataEntry;
-use App\Http\Livewire\Admin\Color\DataTable as ColorDataTable;
+use App\Http\Livewire\Admin\Feature\DataEntry as ColorDataEntry;
+use App\Http\Livewire\Admin\Feature\DataTable as ColorDataTable;
 use App\Http\Livewire\Admin\Contacts\DataTable as ContactsDataTable;
 use App\Http\Livewire\Admin\Contacts\Detail;
 use App\Http\Livewire\Admin\Coupon\DataEntry as CouponDataEntry;
@@ -17,8 +17,8 @@ use App\Http\Livewire\Admin\Coupon\DataTable as CouponDataTable;
 use App\Http\Livewire\Admin\MyShop;
 use App\Http\Livewire\Admin\Order\DataTable as OrderDataTable;
 use App\Http\Livewire\Admin\Order\Detail as OrderDetail;
-use App\Http\Livewire\Admin\Product\DataEntry;
-use App\Http\Livewire\Admin\Product\DataTable;
+use App\Http\Livewire\Admin\Property\DataEntry;
+use App\Http\Livewire\Admin\Property\DataTable;
 use App\Http\Livewire\Admin\Size\DataEntry as SizeDataEntry;
 use App\Http\Livewire\Admin\Size\DataTable as SizeDataTable;
 use App\Http\Livewire\Admin\Slider\DataEntry as SliderDataEntry;
@@ -31,7 +31,7 @@ use App\Http\Livewire\Cart;
 use App\Http\Livewire\Category;
 use App\Http\Livewire\Child\SearchForm;
 use App\Http\Livewire\Home;
-use App\Http\Livewire\ProductDetail;
+use App\Http\Livewire\PropertyDetail;
 use App\Http\Livewire\Wishlist;
 use Illuminate\Support\Facades\Route;
 
@@ -51,7 +51,7 @@ Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('contactU
 Route::get('/cart', Cart::class)->name('cart');
 Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
 
-Route::get('/product/{slug}', ProductDetail::class)->name('product.detail');
+Route::get('/property/{slug}', PropertyDetail::class)->name('property.detail');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/wishlist', Wishlist::class)->name('wishlist')->middleware('verified');
@@ -86,14 +86,14 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/brand/edit/{id}', BrandDataEntry::class)->name('dashboard.brand.edit')->middleware('can:edit brand');
 
     // Color Routes
-    Route::get('/color', ColorDataTable::class)->name('dashboard.color')->middleware('can:view color');
-    Route::get('/color/add', ColorDataEntry::class)->name('dashboard.color.add')->middleware('can:add color');
-    Route::get('/color/edit/{id}', ColorDataEntry::class)->name('dashboard.color.edit')->middleware('can:edit color');
+    Route::get('/feature', ColorDataTable::class)->name('dashboard.feature')->middleware('can:view feature');
+    Route::get('/feature/add', ColorDataEntry::class)->name('dashboard.feature.add')->middleware('can:add feature');
+    Route::get('/feature/edit/{id}', ColorDataEntry::class)->name('dashboard.feature.edit')->middleware('can:edit feature');
 
     // Product Routes
-    Route::get('/product', DataTable::class)->name('dashboard.product')->middleware('can:view product');
-    Route::get('/product/add', DataEntry::class)->name('dashboard.product.add')->middleware('can:add product');
-    Route::get('/product/edit/{id}', DataEntry::class)->name('dashboard.product.edit')->middleware('can:edit product');
+    Route::get('/property', DataTable::class)->name('dashboard.property')->middleware('can:view property');
+    Route::get('/property/add', DataEntry::class)->name('dashboard.property.add')->middleware('can:add property');
+    Route::get('/property/edit/{id}', DataEntry::class)->name('dashboard.property.edit')->middleware('can:edit property');
 
     // Tax Routes
     Route::get('/tax', TaxDataTable::class)->name('dashboard.tax')->middleware('can:view tax');

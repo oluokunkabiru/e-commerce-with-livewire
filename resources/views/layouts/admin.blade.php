@@ -57,9 +57,9 @@
 
                         <x-nav-link can="view order" icon="favorite_border" label="Order" route="dashboard.order" />
 
-                        <x-collapse-nav-link permissions="view product,add product" icon="local_parking" label="Product">
-                            <x-nav-link can="view product" label="All" route="dashboard.product" />
-                            <x-nav-link can="add product" label="Add" route="dashboard.product.add" />
+                        <x-collapse-nav-link permissions="view property,add property" icon="local_parking" label="Properties">
+                            <x-nav-link can="view property" label="All" route="dashboard.property" />
+                            <x-nav-link can="add property" label="Add" route="dashboard.property.add" />
                         </x-collapse-nav-link>
 
                         <x-collapse-nav-link permissions="view category,add category" icon="apps" label="Category">
@@ -82,9 +82,9 @@
                             <x-nav-link can="add brand" label="Add" route="dashboard.brand.add" />
                         </x-collapse-nav-link>
 
-                        <x-collapse-nav-link permissions="view color,add color" icon="palette" label="Color">
-                            <x-nav-link can="view color" label="All" route="dashboard.color" />
-                            <x-nav-link can="add color" label="Add" route="dashboard.color.add" />
+                        <x-collapse-nav-link permissions="view feature,add feature" icon="palette" label="Feature">
+                            <x-nav-link can="view feature" label="All" route="dashboard.feature" />
+                            <x-nav-link can="add feature" label="Add" route="dashboard.feature.add" />
                         </x-collapse-nav-link>
 
                         <x-collapse-nav-link permissions="view tax,add tax" icon="attach_money" label="Tax">

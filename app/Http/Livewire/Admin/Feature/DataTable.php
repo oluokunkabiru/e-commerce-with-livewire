@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Color;
+namespace App\Http\Livewire\Admin\Feature;
 
 use Livewire\Component;
 use App\Admin\WithAdminDataTable;
+use Illuminate\Support\Facades\Log;
 
 class DataTable extends Component
 {
-    public $that = 'color';
-    public $model = 'Color';
+    public $that = 'feature';
+    public $model = 'Feature';
 
     use WithAdminDataTable;
 
@@ -20,6 +21,11 @@ class DataTable extends Component
 
         $modelName = 'App\\Models\\' . $this->model;
         $this->obj = new $modelName();
+
+        // Log::info(json_encode($this->queryString));
+
+        // Log::info(json_encode($this->obj));
+
     }
 
     public function selectAll()
@@ -49,9 +55,11 @@ class DataTable extends Component
     {
         $obj = $this->obj;
         $qry = $obj->where(function ($query) {
-            $query->where('value', 'like', '%' . $this->search . '%')
-                ->orWhere('id', 'like', '%' . $this->search . '%');
+            $query->where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('icon', 'like', '%' . $this->search . '%')
+            ->orWhere('id', 'like', '%' . $this->search . '%');
         });
+
 
         return $this->getCommonModalProperty($qry, $paginate);
     }
@@ -60,6 +68,8 @@ class DataTable extends Component
     {
         $this->getCacheData();
         $items = $this->getModelProperty();
+
+        // Log::info(json_encode($items));
 
         return view('livewire.admin.' . $this->that . '.data-table', compact('items'))
             ->layout('layouts.admin');

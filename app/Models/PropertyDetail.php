@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ProductDetail extends Model implements HasMedia
+class PropertyDetail extends Model implements HasMedia
 {
     use HasFactory;
     use SoftDeletes;
@@ -22,7 +22,7 @@ class ProductDetail extends Model implements HasMedia
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function size()
@@ -30,9 +30,9 @@ class ProductDetail extends Model implements HasMedia
         return $this->belongsTo(Size::class);
     }
 
-    public function color()
+    public function feature()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Feature::class);
     }
 
     public function maxRate()
@@ -57,6 +57,6 @@ class ProductDetail extends Model implements HasMedia
     public function photo(): HasOne
 {
     return $this->hasOne(Media::class, 'model_id')
-        ->where('model_type', ProductDetail::class);
+        ->where('model_type', PropertyDetail::class);
 }
 }

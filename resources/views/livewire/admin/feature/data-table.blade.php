@@ -55,7 +55,10 @@
                                 <tr class="mdc-data-table__header-row">
                                     @include('admin.data-table.basic-thead-left')
 
-                                    @include('admin.data-table.th', ['name' => 'value'])
+                                    @include('admin.data-table.th', ['name' => 'name'])
+                                    <th class="mdc-data-table__header-cell ">
+                                        Icon
+                                    </th>
 
                                     @include('admin.data-table.basic-thead-right')
                                 </tr>
@@ -65,10 +68,15 @@
                                     <tr class="mdc-data-table__row" wire:key='{{ $item->id }}' aria-selected="false">
                                         @include('admin.data-table.basic-tbody-left')
 
-                                        <td class="mdc-data-table__cell color-td">
-                                            <div class="color-box mr-2 mt-1" style="background:{{ $item->value }}">
-                                            </div>
-                                            {{ $item->value }}
+                                        <td class="mdc-data-table__cell">
+
+                                            {{ $item->name }}
+                                        </td>
+
+                                        <td class="mdc-data-table__cell">
+
+                                            <i  class="text-large {{ $item->icon }}"> </i>
+
                                         </td>
 
                                         @include('admin.data-table.basic-tbody-right')

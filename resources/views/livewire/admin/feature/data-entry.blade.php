@@ -22,19 +22,19 @@
                     <div class="template-demo">
                         <form wire:submit.prevent="submit">
                             <div class=" mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                                <p class="text-primary text-uppercase">Enter color name or choose a color</p>
+                                <p class="text-primary text-uppercase">Enter color name or choose a feature</p>
                             </div>
                             <div class="mdc-layout-grid__inner">
                                 <div
                                     class="mdc-layout-grid__cell d-flex align-items-center mdc-layout-grid__cell--span-6-desktop">
                                     <div class="mdc-text-field">
-                                        <input class="mdc-text-field__input" wire:model.defer='value' id="value">
+                                        <input class="mdc-text-field__input" wire:model.defer='name' id="name">
                                         <div class="mdc-line-ripple"></div>
-                                        <label for="value"
-                                            class=" {{ $value != '' ? 'mdc-floating-label--float-above' : '' }} mdc-floating-label">Color
+                                        <label for="name"
+                                            class=" {{ $name != '' ? 'mdc-floating-label--float-above' : '' }} mdc-floating-label">Feature
                                             Name</label>
                                     </div>
-                                    @error('value')
+                                    @error('name')
                                         <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
                                             <p class="text-danger">{{ $message }}</p>
                                         </div>
@@ -42,12 +42,12 @@
                                     <div id="colorPreview"></div>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-                                    <div class="col-md-5">
+                                    <div class="mdc-text-field">
                                         <input class="mdc-text-field__input" type="text"
-                                            id="colorPicker">
+                                            wire:model.defer='icon' id="icon">
                                         <div class="mdc-line-ripple"></div>
                                         <label for="colorPicker"
-                                            class="mdc-floating-label--float-above mdc-floating-label">Pick a color
+                                            class="mdc-floating-label--float-above mdc-floating-label">Icon Class Name
                                         </label>
                                     </div>
                                 </div>
@@ -78,9 +78,9 @@
         document.addEventListener('livewire:load', () => {
 
 
-            $('#colorPicker').iconpicker().on('iconpickerSelected', function(e) {
-                $('.iconpicker-input').val(`<i class="${e.iconpickerValue}"></i>`);
-        });
+            // $('#colorPicker').iconpicker().on('iconpickerSelected', function(e) {
+            //     $('.iconpicker-input').val(`<i class="${e.iconpickerValue}"></i>`);
+        // });
 
         });
 

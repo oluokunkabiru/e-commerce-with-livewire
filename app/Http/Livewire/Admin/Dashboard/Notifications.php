@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Dashboard;
 
-use App\Models\ProductDetail;
+use App\Models\PropertyDetail;
 use Livewire\Component;
 
 class Notifications extends Component
@@ -12,7 +12,7 @@ class Notifications extends Component
 
     public function dismissAll()
     {
-        ProductDetail::where('qty', "<", 6)->where("alert", 1)->update([
+        PropertyDetail::where('qty', "<", 6)->where("alert", 1)->update([
             'alert' => 0,
         ]);
         $this->count = 0;
@@ -20,8 +20,8 @@ class Notifications extends Component
 
     public function mount()
     {
-        $this->products = ProductDetail::where('qty', "<", 6)->with(["product", 'photo'])->get();
-        $this->count    = ProductDetail::where('qty', "<", 6)->where("alert", 1)->count();
+        $this->products = PropertyDetail::where('qty', "<", 6)->with(["product", 'photo'])->get();
+        $this->count    = PropertyDetail::where('qty', "<", 6)->where("alert", 1)->count();
     }
 
     public function render()

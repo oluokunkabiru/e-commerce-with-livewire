@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Product;
+namespace App\Http\Livewire\Admin\Property;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -30,6 +30,6 @@ class Detail extends Component
 
     public function render()
     {
-        return view('livewire.admin.product.detail');
+        return view('livewire.admin.property.detail');
     }
 }

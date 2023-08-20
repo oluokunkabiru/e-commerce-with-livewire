@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Product;
+namespace App\Http\Livewire\Admin\Property;
 
 use App\Http\Controllers\MediaController;
 use App\Models\Brand;
@@ -8,8 +8,9 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Color;
 use App\Models\Country;
-use App\Models\Product;
-use App\Models\ProductDetail;
+use App\Models\Feature;
+use App\Models\Property;
+use App\Models\PropertyDetail;
 use App\Models\Size;
 use App\Models\State;
 use App\Models\Tax;
@@ -24,7 +25,7 @@ class DataEntry extends Component
 {
     use WithFileUploads;
 
-    public $that   = 'product';
+    public $that   = 'property';
     public $thatUp = 'Property';
     public $editId = '';
 
@@ -51,7 +52,7 @@ class DataEntry extends Component
 
     public $attributes = [];
 
-    public $product;
+    public $property;
 
     public $categories;
     public $taxes;
@@ -81,8 +82,8 @@ class DataEntry extends Component
     protected function rules()
     {
         return '' != $this->editId ? [
-            'name'                => ['required', Rule::unique('products')->ignore($this->editId)],
-            'slug'                => ['required', Rule::unique('products')->ignore($this->editId)],
+            'name'                => ['required', Rule::unique('properties')->ignore($this->editId)],
+            'slug'                => ['required', Rule::unique('properties')->ignore($this->editId)],
             'category'            => ['required', 'integer'],
             'brand'               => ['required', 'integer'],
             'model'               => 'nullable',
@@ -117,8 +118,8 @@ class DataEntry extends Component
             ],
         ]
         : [
-            'name'                => 'required|unique:products',
-            'slug'                => 'required|unique:products',
+            'name'                => 'required|unique:propertiess',
+            'slug'                => 'required|unique:properties',
             'category'            => ['required', 'integer'],
             'brand'               => ['required', 'integer'],
             'model'               => 'nullable',
@@ -227,7 +228,7 @@ class DataEntry extends Component
     public function removeAttr($index)
     {
         if ('' != $this->attributes[$index]['id']) {
-            $data = ProductDetail::find($this->attributes[$index]['id']);
+            $data = PropertyDetail::find($this->attributes[$index]['id']);
             if ($data) {
                 Storage::delete('public/product_image/' . $data->photos);
                 $data->forceDelete();
@@ -286,16 +287,16 @@ class DataEntry extends Component
             foreach ($this->attributes as $key => $attribute) {
                 if ($attribute['id']!='') {
 
-                    $productDetailUpdate = ProductDetail::where('product_id', $this->editId)->where('id', $attribute['id'])->first();
+                    $PropertyDetailUpdate = PropertyDetail::where('property_id', $this->editId)->where('id', $attribute['id'])->first();
 
                     if ($attribute['photo'] && method_exists($attribute['photo'], 'storeAs')) {
-                        $productDetailUpdate->clearMediaCollection('products');
-                        $productDetailUpdate->addMedia($attribute['photo'])
+                        $PropertyDetailUpdate->clearMediaCollection('products');
+                        $PropertyDetailUpdate->addMedia($attribute['photo'])
                         ->toMediaCollection('products');
                     }
 
-                    if ($productDetailUpdate) {
-                        $productDetailUpdate->update([
+                    if ($PropertyDetailUpdate) {
+                        $PropertyDetailUpdate->update([
                             'sku'      => $attribute['sku'],
                             'mrp'      => $attribute['mrp'],
                             'price'    => $attribute['price'],
@@ -307,11 +308,11 @@ class DataEntry extends Component
                         ]);
                     }
                 } else {
-                    ProductDetail::where('product_id', $this->editId)->first();
+                    PropertyDetail::where('property_id', $this->editId)->first();
                     // ->addMedia($attribute['photo'])
                     // ->toMediaCollection('products');
                     $this->storeDetail($this->editId, $attribute, $key);
-                    // $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
+                    // $media = MediaController::set(PropertyDetail::class, $attribute['photo'], 'products', $this->product->slug . '__' . $key);
                     // $media??$media->upload($id);
                 }
             }
@@ -319,17 +320,17 @@ class DataEntry extends Component
             $status = "updated";
         } else {
             if (can('add product')) {
-                $product = Product::create($form);
+                $product = Property::create($form);
             }
 
             if ($this->hasAttr) {
                 foreach ($this->attributes as $key => $attribute) {
-                    // $media = MediaController::set(ProductDetail::class, $attribute['photo'], 'products', $product->slug . '__' . $key);
+                    // $media = MediaController::set(PropertyDetail::class, $attribute['photo'], 'products', $product->slug . '__' . $key);
 
                     $this->storeDetail($product->id, $attribute, $key);
                     // $media??$media->upload($id);
 
-                    // ProductDetail::addMedia($attribute['photo'])
+                    // PropertyDetail::addMedia($attribute['photo'])
                     // ->toMediaCollection('products');
 
                 }
@@ -343,14 +344,14 @@ class DataEntry extends Component
     public function storeDetail($pid, $attribute, $key)
     {
         if (can('add product')) {
-            $pro = ProductDetail::create([
+            $pro = PropertyDetail::create([
                 'sku'        => $attribute['sku'],
                 'mrp'        => $attribute['mrp'],
                 'price'      => $attribute['price'],
                 'qty'        => $attribute['qty'],
                 'size_id'    => $attribute['size'],
                 'color_id'   => $attribute['color'],
-                'product_id' => $pid,
+                'property_id' => $pid,
                 'order_id'   => $key + 1,
                 'status'     => $attribute['status'],
             ])->addMedia($attribute['photo'])
@@ -363,7 +364,7 @@ class DataEntry extends Component
     public function mount($id = '')
     {
         if ('' != $id) {
-            $this->product                 = Product::where('id', $id)->with('productDetails')->firstOrFail();
+            $this->product                 = Property::where('id', $id)->with('PropertyDetails')->firstOrFail();
             $this->name                    = $this->product->name;
             $this->slug                    = $this->product->slug;
             $this->category                = $this->product->category_id;
@@ -386,22 +387,22 @@ class DataEntry extends Component
             $this->trending    = $this->product->trending;
             $this->best_seller = $this->product->best_seller;
 
-            if ($this->product->productDetails->count() > 0) {
+            if ($this->product->PropertyDetails->count() > 0) {
 
-                foreach ($this->product->productDetails as $key => $productDetailDt) {
+                foreach ($this->product->PropertyDetails as $key => $PropertyDetailDt) {
                     $this->attributes[$key] = [
-                        'photo'     => $productDetailDt->photos,
-                        'src'       => $productDetailDt->getMedia('products')->first()!=null ? $productDetailDt->getMedia('products')->first()->getFullUrl():null,
-                        'color'     => $productDetailDt->color_id,
-                        'size'      => $productDetailDt->size_id,
-                        'sku'       => $productDetailDt->sku,
-                        'mrp'       => $productDetailDt->mrp,
-                        'price'     => $productDetailDt->price,
-                        'qty'       => $productDetailDt->qty,
-                        'order_id'  => $productDetailDt->order_id,
-                        'status'    => $productDetailDt->status,
+                        'photo'     => $PropertyDetailDt->photos,
+                        'src'       => $PropertyDetailDt->getMedia('products')->first()!=null ? $PropertyDetailDt->getMedia('products')->first()->getFullUrl():null,
+                        'color'     => $PropertyDetailDt->color_id,
+                        'size'      => $PropertyDetailDt->size_id,
+                        'sku'       => $PropertyDetailDt->sku,
+                        'mrp'       => $PropertyDetailDt->mrp,
+                        'price'     => $PropertyDetailDt->price,
+                        'qty'       => $PropertyDetailDt->qty,
+                        'order_id'  => $PropertyDetailDt->order_id,
+                        'status'    => $PropertyDetailDt->status,
                         'new_photo' => '',
-                        'id'        => $productDetailDt->id,
+                        'id'        => $PropertyDetailDt->id,
                     ];
                 }
             }
@@ -426,9 +427,9 @@ class DataEntry extends Component
         $this->brands     = Brand::where('status', 1)->get(['name', 'id'])->toArray();
 
         $this->sizesDt  = $this->hasAttr ? Size::where('status', 1)->get()->toArray() : [];
-        $this->colorsDt = $this->hasAttr ? Color::where('status', 1)->get()->toArray() : [];
+        $this->colorsDt = $this->hasAttr ? Feature::where('status', 1)->get()->toArray() : [];
 
-        return view('livewire.admin.product.data-entry')
+        return view('livewire.admin.property.data-entry')
             ->layout('layouts.admin');
     }
 }

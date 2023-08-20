@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class ProductDetail extends Component
+class PropertyDetail extends Component
 {
     public $product;
     public $rate;
@@ -41,7 +41,7 @@ class ProductDetail extends Component
 
     public function mount($slug, Request $request)
     {
-        $this->product = Product::with('details')
+        $this->product = Property::with('details')
             ->has('details')
             ->where('slug', $slug)
             ->firstOrFail();

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Property extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -15,14 +15,14 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public function productDetails()
+    public function propertyDetails()
     {
-        return $this->hasMany(ProductDetail::class)->orderBy('order_id', 'asc')->with('photo');
+        return $this->hasMany(PropertyDetail::class)->orderBy('order_id', 'asc')->with('photo');
     }
 
     public function onSaleAttributes()
     {
-        return $this->hasMany(ProductDetail::class)
+        return $this->hasMany(PropertyDetail::class)
             ->with(['maxRate', 'photo'])
             ->where('status', 1)
             ->where('qty', '>', 0)
@@ -31,7 +31,7 @@ class Product extends Model
 
     public function details()
     {
-        return $this->hasMany(ProductDetail::class)
+        return $this->hasMany(PropertyDetail::class)
             ->with(['reviews', 'photo', 'maxRate'])
             ->where('status', 1)
             ->where('qty', '>', 0)
@@ -43,9 +43,18 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function brand()
+    public function country()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Country::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function tax()
