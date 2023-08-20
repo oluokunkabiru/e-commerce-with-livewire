@@ -10,7 +10,7 @@
 @endsection
 
 <div class="">
-  {{-- @include('partial.component-loading') --}}
+  @include('partial.component-loading')
   <!-- Start Slider Area -->
   <div style="height: 500px;" class="mb-4 slider__container slider--one bg__cat--3">
     @livewire('child.home-slider')

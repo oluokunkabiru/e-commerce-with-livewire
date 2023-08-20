@@ -5,10 +5,13 @@ namespace App\Http\Livewire\Admin\Product;
 use App\Http\Controllers\MediaController;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Color;
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Size;
+use App\Models\State;
 use App\Models\Tax;
 use App\Rules\NotNull;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +25,7 @@ class DataEntry extends Component
     use WithFileUploads;
 
     public $that   = 'product';
-    public $thatUp = 'Product';
+    public $thatUp = 'Property';
     public $editId = '';
 
     public $category;
@@ -36,6 +39,7 @@ class DataEntry extends Component
     public $technical_specification;
     public $usage;
     public $warrenty;
+
 
     public $lead_time;
     public $tax;
@@ -60,6 +64,17 @@ class DataEntry extends Component
 
     public $previousPhoto = [];
     public $hasAttr       = false;
+
+
+
+    public $country;
+    public $countries;
+
+    public $state;
+    public $states=[];
+
+    public $city;
+    public $cities=[];
 
     protected $listeners = ['removeAttr'];
 
@@ -190,6 +205,24 @@ class DataEntry extends Component
         $this->photos = [];
         $this->validatePhoto();
     }
+
+
+            public function updatedCountry($newCountry)
+        {
+            // Fetch states based on the selected country and update the $states property
+            $this->states = State::where('country_id', $newCountry)->get();
+            // Reset the selected state and city
+            $this->state = null;
+            $this->city = null;
+        }
+
+        public function updatedState($newState)
+        {
+            // Fetch cities based on the selected state and update the $cities property
+            $this->cities = City::where('state_id', $newState)->get();
+            // Reset the selected city
+            $this->city = null;
+        }
 
     public function removeAttr($index)
     {
@@ -386,6 +419,9 @@ class DataEntry extends Component
         $this->hasAttr = count($this->attributes) > 0 ? true : false;
 
         $this->categories = Category::where('status', 1)->get(['name', 'id'])->toArray();
+        $this->countries = Country::get();
+        $this->states = $this->states;
+        $this->cities = $this->cities;
         $this->taxes      = Tax::where('status', 1)->get(['id', 'description'])->toArray();
         $this->brands     = Brand::where('status', 1)->get(['name', 'id'])->toArray();
 

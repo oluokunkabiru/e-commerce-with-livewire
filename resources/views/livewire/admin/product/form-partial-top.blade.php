@@ -37,30 +37,68 @@
         </div>
     @enderror
 </div>
-<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-    <div class="mdc-text-field @error('brand') input-invalid @enderror">
-        <select wire:model.defer='brand' class="mdc-text-field__input" id="brand">
-            <option value="">
 
-            </option>
-            @foreach ($brands as $brandDt)
-                <option {{ $brandDt['id'] == $brand ? 'selected' : '' }} value="{{ $brandDt['id'] }}">
-                    {{ $brandDt['name'] }}
-                </option>
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+    <div class="mdc-text-field @error('country') input-invalid @enderror">
+        <select wire:model="country" class="mdc-text-field__input" id="country">
+            <option value="">Select Country</option>
+            @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->name }}</option>
             @endforeach
         </select>
         <div class="mdc-line-ripple"></div>
-        <label for="brand"
-            class="mdc-floating-label {{ $brand != '' ? 'mdc-floating-label--float-above' : '' }}">Brand<span
+        <label for="country"
+            class="mdc-floating-label {{ $country != '' ? 'mdc-floating-label--float-above' : '' }}">Country<span
                 class="text-danger">*</span></label>
     </div>
-    @error('brand')
-
+    @error('country')
         <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
             <p class="text-danger">{{ $message }}</p>
         </div>
     @enderror
 </div>
+
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+    <div class="mdc-text-field @error('state') input-invalid @enderror">
+        <select wire:model="state" class="mdc-text-field__input" id="state">
+            @foreach ($states as $state)
+                <option value="{{ $state->id }}">{{ $state->name }}</option>
+            @endforeach
+        </select>
+        <div class="mdc-line-ripple"></div>
+        <label for="state"
+            class="mdc-floating-label {{ $state != '' ? 'mdc-floating-label--float-above' : '' }}">State<span
+                class="text-danger">*</span></label>
+    </div>
+    @error('state')
+        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+            <p class="text-danger">{{ $message }}</p>
+        </div>
+    @enderror
+</div>
+
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+    <div class="mdc-text-field @error('city') input-invalid @enderror">
+        <select wire:model="city" class="mdc-text-field__input" id="city">
+            @foreach ($cities as $city)
+                <option value="{{ $city->id }}">{{ $city->name }}</option>
+            @endforeach
+        </select>
+        <div class="mdc-line-ripple"></div>
+        <label for="city"
+            class="mdc-floating-label {{ $city != '' ? 'mdc-floating-label--float-above' : '' }}">City<span
+                class="text-danger">*</span></label>
+    </div>
+    @error('city')
+        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+            <p class="text-danger">{{ $message }}</p>
+        </div>
+    @enderror
+</div>
+
+
+
+
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-text-field @error('tax') input-invalid @enderror">
         <select wire:model.defer='tax' class="mdc-text-field__input" id="tax">

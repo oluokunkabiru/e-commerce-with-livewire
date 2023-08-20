@@ -42,8 +42,8 @@
                                     <div id="colorPreview"></div>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-                                    <div class="mdc-text-field">
-                                        <input class="mdc-text-field__input" type="color" wire:model='value'
+                                    <div class="col-md-5">
+                                        <input class="mdc-text-field__input" type="text"
                                             id="colorPicker">
                                         <div class="mdc-line-ripple"></div>
                                         <label for="colorPicker"
@@ -51,6 +51,12 @@
                                         </label>
                                     </div>
                                 </div>
+
+
+
+
+
+
 
                                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
                                     <button
@@ -70,11 +76,15 @@
 @section('extra-js')
     <script>
         document.addEventListener('livewire:load', () => {
-            document.querySelector("#value").addEventListener('keyup', () => {
-                let value = document.querySelector("#value").value;
-                document.querySelector('#colorPreview').style.backgroundColor = value;
-            });
+
+
+            $('#colorPicker').iconpicker().on('iconpickerSelected', function(e) {
+                $('.iconpicker-input').val(`<i class="${e.iconpickerValue}"></i>`);
         });
+
+        });
+
+
 
     </script>
 @endsection

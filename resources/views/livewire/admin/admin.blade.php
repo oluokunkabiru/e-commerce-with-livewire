@@ -89,7 +89,7 @@ Dashboard
 <!-- Plugin js for this page-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.1/Chart.bundle.min.js" integrity="sha512-wVoQ4GYEbly/PY7wENb0GlmInwzciyNOYJdtmmHn7wJ7M/c0Y3QlsaG/NGYIENR+HD9C+3+KRLwXn8G+PED9/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- End plugin js for this page-->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     const ovrvLabels = [
         @foreach($months as $month)

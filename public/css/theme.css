@@ -1,13 +1,13 @@
 :root {
-    --mdc-theme-primary: #f70c9dff;
-    --mdc-theme-sidebar-top: #ca057e;
-    --mdc-theme-sidebar-bottom: #840653;
+    --mdc-theme-primary: #3b81f3;
+    --mdc-theme-sidebar-top: #1f71f6;
+    --mdc-theme-sidebar-bottom: #2263ca;
     --mdc-theme-secondary: #0f1a20ff;
     /* --mdc-theme-primary: #7a00ff;
     --mdc-theme-secondary: #ff420f; */
     --mdc-theme-background: #fff;
     --mdc-theme-surface: #fff;
-    --mdc-theme-error: #b00020;
+    --mdc-theme-error: #397be4;
     --mdc-theme-on-primary: #fff;
     --mdc-theme-on-secondary: #fff;
     --mdc-theme-on-surface: #000;
@@ -36,9 +36,9 @@
     --smaller-font-size: 0.8rem;
 
     /*========== Colors ==========*/
-    --first-color: #f70c9dff;
-    --first-color-shadow: #f188c8;
-    --first-color-alt: #de0b8d;
+    --first-color: #3b81f3;
+    --first-color-shadow: #2c76ed;
+    --first-color-alt: #518ff2;
     --first-color-opposite: #ffff;
 
     --second-color: #0f1a20ff;

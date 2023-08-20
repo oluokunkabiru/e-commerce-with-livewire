@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css" integrity="sha512-vIgFb4o1CL8iMGoIF7cYiEVFrel13k/BkTGvs0hGfVnlbV6XjAA0M0oEHdWqGdAVRTDID3vIZPOHmKdrMAUChA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha512-rRQtF4V2wtAvXsou4iUAs2kXHi3Lj9NE7xJR77DE7GHsxgY9RTWy93dzMXgDIG8ToiRTD45VsDNdTiUagOFeZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('admins/vendors/css/vendor.bundle.base.css') }}">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <!-- endinject -->
 
 
@@ -20,6 +25,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ @settings()->getMedia('favicon')->first()->getFullUrl() }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <link href="{{ asset('css/fontawesome-iconpicker.min.css') }}" rel="stylesheet">
 
     @yield('extra-css')
 
@@ -173,6 +179,8 @@
     <script src="{{ asset('admins/vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('admins/js/material.js') }}"></script>
     <script src="{{ asset('admins/js/misc.js') }}"></script>
+
+    <script src="{{ asset('js/fontawesome-iconpicker.js') }}"></script>
 
     @yield('extra-js')
 
