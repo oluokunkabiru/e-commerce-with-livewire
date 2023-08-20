@@ -18,13 +18,13 @@
         <option value="">
 
         </option>
-        @foreach ($colorsDt as $colorDt)
-            <option {{ $attribute['color'] == $colorDt['id'] ? 'selected' : '' }} value="{{ $colorDt['id'] }}">
-                {{ $colorDt['value'] }}
+        @foreach ($featuresDt as $featureDt)
+            <option {{ $attribute['feature'] == $featureDt['id'] ? 'selected' : '' }} value="{{ $featureDt['id'] }}">
+                {{ $featureDt['name'] }}
             </option>
         @endforeach
     </select>
-    <label class="mdc-floating-label mdc-floating-label--float-above">Color<span class="text-danger">*</span></label>
+    <label class="mdc-floating-label mdc-floating-label--float-above">Feature<span class="text-danger">*</span></label>
 </div>
 @error('attributes.' . $loopIndex . '.color')
     <p class="text-danger m-0">{{ $message }}</p>

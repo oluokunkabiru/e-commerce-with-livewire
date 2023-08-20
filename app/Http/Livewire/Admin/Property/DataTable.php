@@ -100,7 +100,6 @@ class DataTable extends Component
                         ->orWhere('slug', 'like', '%' . $this->search . '%');
                 })
                 ->orWhere('slug', 'like', '%' . $this->search . '%')
-                ->orWhere('model', 'like', '%' . $this->search . '%')
                 ->orWhere('short_description', 'like', '%' . $this->search . '%')
                 ->orWhere('description', 'like', '%' . $this->search . '%')
                 ->orWhere('keywords', 'like', '%' . $this->search . '%')

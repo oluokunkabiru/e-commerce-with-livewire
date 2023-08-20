@@ -1,4 +1,4 @@
-<div class="mdc-text-field">
+{{-- <div class="mdc-text-field">
     <input class="mdc-text-field__input" wire:model.defer='attributes.{{ $loopIndex }}.sku'>
     <label class="mdc-floating-label mdc-floating-label--float-above">Sku<span class="text-danger">*</span></label>
 </div>
@@ -12,7 +12,7 @@
 </div>
 @error('attributes.' . $loopIndex . '.mrp')
     <p class="text-danger m-0">{{ $message }}</p>
-@enderror
+@enderror --}}
 
 <div class="mdc-text-field">
     <input class="mdc-text-field__input" wire:model.defer='attributes.{{ $loopIndex }}.price'>

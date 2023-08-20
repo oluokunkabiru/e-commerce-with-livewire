@@ -6,7 +6,6 @@ use App\Http\Controllers\MediaController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\City;
-use App\Models\Color;
 use App\Models\Country;
 use App\Models\Feature;
 use App\Models\Property;
@@ -58,7 +57,7 @@ class DataEntry extends Component
     public $taxes;
     public $brands;
     public $sizesDt;
-    public $colorsDt;
+    public $featuresDt;
 
     public $photos   = [];
     public $newPhoto = [];
@@ -85,22 +84,20 @@ class DataEntry extends Component
             'name'                => ['required', Rule::unique('properties')->ignore($this->editId)],
             'slug'                => ['required', Rule::unique('properties')->ignore($this->editId)],
             'category'            => ['required', 'integer'],
-            'brand'               => ['required', 'integer'],
-            'model'               => 'nullable',
+            'state'               => ['required', 'integer'],
+            'country'               => ['required', 'integer'],
+            'city'               => ['required', 'integer'],
             'short_description'   => 'required',
             'description'         => 'required',
             'keywords'            => 'required',
-            'tax'                 => 'required|integer',
             'promo'               => ['required', Rule::in([0, 1])],
             'featured'            => ['required', Rule::in([0, 1])],
             'discounted'          => ['required', Rule::in([0, 1])],
             'trending'            => ['required', Rule::in([0, 1])],
             'best_seller'         => ['required', Rule::in([0, 1])],
 
-            'attributes.*.color'  => ['required', new NotNull],
+            'attributes.*.feature'  => ['required', new NotNull],
             'attributes.*.size'   => ['required', new NotNull],
-            'attributes.*.sku'    => ['required', new NotNull],
-            'attributes.*.mrp'    => ['required', new NotNull, 'integer'],
             'attributes.*.price'  => ['required', new NotNull, 'integer'],
             'attributes.*.qty'    => ['required', new NotNull, 'integer'],
             'attributes.*.status' => [Rule::in([1, 0])],
@@ -121,22 +118,20 @@ class DataEntry extends Component
             'name'                => 'required|unique:propertiess',
             'slug'                => 'required|unique:properties',
             'category'            => ['required', 'integer'],
-            'brand'               => ['required', 'integer'],
-            'model'               => 'nullable',
+            'state'               => ['required', 'integer'],
+            'country'               => ['required', 'integer'],
+            'city'               => ['required', 'integer'],
             'short_description'   => 'required',
             'description'         => 'required',
             'keywords'            => 'required',
-            'tax'                 => 'required|integer',
             'promo'               => ['required', Rule::in([0, 1])],
             'featured'            => ['required', Rule::in([0, 1])],
             'discounted'          => ['required', Rule::in([0, 1])],
             'trending'            => ['required', Rule::in([0, 1])],
             'best_seller'         => ['required', Rule::in([0, 1])],
 
-            'attributes.*.color'  => ['required', new NotNull],
+            'attributes.*.feature'  => ['required', new NotNull],
             'attributes.*.size'   => ['required', new NotNull],
-            'attributes.*.sku'    => ['required', new NotNull],
-            'attributes.*.mrp'    => ['required', new NotNull, 'integer'],
             'attributes.*.price'  => ['required', new NotNull, 'integer'],
             'attributes.*.qty'    => ['required', new NotNull, 'integer'],
             'attributes.*.status' => [Rule::in([1, 0])],
@@ -191,10 +186,8 @@ class DataEntry extends Component
             $this->attributes[$i] = [
                 'photo'     => $this->photos[$j],
                 'src'       => $this->photos[$j]->temporaryUrl(),
-                'color'     => '',
+                'feature'     => '',
                 'size'      => '',
-                'sku'       => '',
-                'mrp'       => '',
                 'price'     => '',
                 'qty'       => '',
                 'order_id'  => '',
@@ -263,13 +256,12 @@ class DataEntry extends Component
             'name'                    => $this->name,
             'slug'                    => $this->slug,
             'category_id'             => $this->category,
-            'brand_id'                => $this->brand,
-            'model'                   => $this->model,
+            'country_id'                => $this->country,
+            'state_id'                => $this->state,
+            'city_id'                => $this->city,
             'short_description'       => $this->short_description,
             'description'             => $this->description,
             'keywords'                => $this->keywords,
-            'technical_specification' => $this->technical_specification,
-            'usage'                   => $this->usage,
             'warrenty'                => $this->warrenty,
             'lead_time'               => $this->lead_time,
             'tax_id'                  => $this->tax,
@@ -297,12 +289,10 @@ class DataEntry extends Component
 
                     if ($PropertyDetailUpdate) {
                         $PropertyDetailUpdate->update([
-                            'sku'      => $attribute['sku'],
-                            'mrp'      => $attribute['mrp'],
                             'price'    => $attribute['price'],
                             'qty'      => $attribute['qty'],
                             'size_id'  => $attribute['size'],
-                            'color_id' => $attribute['color'],
+                            'feature_id' => $attribute['feature'],
                             'status'   => $attribute['status'],
                             'order_id' => $key + 1,
                         ]);
@@ -319,7 +309,7 @@ class DataEntry extends Component
 
             $status = "updated";
         } else {
-            if (can('add product')) {
+            if (can('add property')) {
                 $product = Property::create($form);
             }
 
@@ -343,14 +333,12 @@ class DataEntry extends Component
 
     public function storeDetail($pid, $attribute, $key)
     {
-        if (can('add product')) {
+        if (can('add property')) {
             $pro = PropertyDetail::create([
-                'sku'        => $attribute['sku'],
-                'mrp'        => $attribute['mrp'],
                 'price'      => $attribute['price'],
                 'qty'        => $attribute['qty'],
                 'size_id'    => $attribute['size'],
-                'color_id'   => $attribute['color'],
+                'feature_id'   => $attribute['feature'],
                 'property_id' => $pid,
                 'order_id'   => $key + 1,
                 'status'     => $attribute['status'],
@@ -364,23 +352,20 @@ class DataEntry extends Component
     public function mount($id = '')
     {
         if ('' != $id) {
-            $this->product                 = Property::where('id', $id)->with('PropertyDetails')->firstOrFail();
+            $this->property                 = Property::where('id', $id)->with('PropertyDetails')->firstOrFail();
             $this->name                    = $this->product->name;
             $this->slug                    = $this->product->slug;
             $this->category                = $this->product->category_id;
-            $this->brand                   = $this->product->brand_id;
-            $this->model                   = $this->product->model;
+            $this->city                   = $this->product->country_id;
+            $this->city                   = $this->product->city_id;
+            $this->state                   = $this->product->state_id;
             $this->short_description       = $this->product->short_description;
             $this->description             = $this->product->description;
             $this->keywords                = $this->product->keywords;
             $this->description             = $this->product->description;
-            $this->technical_specification = $this->product->technical_specification;
-            $this->usage                   = $this->product->usage;
             $this->warrenty                = $this->product->warrenty;
             $this->editId                  = $this->product->id;
 
-            $this->lead_time   = $this->product->lead_time;
-            $this->tax         = $this->product->tax_id;
             $this->promo       = $this->product->promo;
             $this->featured    = $this->product->featured;
             $this->discounted  = $this->product->discounted;
@@ -393,10 +378,8 @@ class DataEntry extends Component
                     $this->attributes[$key] = [
                         'photo'     => $PropertyDetailDt->photos,
                         'src'       => $PropertyDetailDt->getMedia('products')->first()!=null ? $PropertyDetailDt->getMedia('products')->first()->getFullUrl():null,
-                        'color'     => $PropertyDetailDt->color_id,
+                        'feature'     => $PropertyDetailDt->feature_id,
                         'size'      => $PropertyDetailDt->size_id,
-                        'sku'       => $PropertyDetailDt->sku,
-                        'mrp'       => $PropertyDetailDt->mrp,
                         'price'     => $PropertyDetailDt->price,
                         'qty'       => $PropertyDetailDt->qty,
                         'order_id'  => $PropertyDetailDt->order_id,
@@ -423,11 +406,11 @@ class DataEntry extends Component
         $this->countries = Country::get();
         $this->states = $this->states;
         $this->cities = $this->cities;
-        $this->taxes      = Tax::where('status', 1)->get(['id', 'description'])->toArray();
-        $this->brands     = Brand::where('status', 1)->get(['name', 'id'])->toArray();
+        // $this->taxes      = Tax::where('status', 1)->get(['id', 'description'])->toArray();
+        // $this->brands     = Brand::where('status', 1)->get(['name', 'id'])->toArray();
 
         $this->sizesDt  = $this->hasAttr ? Size::where('status', 1)->get()->toArray() : [];
-        $this->colorsDt = $this->hasAttr ? Feature::where('status', 1)->get()->toArray() : [];
+        $this->featuresDt = $this->hasAttr ? Feature::where('status', 1)->get()->toArray() : [];
 
         return view('livewire.admin.property.data-entry')
             ->layout('layouts.admin');

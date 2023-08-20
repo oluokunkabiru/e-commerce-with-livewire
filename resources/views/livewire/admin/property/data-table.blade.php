@@ -203,7 +203,7 @@
                                         category
                                     </th>
                                     <th class="mdc-data-table__header-cell ">
-                                        brand
+                                        Country
                                     </th>
                                     <th class="mdc-data-table__header-cell ">
                                         Attribute
@@ -231,12 +231,12 @@
                                         </td>
                                         <td class="mdc-data-table__cell ">
                                             <a
-                                                href="{{ route('dashboard.brand.edit', $item->brand->id) }}">{{ $item->brand->name }}</a>
+                                                href="{{ route('dashboard.brand.edit', @$item->country->id) }}">{{ @$item->counrty->name }}</a>
                                         </td>
                                         <td class="mdc-data-table__cell product-status-td">
                                             <button aria-describedby="tt_product_status_{{ $item->id }}"
                                                 class="mdc-button mdc-button--raised icon-button filled-button--dark mdc-ripple-upgraded">
-                                                {{ $item->productDetails->count() }}
+                                                {{ $item->propertyDetails->count() }}
                                             </button>
                                             <div id="tt_product_status_{{ $item->id }}" class="mdc-tooltip"
                                                 role="tooltip" aria-hidden="true">

@@ -99,7 +99,7 @@
 
 
 
-<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+{{-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-text-field @error('tax') input-invalid @enderror">
         <select wire:model.defer='tax' class="mdc-text-field__input" id="tax">
             <option value="">
@@ -121,8 +121,8 @@
             <p class="text-danger">{{ $message }}</p>
         </div>
     @enderror
-</div>
-<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+</div> --}}
+{{-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-text-field @error('lead_time') input-invalid @enderror">
         <input class="mdc-text-field__input" wire:model.defer='lead_time' id="lead_time">
         <div class="mdc-line-ripple"></div>
@@ -135,7 +135,7 @@
             <p class="text-danger">{{ $message }}</p>
         </div>
     @enderror
-</div>
+</div> --}}
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-form-field mdc-checkbox-field">
         <div class="mdc-checkbox">
@@ -180,6 +180,8 @@
         <label for="trending">Trending</label>
     </div>
 </div>
+
+
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-form-field mdc-checkbox-field">
         <div class="mdc-checkbox">
@@ -207,7 +209,9 @@
         <label for="best_seller">Best Seller</label>
     </div>
 </div>
-<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
+
+
+{{-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
     <div class="mdc-text-field @error('model') input-invalid @enderror">
         <input class="mdc-text-field__input" wire:model.defer='model' id="model">
         <div class="mdc-line-ripple"></div>
@@ -220,7 +224,7 @@
             <p class="text-danger">{{ $message }}</p>
         </div>
     @enderror
-</div>
+</div> --}}
 
 <div
     class="text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('short_description') input-invalid @enderror">
@@ -248,6 +252,7 @@
         </div>
     @enderror
 </div>
+
 <div
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('keywords') input-invalid @enderror">
     <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea">
@@ -267,7 +272,11 @@
         </div>
     @enderror
 </div>
-<div
+
+
+
+
+{{-- <div
     class="text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('technical_specification') input-invalid @enderror">
     <span class="text-area-label">Technical Specification</span>
     <textarea editor="true" data-model="technical_specification" data-that="@this"
@@ -289,7 +298,10 @@
             <p class="text-danger">{{ $message }}</p>
         </div>
     @enderror
-</div>
+</div> --}}
+
+
+
 <div
     class="text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('warrenty') input-invalid @enderror">
     <span class="text-area-label">Warrenty</span>

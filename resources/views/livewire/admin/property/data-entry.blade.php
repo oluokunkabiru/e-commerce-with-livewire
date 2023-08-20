@@ -23,7 +23,7 @@
 
                             <div class="mdc-layout-grid__inner">
 
-                                @include('livewire.admin.product.form-partial-top')
+                                @include('livewire.admin.property.form-partial-top')
 
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
                                     <input wire:model='photos' multiple accept="image/*" wire:loading.attr='disabled'
@@ -62,8 +62,8 @@
                                                     <p class="text-danger m-0">{{ $message }}</p>
                                                 @enderror
 
-                                                @include('livewire.admin.product.form-partial-select')
-                                                @include('livewire.admin.product.form-partial-attr-text')
+                                                @include('livewire.admin.property.form-partial-select')
+                                                @include('livewire.admin.property.form-partial-attr-text')
 
                                             </div>
                                         @endforeach
