@@ -105,7 +105,7 @@ class DataTable extends Component
                 ->orWhere('keywords', 'like', '%' . $this->search . '%')
                 // ->orWhere('technical_specification', 'like', '%' . $this->search . '%')
                 // ->orWhere('usage', 'like', '%' . $this->search . '%')
-                // ->orWhere('warrenty', 'like', '%' . $this->search . '%')
+                ->orWhere('warrenty', 'like', '%' . $this->search . '%')
                 ->orWhere('id', 'like', '%' . $this->search . '%');
         });
 

@@ -14,7 +14,7 @@
 
                     @include('admin.data-table.header-center')
 
-                    @can('add product')
+                    @can('add property')
                         <a href="{{ route('dashboard.' . $that . '.add') }}" class="card-padding pb-0">Add</a>
                     @endcan
                 </div>
@@ -230,8 +230,7 @@
                                                 href="{{ route('dashboard.category.edit', $item->category->id) }}">{{ $item->category->name }}</a>
                                         </td>
                                         <td class="mdc-data-table__cell ">
-                                            <a
-                                                href="{{ route('dashboard.brand.edit', @$item->country->id) }}">{{ @$item->counrty->name }}</a>
+                                            {{ @$item->counrty->name }}
                                         </td>
                                         <td class="mdc-data-table__cell product-status-td">
                                             <button aria-describedby="tt_product_status_{{ $item->id }}"

@@ -77,20 +77,20 @@
                             <x-nav-link can="add size" label="Add" route="dashboard.size.add" />
                         </x-collapse-nav-link>
 
-                        <x-collapse-nav-link permissions="view brand,add brand" icon="branding_watermark" label="Brand">
+                        {{-- <x-collapse-nav-link permissions="view brand,add brand" icon="branding_watermark" label="Brand">
                             <x-nav-link can="view brand" label="All" route="dashboard.brand" />
                             <x-nav-link can="add brand" label="Add" route="dashboard.brand.add" />
-                        </x-collapse-nav-link>
+                        </x-collapse-nav-link> --}}
 
                         <x-collapse-nav-link permissions="view feature,add feature" icon="palette" label="Feature">
                             <x-nav-link can="view feature" label="All" route="dashboard.feature" />
                             <x-nav-link can="add feature" label="Add" route="dashboard.feature.add" />
                         </x-collapse-nav-link>
 
-                        <x-collapse-nav-link permissions="view tax,add tax" icon="attach_money" label="Tax">
+                        {{-- <x-collapse-nav-link permissions="view tax,add tax" icon="attach_money" label="Tax">
                             <x-nav-link can="view tax" label="All" route="dashboard.tax" />
                             <x-nav-link can="add tax" label="Add" route="dashboard.tax.add" />
-                        </x-collapse-nav-link>
+                        </x-collapse-nav-link> --}}
 
                         <x-collapse-nav-link permissions="view slider,add slider" icon="view_carousel" label="Slider">
                             <x-nav-link can="view slider" label="All" route="dashboard.slider" />

@@ -14,6 +14,7 @@ use App\Models\Size;
 use App\Models\State;
 use App\Models\Tax;
 use App\Rules\NotNull;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -90,6 +91,7 @@ class DataEntry extends Component
             'short_description'   => 'required',
             'description'         => 'required',
             'keywords'            => 'required',
+            // 'warrenty'         => 'required',
             'promo'               => ['required', Rule::in([0, 1])],
             'featured'            => ['required', Rule::in([0, 1])],
             'discounted'          => ['required', Rule::in([0, 1])],
@@ -115,7 +117,7 @@ class DataEntry extends Component
             ],
         ]
         : [
-            'name'                => 'required|unique:propertiess',
+            'name'                => 'required|unique:properties',
             'slug'                => 'required|unique:properties',
             'category'            => ['required', 'integer'],
             'state'               => ['required', 'integer'],
@@ -123,13 +125,13 @@ class DataEntry extends Component
             'city'               => ['required', 'integer'],
             'short_description'   => 'required',
             'description'         => 'required',
+            // 'warrenty'         => 'required',
             'keywords'            => 'required',
             'promo'               => ['required', Rule::in([0, 1])],
             'featured'            => ['required', Rule::in([0, 1])],
             'discounted'          => ['required', Rule::in([0, 1])],
             'trending'            => ['required', Rule::in([0, 1])],
             'best_seller'         => ['required', Rule::in([0, 1])],
-
             'attributes.*.feature'  => ['required', new NotNull],
             'attributes.*.size'   => ['required', new NotNull],
             'attributes.*.price'  => ['required', new NotNull, 'integer'],
@@ -263,18 +265,21 @@ class DataEntry extends Component
             'description'             => $this->description,
             'keywords'                => $this->keywords,
             'warrenty'                => $this->warrenty,
-            'lead_time'               => $this->lead_time,
-            'tax_id'                  => $this->tax,
+            // 'lead_time'               => $this->lead_time,
+            // 'tax_id'                  => $this->tax,
             'promo'                   => $this->promo,
             'featured'                => $this->featured,
             'discounted'              => $this->discounted,
             'trending'                => $this->trending,
             'best_seller'             => $this->best_seller,
         ];
+
+
+        Log::info($form);
         $status = "added";
 
-        if ($this->editId !='' && $this->product && can('edit product')) {
-            $this->product->update($form);
+        if ($this->editId !='' && $this->property && can('edit property')) {
+            $this->property->update($form);
 
             foreach ($this->attributes as $key => $attribute) {
                 if ($attribute['id']!='') {
@@ -310,14 +315,14 @@ class DataEntry extends Component
             $status = "updated";
         } else {
             if (can('add property')) {
-                $product = Property::create($form);
+                $property = Property::create($form);
             }
 
             if ($this->hasAttr) {
                 foreach ($this->attributes as $key => $attribute) {
                     // $media = MediaController::set(PropertyDetail::class, $attribute['photo'], 'products', $product->slug . '__' . $key);
 
-                    $this->storeDetail($product->id, $attribute, $key);
+                    $this->storeDetail($property->id, $attribute, $key);
                     // $media??$media->upload($id);
 
                     // PropertyDetail::addMedia($attribute['photo'])
@@ -353,28 +358,27 @@ class DataEntry extends Component
     {
         if ('' != $id) {
             $this->property                 = Property::where('id', $id)->with('PropertyDetails')->firstOrFail();
-            $this->name                    = $this->product->name;
-            $this->slug                    = $this->product->slug;
-            $this->category                = $this->product->category_id;
-            $this->city                   = $this->product->country_id;
-            $this->city                   = $this->product->city_id;
-            $this->state                   = $this->product->state_id;
-            $this->short_description       = $this->product->short_description;
-            $this->description             = $this->product->description;
-            $this->keywords                = $this->product->keywords;
-            $this->description             = $this->product->description;
-            $this->warrenty                = $this->product->warrenty;
-            $this->editId                  = $this->product->id;
+            $this->name                    = $this->property->name;
+            $this->slug                    = $this->property->slug;
+            $this->category                = $this->property->category_id;
+            $this->country                   = $this->property->country_id;
+            $this->city                   = $this->property->city_id;
+            $this->state                   = $this->property->state_id;
+            $this->short_description       = $this->property->short_description;
+            $this->description             = $this->property->description;
+            $this->keywords                = $this->property->keywords;
+            $this->description             = $this->property->description;
+            $this->warrenty                = $this->property->warrenty;
+            $this->editId                  = $this->property->id;
+            $this->promo       = $this->property->promo;
+            $this->featured    = $this->property->featured;
+            $this->discounted  = $this->property->discounted;
+            $this->trending    = $this->property->trending;
+            $this->best_seller = $this->property->best_seller;
 
-            $this->promo       = $this->product->promo;
-            $this->featured    = $this->product->featured;
-            $this->discounted  = $this->product->discounted;
-            $this->trending    = $this->product->trending;
-            $this->best_seller = $this->product->best_seller;
+            if ($this->property->PropertyDetails->count() > 0) {
 
-            if ($this->product->PropertyDetails->count() > 0) {
-
-                foreach ($this->product->PropertyDetails as $key => $PropertyDetailDt) {
+                foreach ($this->property->PropertyDetails as $key => $PropertyDetailDt) {
                     $this->attributes[$key] = [
                         'photo'     => $PropertyDetailDt->photos,
                         'src'       => $PropertyDetailDt->getMedia('products')->first()!=null ? $PropertyDetailDt->getMedia('products')->first()->getFullUrl():null,

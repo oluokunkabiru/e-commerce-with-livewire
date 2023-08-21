@@ -14,7 +14,7 @@
 @enderror
 
 <div class="mdc-text-field">
-    <select wire:model.defer='attributes.{{ $loopIndex }}.color' class="mdc-text-field__input">
+    <select wire:model.defer='attributes.{{ $loopIndex }}.feature' class="mdc-text-field__input">
         <option value="">
 
         </option>
@@ -26,7 +26,7 @@
     </select>
     <label class="mdc-floating-label mdc-floating-label--float-above">Feature<span class="text-danger">*</span></label>
 </div>
-@error('attributes.' . $loopIndex . '.color')
+@error('attributes.' . $loopIndex . '.feature')
     <p class="text-danger m-0">{{ $message }}</p>
 @enderror
 

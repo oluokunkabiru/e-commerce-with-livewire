@@ -37,7 +37,7 @@ class Category extends Model implements HasMedia
 
     public function products()
     {
-        return $this->hasMany(Product::class)->has("onSaleAttributes");
+        return $this->hasMany(Property::class)->has("onSaleAttributes");
     }
 
     public function photo()
