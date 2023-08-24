@@ -2,32 +2,32 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
+use App\Models\Property;
 use Livewire\Component;
 
 class Home extends Component
 {
     public function render()
     {
-        $bestSellers = Product::with('onSaleAttributes')
+        $bestSellers = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('best_seller', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        $featureds = Product::with('onSaleAttributes')
+        $featureds = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('featured', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        $trendings = Product::with('onSaleAttributes')
+        $trendings = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('trending', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        $discounteds = Product::with('onSaleAttributes')
+        $discounteds = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('discounted', 1)
             ->where('status', 1)

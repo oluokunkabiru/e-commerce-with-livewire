@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Coupon;
 use App\Models\MyShop;
-use App\Models\Product;
+use App\Models\Property;
 use App\Models\ProductDetail;
 use App\Models\Size;
 use App\Models\Slider;
@@ -191,17 +191,17 @@ class DatabaseSeeder extends Seeder
         Category::create(['name' => 'Computer', 'slug' => 'computer', 'in_home_page' => '1']);
         Brand::create(['name' => 'Computer', 'slug' => 'computer', 'in_home_page' => '1']);
 
-        Color::create(['value' => '#d4cece']);
-        Color::create(['value' => '#f76262']);
-        Color::create(['value' => '#6b6b6b']);
-        Color::create(['value' => '#78b6f5']);
+        // Color::create(['value' => '#d4cece']);
+        // Color::create(['value' => '#f76262']);
+        // Color::create(['value' => '#6b6b6b']);
+        // Color::create(['value' => '#78b6f5']);
 
         Tax::create(['value' => 10, 'description' => '10% tax']);
 
         Slider::create(['sub_heading' => 'Shop from here', 'heading' => 'Shop', 'link' => url('shop'), 'link_text' => 'Shop Now', 'order_id' => 1]);
         Slider::create(['sub_heading' => 'This is our shop', 'heading' => 'Our Shop', 'link' => url('shop'), 'link_text' => 'Shop Now', 'order_id' => 2]);
 
-        Product::create([
+        Property::create([
             'name'              => 'Desktop Computer',
             'slug'              => 'desktop-computer',
             'category_id'       => 1,
@@ -218,7 +218,7 @@ class DatabaseSeeder extends Seeder
             'best_seller'       => 0,
         ]);
 
-        ProductDetail::create([
+        PropertyDetail::create([
             'sku'        => 'sku',
             'mrp'        => 3567,
             'price'      => 3450,

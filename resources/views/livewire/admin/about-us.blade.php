@@ -21,11 +21,45 @@
 
                                 <div
                                     class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
-                                    <span class="text-area-label">Body<span class="text-danger">*</span></span>
-                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this"
-                                        data-model='body'>{{ $body }}</textarea>
-                                    @error('body')
+                                    <span class="text-area-label">About US<span class="text-danger">*</span></span>
+                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='about'>{!! $about !!}</textarea>
+                                    @error('about')
+                                        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+                                            <p class="text-danger">{{ $message }}</p>
+                                        </div>
+                                    @enderror
+                                </div>
 
+
+
+                                <div
+                                    class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
+                                    <span class="text-area-label">Our Vision<span class="text-danger">*</span></span>
+                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='vision'>{!! $vision !!}</textarea>
+                                    @error('vision')
+                                        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+                                            <p class="text-danger">{{ $message }}</p>
+                                        </div>
+                                    @enderror
+                                </div>
+
+
+                                <div
+                                    class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
+                                    <span class="text-area-label">Our Mission<span class="text-danger">*</span></span>
+                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='mission'>{!! $mission !!}</textarea>
+                                    @error('mission')
+                                        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+                                            <p class="text-danger">{{ $message }}</p>
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div
+                                    class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
+                                    <span class="text-area-label">What We do<span class="text-danger">*</span></span>
+                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='what_we_do'>{!! $what_we_do !!}</textarea>
+                                    @error('what_we_do')
                                         <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
                                             <p class="text-danger">{{ $message }}</p>
                                         </div>
@@ -56,13 +90,18 @@
     <script src="{{ asset('common/js/ckeditor.js') }}"></script>
 
     <script>
-        let textareaData;
+        // let textareaData;
+        let textareaData = [];
+
 
         document.addEventListener('livewire:load', () => {
             ckeditor();
 
             document.querySelector("#submitBtn").addEventListener('click', () => {
-                eval(textareaData[2]).set(textareaData[1], textareaData[0].getData());
+                // eval(textareaData[2]).set(textareaData[1], textareaData[0].getData());
+                textareaData.forEach(textarea => {
+                    eval(textarea[2]).set(textarea[1], textarea[0].getData());
+                });
             });
         });
 
@@ -71,63 +110,124 @@
         });
 
         function ckeditor() {
-            let textarea = document.querySelector("textarea[editor='true']");
+            let textareas = document.querySelectorAll("textarea[editor='true']");
 
-            ClassicEditor
-                .create(textarea, {
-                    toolbar: {
-                        items: [
-                            'bold',
-                            'italic',
-                            'link',
-                            '|',
-                            'bulletedList',
-                            'numberedList',
-                            '|',
-                            'outdent',
-                            'indent',
-                            '|',
-                            'blockQuote',
-                            'insertTable',
-                            'mediaEmbed',
-                            '|',
-                            'undo',
-                            'redo',
-                            '|',
-                            'highlight',
-                            'alignment',
-                            '|',
-                            'fontSize',
-                            'fontBackgroundColor',
-                            'fontColor',
-                            '|',
-                            'htmlEmbed',
-                            'removeFormat',
-                            '|',
-                            'subscript',
-                            'superscript',
-                            '|',
-                            'underline'
-                        ]
-                    },
-                    language: 'en',
-                    table: {
-                        contentToolbar: [
-                            'tableColumn',
-                            'tableRow',
-                            'mergeTableCells'
-                        ]
-                    },
-                    licenseKey: '',
-                })
-                .then(editor => {
-                    textareaData = [
-                        editor = editor,
-                        model = textarea.getAttribute("data-model"),
-                        that = textarea.getAttribute("data-that")
-                    ];
-                });
+            // ClassicEditor
+            //     .create(textarea, {
+            //         toolbar: {
+            //             items: [
+            //                 'bold',
+            //                 'italic',
+            //                 'link',
+            //                 '|',
+            //                 'bulletedList',
+            //                 'numberedList',
+            //                 '|',
+            //                 'outdent',
+            //                 'indent',
+            //                 '|',
+            //                 'blockQuote',
+            //                 'insertTable',
+            //                 'mediaEmbed',
+            //                 '|',
+            //                 'undo',
+            //                 'redo',
+            //                 '|',
+            //                 'highlight',
+            //                 'alignment',
+            //                 '|',
+            //                 'fontSize',
+            //                 'fontBackgroundColor',
+            //                 'fontColor',
+            //                 '|',
+            //                 'htmlEmbed',
+            //                 'removeFormat',
+            //                 '|',
+            //                 'subscript',
+            //                 'superscript',
+            //                 '|',
+            //                 'underline'
+            //             ]
+            //         },
+            //         language: 'en',
+            //         table: {
+            //             contentToolbar: [
+            //                 'tableColumn',
+            //                 'tableRow',
+            //                 'mergeTableCells'
+            //             ]
+            //         },
+            //         licenseKey: '',
+            //     })
+            //     .then(editor => {
+            //         textareaData = [
+            //             editor = editor,
+            //             model = textarea.getAttribute("data-model"),
+            //             that = textarea.getAttribute("data-that")
+            //         ];
+            //     });
+
+
+
+            textareas.forEach((textarea, key) => {
+                ClassicEditor
+                    .create(textarea, {
+                        toolbar: {
+                            items: [
+                                'bold',
+                                'italic',
+                                'link',
+                                '|',
+                                'bulletedList',
+                                'numberedList',
+                                '|',
+                                'outdent',
+                                'indent',
+                                '|',
+                                'blockQuote',
+                                'insertTable',
+                                'mediaEmbed',
+                                '|',
+                                'undo',
+                                'redo',
+                                '|',
+                                'highlight',
+                                'alignment',
+                                '|',
+                                'fontSize',
+                                'fontBackgroundColor',
+                                'fontColor',
+                                '|',
+                                'htmlEmbed',
+                                'removeFormat',
+                                '|',
+                                'subscript',
+                                'superscript',
+                                '|',
+                                'underline'
+                            ]
+                        },
+                        language: 'en',
+                        table: {
+                            contentToolbar: [
+                                'tableColumn',
+                                'tableRow',
+                                'mergeTableCells'
+                            ]
+                        },
+                        licenseKey: '',
+                        title: false
+                    })
+                    .then(editor => {
+                        textareaData[key] = [
+                            editor = editor,
+                            model = textarea.getAttribute("data-model"),
+                            that = textarea.getAttribute("data-that")
+                        ];
+                        // textarea.parentNode.querySelector(".ck-content h1").style.display = "none"
+                    });
+
+            });
         }
-
     </script>
 @endsection

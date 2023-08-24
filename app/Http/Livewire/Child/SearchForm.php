@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Child;
 
-use App\Models\Product;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -14,7 +14,7 @@ class SearchForm extends Component
     {
         $term = $request->term;
 
-        return Product::with('onSaleAttributes')
+        return Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where(function ($qry) use ($term) {
                 $qry->where('name', 'like', '%' . $term . '%')

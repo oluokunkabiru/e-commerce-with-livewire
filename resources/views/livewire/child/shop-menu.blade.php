@@ -1,5 +1,5 @@
 <li class="p-relative sub-menu-container">
-  <a href="{{ route('shop') }}" class="sub-menu-root @yield('shop') btn btn-white my-md-2 shadow-0 mx-lg-1">Shop
+  <a href="{{ route('shop') }}" class="sub-menu-root @yield('shop') btn btn-white my-md-2 shadow-0 mx-lg-1">Properties
   </a>
   @if ($categories->count() > 0)
     <ul class="sub-menu bg-white shadow-1-strong py-2 rounded-3">

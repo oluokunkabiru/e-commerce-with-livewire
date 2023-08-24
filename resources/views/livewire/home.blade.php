@@ -157,9 +157,9 @@
   @endif
 
   {{-- Brand --}}
-  <section class="">
+  {{-- <section class="">
     @livewire('child.home-brands')
-  </section>
+  </section> --}}
   {{-- ! Brand --}}
 
 </div>

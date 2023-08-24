@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
+use App\Models\Property;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -51,12 +51,12 @@ class Category extends Component
 
     public function mount($slug)
     {
-        $this->category = \App\Models\Category::where('slug', $slug)->with('subCategories')->firstOrFail();
+        $this->category = Category::where('slug', $slug)->with('subCategories')->firstOrFail();
     }
 
     public function render()
     {
-        $qry = Product::where('category_id', $this->category->id);
+        $qry = Property::where('category_id', $this->category->id);
 
         $qry->with('onSaleAttributes', function ($query) {
             if ($this->minPrice > 0) {
@@ -106,7 +106,7 @@ class Category extends Component
 
         $products = $qry->paginate($this->perPage);
 
-        $allProducts = Product::where('category_id', $this->category->id)->has('onSaleAttributes')->get();
+        $allProducts = Property::where('category_id', $this->category->id)->has('onSaleAttributes')->get();
 
         $this->minPrice = $allProducts->first()->onSaleAttributes->min('price');
         $this->maxPrice = $allProducts->first()->onSaleAttributes->max('price');

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Order;
-use App\Models\Product;
+use App\Models\Property;
 use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
@@ -98,7 +98,7 @@ class Admin extends Component
                 ->where('payment_status', 'pending')->sum('final_price');
 
             $this->totalUser = User::where('email_verified_at', '!=', null)->count();
-            $this->item      = Product::count();
+            $this->item      = Property::count();
         }
     }
 
@@ -135,7 +135,7 @@ class Admin extends Component
 
     public function itemSnglMonTotal($start, $end)
     {
-        return Product::where('created_at', '>=', $start)->where('created_at', '<=', $end)->count();
+        return Property::where('created_at', '>=', $start)->where('created_at', '<=', $end)->count();
     }
 
     public function orderCancledSnglMonTotal($start, $end)

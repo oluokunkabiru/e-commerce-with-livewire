@@ -62,7 +62,7 @@ Dashboard
             <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
                 <div class="mdc-card bg-info text-white">
                     <div class="d-flex justify-content-between">
-                        <h3 class="font-weight-normal">Product</h3>
+                        <h3 class="font-weight-normal">Properties</h3>
                     </div>
                     <div class="mdc-layout-grid__inner align-items-center">
                         <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-2-phone">

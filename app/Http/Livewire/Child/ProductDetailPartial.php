@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Child;
 
 use App\Models\Cart;
-use App\Models\ProductDetail;
+use App\Models\PropertyDetail;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -27,7 +27,7 @@ class ProductDetailPartial extends Component
 
     public function attribute($id)
     {
-        $this->attributeArr = ProductDetail::where('product_id', $this->product->id)
+        $this->attributeArr = PropertyDetail::where('product_id', $this->product->id)
             ->with(['maxRate', 'photo'])
             ->where('id', $id)
             ->where('qty', '>', 0)
@@ -67,7 +67,7 @@ class ProductDetailPartial extends Component
             ->where('product_attr_id', $aid)
             ->first();
 
-        $pQty = \App\Models\ProductDetail::where('id', $aid)->get('qty')->first()->qty;
+        $pQty = PropertyDetail::where('id', $aid)->get('qty')->first()->qty;
         if ($pQty < $qty) {
             session()->flash('product_error_msg', 'Quantity should be less that or equal to ' . $pQty . '.');
             return;

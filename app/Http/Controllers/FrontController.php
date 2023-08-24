@@ -7,7 +7,7 @@ use App\Models\Cart as ModelsCart;
 use App\Models\Category;
 use App\Models\MyShop;
 use App\Models\Order;
-use App\Models\Product;
+use App\Models\Property;
 use App\Models\User;
 use App\Notifications\OrderPlaced;
 use Illuminate\Support\Facades\Notification;
@@ -16,7 +16,7 @@ class FrontController extends Controller
 {
     public function search($term)
     {
-        $products = Product::with('onSaleAttributes')
+        $products = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where(function ($qry) use ($term) {
                 $qry->where('name', 'like', '%' . $term . '%')

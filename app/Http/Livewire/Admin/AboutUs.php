@@ -2,11 +2,15 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\AboutsUs;
 use Livewire\Component;
 
 class AboutUs extends Component
 {
-    public $body;
+    public $about;
+    public $mission;
+    public $vision;
+    public $what_we_do;
 
     public function dehydrate()
     {
@@ -19,13 +23,29 @@ class AboutUs extends Component
             return;
         }
 
-        $this->validate(['body' => 'required']);
-        $aboutUs = \App\Models\AboutsUs::first();
+        $this->validate(
+            [
+                'about' => 'required|string',
+                'mission' => 'required|string',
+                'vision' => 'required|string',
+
+            ]
+        );
+        $aboutUs = AboutsUs::first();
 
         if ($aboutUs) {
-            $aboutUs->update(['body' => $this->body]);
+            $aboutUs->update([
+                'about' => $this->about,
+                'mission' => $this->mission,
+                'vision' => $this->vision,
+                'what_we_do' => $this->what_we_do,
+            ]);
         } else {
-            \App\Models\AboutsUs::create(['body' => $this->body]);
+            AboutsUs::create([
+            'about' => $this->about,
+            'mission' => $this->mission,
+            'vision' => $this->vision,
+            'what_we_do' => $this->what_we_do,]);
         }
 
         session()->flash('success_msg', 'Saved');
@@ -33,7 +53,10 @@ class AboutUs extends Component
 
     public function mount()
     {
-        $this->body = \App\Models\AboutsUs::first()->body;
+        $this->about = AboutsUs::first()->about;
+        $this->mission = AboutsUs::first()->mission;
+        $this->vision = AboutsUs::first()->vision;
+        $this->what_we_do = AboutsUs::first()->what_we_do;
     }
 
     public function render()
