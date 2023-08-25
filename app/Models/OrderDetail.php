@@ -18,7 +18,7 @@ class OrderDetail extends Model
 
     public function productDetails()
     {
-        return $this->belongsTo(ProductDetail::class, 'product_attr_id', 'id')->with('photo');
+        return $this->belongsTo(PropertyDetail::class, 'product_attr_id', 'id')->with('photo');
     }
 
     public function review()

@@ -8,8 +8,7 @@
 
     <div class="bradcaump py-4">
         <div class="container">
-            <a href="{{ route('shop') }}" class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i
-                    class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>shop</a>
+            <a href="{{ route('shop') }}" class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-home mr-2" aria-hidden="true"></i>Properties</a>
             <button class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-chevron-right"
                     aria-hidden="true"></i></button>
             <button class="btn btn-lg btn-transparent p-3 shadow-0">
@@ -31,13 +30,13 @@
                     @foreach ($carts as $cart)
                         <tr>
                             <td class="image-td"><a
-                                    href="{{ route('product.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
+                                    href="{{ route('property.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
                                     class="btn btn-transparent p-0 shadow-0">
                                     <img src="{{ $cart->attribute->getMedia('products')->first() !=null ? $cart->attribute->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid">
                                 </a></td>
                             <td>
                                 <h4 class="small-font f-500 text-nowrap">{{ $cart->product->name }}</h4>
-                                <p class="smaller-font">${{ $cart->attribute->price }}</p>
+                                <p class="smaller-font">₦{{ $cart->attribute->price }}</p>
                             </td>
                             <td>
                                 <input type="number" data-id="{{ $cart->id }}" value="{{ $cart->qty }}"
@@ -66,7 +65,7 @@
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <a href="{{ route('shop') }}" class="btn btn-lg btn-dark">
-                            <i class="fa fa-chevron-left mr-3"></i>Continue Shopping
+                            <i class="fa fa-chevron-left mr-3"></i>Continue Checking Properties
                         </a>
                         <a href="{{ route('checkout') }}" class="btn btn-lg btn-dark">
                             Checkout<i class="fa fa-chevron-right ml-3"></i></a>

@@ -16,8 +16,8 @@
 
     <div class="bradcaump py-4">
         <div class="container">
-            <a href="{{ route('shop') }}" class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i
-                    class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>Shop</a>
+            <a href="{{ route('shop') }}" class="btn btn-lg btn-transparent mr--6 p-3 shadow-0">
+                <i class="fa fa-home mr-2" aria-hidden="true"></i>Properties</a>
             <button class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-chevron-right"
                     aria-hidden="true"></i></button>
             <button class="btn btn-lg btn-transparent p-3 shadow-0">
@@ -65,16 +65,18 @@
             @endif
 
             <div class="mb-4">
-                <div class="smallest-font text-black f-500 text-uppercase">COLOR</div>
+                <div class="smallest-font text-black f-500 text-uppercase">Feature</div>
                 <hr class="mt-1 mb-3">
                 <ul class="list-unstyled d-flex flex-wrap f-500">
-                    @foreach ($colors as $color)
+                    @foreach ($features as $feature)
                         <li>
-                            <div class="button-checkbox p-0 mr-3">
-                                <input wire:model="color" class="d-none" type="checkbox" value="{{ $color->id }}"
-                                    id="colorCheck{{ $color->id }}" />
-                                <label style="background: {{ $color->value }}" class="btn btn-floating btn-transparent"
-                                    for="colorCheck{{ $color->id }}">
+                            <div class="button-checkbox p-0 mx-1">
+                                <input wire:model="feature" class="d-none" type="checkbox" value="{{ $feature->id }}"
+                                    id="featureCheck{{ $feature->id }}" />
+                                <label  class="btn btn-floatin btn-transparent" title="{!! $feature->name !!}"
+                                    for="featureCheck{{ $feature->id }}">
+
+                                    <i style="font-size: 40px" class="{!! $feature->icon !!} "></i>
 
                                 </label>
                             </div>

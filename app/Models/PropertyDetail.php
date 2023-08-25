@@ -20,7 +20,7 @@ class PropertyDetail extends Model implements HasMedia
     protected $dates   = ['deleted_at'];
     protected $guarded = [];
 
-    public function product()
+    public function property()
     {
         return $this->belongsTo(Property::class);
     }

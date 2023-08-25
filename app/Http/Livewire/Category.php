@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Category as ModelsCategory;
 use App\Models\Property;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,16 +18,16 @@ class Category extends Component
     public $moreAttr;
     public $perPage = 10;
 
-    public $colors = [];
+    public $features = [];
     public $sizes  = [];
 
     public $sort  = 'latest';
-    public $color = [];
+    public $feature = [];
     public $size  = [];
 
     protected $queryString = [
         'sort'  => ['except' => 'latest'],
-        'color' => ['except' => []],
+        'feature' => ['except' => []],
         'size'  => ['except' => []],
     ];
 
@@ -39,7 +41,7 @@ class Category extends Component
         $this->emit('resetPriceRange');
     }
 
-    public function updatedColor()
+    public function updatedFeature()
     {
         $this->emit('resetPriceRange');
     }
@@ -51,7 +53,8 @@ class Category extends Component
 
     public function mount($slug)
     {
-        $this->category = Category::where('slug', $slug)->with('subCategories')->firstOrFail();
+        Log::info($slug);
+        $this->category = ModelsCategory::where('slug', $slug)->with('subCategories')->firstOrFail();
     }
 
     public function render()
@@ -67,8 +70,8 @@ class Category extends Component
                 $query->where('price', '<=', $this->maxPrice);
             }
 
-            if (count($this->color) > 0) {
-                $query->whereIn('color_id', $this->color);
+            if (count($this->feature) > 0) {
+                $query->whereIn('feature_id', $this->feature);
             }
 
             if (count($this->size) > 0) {
@@ -84,8 +87,8 @@ class Category extends Component
                 $query->where('price', '<=', $this->maxPrice);
             }
 
-            if (count($this->color) > 0) {
-                $query->whereIn('color_id', $this->color);
+            if (count($this->feature) > 0) {
+                $query->whereIn('feature_id', $this->feature);
             }
 
             if (count($this->size) > 0) {
@@ -121,7 +124,7 @@ class Category extends Component
             : $this->maxPrice;
 
             foreach ($product->onSaleAttributes as $key => $attr) {
-                $this->colors[$key] = $attr->color;
+                $this->features[$key] = $attr->feature;
                 $this->sizes[$key]  = $attr->size;
             }
         }

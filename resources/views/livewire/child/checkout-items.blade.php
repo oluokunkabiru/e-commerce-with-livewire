@@ -6,13 +6,13 @@
 
     @foreach ($carts as $cart)
         <div class="my-2 d-flex justify-content-between align-items-center">
-            <a href="{{ route('product.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
+            <a href="{{ route('property.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
                 class="btn btn-transparent p-0 shadow-0">
                 <img src="{{ $cart->attribute->getMedia('products')->first() !=null ? $cart->attribute->getMedia('products')->first()->getFUllUrl():null }}" alt="" width="60px" class="img-fluid">
             </a>
             <div class="">
                 <p class="smallest-font mb-0">{{ $cart->product->name }}({{ $cart->qty }})</p>
-                <p class="smallest-font f-500 m-0">${{ $cart->attribute->price * $cart->qty }}</p>
+                <p class="smallest-font f-500 m-0">₦{{ $cart->attribute->price * $cart->qty }}</p>
             </div>
             <button data-id="{{ $cart->id }}" class="remove-button btn btn-floating shadow-0 btn-transparent">
                 <i class="fa fa-trash-alt" aria-hidden="true"></i>
@@ -22,27 +22,21 @@
     <div class="mt-4 text-uppercase">
         <div class="d-flex justify-content-between">
             <p>Cart Sub Total</p>
-            <p class="f-500">${{ $subTotal }}</p>
+            <p class="f-500">₦{{ $subTotal }}</p>
         </div>
-        <div class="d-flex justify-content-between">
-            <p>TAX</p>
-            <p class="f-500">${{ $this->tax }}</p>
-        </div>
-        <div class="d-flex justify-content-between">
-            <p>Shipping</p>
-            <p class="f-500">$0.00</p>
-        </div>
+
+
 
         @if ($appliedCouponExtra > 0)
             <div class="d-flex justify-content-between">
                 <p>Coupon Extra</p>
-                <p class="f-500">${{ $appliedCouponExtra }}</p>
+                <p class="f-500">₦{{ $appliedCouponExtra }}</p>
             </div>
         @endif
         <hr>
         <div class="d-flex justify-content-between">
             <p>Total</p>
-            <p class="f-500">${{ $total }}</p>
+            <p class="f-500">₦{{ $total }}</p>
         </div>
         <div>
             <form wire:submit.prevent='submit' class="d-flex">

@@ -18,6 +18,6 @@ class Cart extends Model
 
     public function attribute()
     {
-        return $this->belongsTo(ProductDetail::class, 'product_attr_id')->with('photo');
+        return $this->belongsTo(PropertyDetail::class, 'product_attr_id')->with('photo');
     }
 }

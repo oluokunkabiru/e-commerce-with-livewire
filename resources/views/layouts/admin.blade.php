@@ -25,7 +25,6 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ @settings()->getMedia('favicon')->first()->getFullUrl() }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
-    <link href="{{ asset('css/fontawesome-iconpicker.min.css') }}" rel="stylesheet">
 
     @yield('extra-css')
 

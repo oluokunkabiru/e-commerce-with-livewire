@@ -19,12 +19,12 @@
     </div>
     <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
       @forelse ($products as $product)
-        <a href="{{ route('dashboard.product.edit', $product->product->id) }}" class="mdc-list-item" role="menuitem">
+        <a href="{{ route('dashboard.property.edit', $product->property->id) }}" class="mdc-list-item" role="menuitem">
           <div class="item-thumbnail">
             <img src="{{ $product->photo->url }}" alt="user">
           </div>
           <div class="item-content d-flex align-items-start flex-column justify-content-center">
-            <h6 class="item-subject font-weight-normal">{{ $product->product->name }}</h6>
+            <h6 class="item-subject font-weight-normal">{{ $product->property->name }}</h6>
             <small class="text-muted"> {{ $product->qty }} </small>
           </div>
         </a>

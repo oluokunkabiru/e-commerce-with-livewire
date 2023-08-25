@@ -2,43 +2,155 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Property;
 use Livewire\Component;
+use App\Models\Property;
+use App\Models\State;
+use App\Models\City;
+use App\Models\Category;
+use App\Models\Country;
+use Illuminate\Support\Facades\Log;
 
 class Home extends Component
 {
+    public $country;
+    public $countries;
+
+    public $state;
+    public $states = [];
+
+    public $city;
+    public $cities = [];
+
+    public $categories;
+    public $bestSellers;
+    public $featureds;
+    public $trendings;
+    public $discounteds;
+    public $category;
+
+    public function updatedCountry($newCountry)
+    {
+        $this->states = State::where('country_id', $newCountry)->get();
+        $this->state = null; // Reset selected state
+        $this->city = null; // Reset selected city
+
+        // Update properties based on the selected filters
+        $this->updateFilteredProperties();
+    }
+
+    public function updatedState($newState)
+    {
+        $this->cities = City::where('state_id', $newState)->get();
+        $this->city = null; // Reset selected city
+
+        // Update properties based on the selected filters
+        $this->updateFilteredProperties();
+    }
+
+    public function updateCategory($newCategory)
+    {
+        // Update properties based on the selected filters
+        $this->updateFilteredProperties();
+    }
+
+    public function updateFilteredProperties()
+    {
+        $this->bestSellers = Property::with('onSaleAttributes')
+            ->has('onSaleAttributes')
+            ->where('best_seller', 1)
+            ->where('status', 1)
+            ->when($this->country, function ($query) {
+                $query->where('country_id', $this->country);
+            })
+            ->when($this->state, function ($query) {
+                $query->where('state_id', $this->state);
+            })
+            ->when($this->category, function ($query) {
+                $query->where('category_id', $this->category);
+            })
+            ->latest()
+            ->get();
+
+        $this->featureds = Property::with('onSaleAttributes')
+            ->has('onSaleAttributes')
+            ->where('featured', 1)
+            ->where('status', 1)
+            ->when($this->country, function ($query) {
+                $query->where('country_id', $this->country);
+            })
+            ->when($this->state, function ($query) {
+                $query->where('state_id', $this->state);
+            })
+            ->when($this->category, function ($query) {
+                $query->where('category_id', $this->category);
+            })
+            ->latest()
+            ->get();
+
+        $this->trendings = Property::with('onSaleAttributes')
+            ->has('onSaleAttributes')
+            ->where('trending', 1)
+            ->where('status', 1)
+            ->when($this->country, function ($query) {
+                $query->where('country_id', $this->country);
+            })
+            ->when($this->state, function ($query) {
+                $query->where('state_id', $this->state);
+            })
+            ->when($this->category, function ($query) {
+                $query->where('category_id', $this->category);
+            })
+            ->latest()
+            ->get();
+
+        $this->discounteds = Property::with('onSaleAttributes')
+            ->has('onSaleAttributes')
+            ->where('discounted', 1)
+            ->where('status', 1)
+            ->when($this->country, function ($query) {
+                $query->where('country_id', $this->country);
+            })
+            ->when($this->state, function ($query) {
+                $query->where('state_id', $this->state);
+            })
+            ->when($this->category, function ($query) {
+                $query->where('category_id', $this->category);
+            })
+            ->latest()
+            ->get();
+        // Note: Make sure your property model has relationships defined for country, state, and category.
+    }
+
     public function render()
     {
-        $bestSellers = Property::with('onSaleAttributes')
+        $this->bestSellers = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('best_seller', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        $featureds = Property::with('onSaleAttributes')
+        $this->featureds = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('featured', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        $trendings = Property::with('onSaleAttributes')
+        $this->trendings = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('trending', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        $discounteds = Property::with('onSaleAttributes')
+        $this->discounteds = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where('discounted', 1)
             ->where('status', 1)
             ->latest()->get();
 
-        return view('livewire.home', [
-            'bestSellers' => $bestSellers,
-            'featureds'   => $featureds,
-            'trendings'   => $trendings,
-            'discounteds' => $discounteds,
-        ])
+        $this->categories = Category::where('status', 1)->get(['name', 'id']);
+        $this->countries = Country::get();
+
+        return view('livewire.home')
             ->extends('layouts.app')
             ->section('contents');
     }

@@ -21,22 +21,17 @@ class FrontController extends Controller
             ->where(function ($qry) use ($term) {
                 $qry->where('name', 'like', '%' . $term . '%')
                     ->orWhere('slug', 'like', '%' . $term . '%')
-                    ->orWhere('model', 'like', '%' . $term . '%')
                     ->orWhere('short_description', 'like', '%' . $term . '%')
                     ->orWhere('description', 'like', '%' . $term . '%')
                     ->orWhere('keywords', 'like', '%' . $term . '%')
-                    ->orWhere('technical_specification', 'like', '%' . $term . '%')
                     ->orWhere('usage', 'like', '%' . $term . '%')
                     ->orWhere('warrenty', 'like', '%' . $term . '%')
                     ->orWhereHas('category', function ($query) use ($term) {
                         $query->where('name', 'like', '%' . $term . '%')
                             ->where('status', 1)
                             ->orWhere('slug', 'like', '%' . $term . '%');
-                    })->orWhereHas('brand', function ($query) use ($term) {
-                    $query->where('name', 'like', '%' . $term . '%')
-                        ->where('status', 1)
-                        ->orWhere('slug', 'like', '%' . $term . '%');
-                });
+                    })
+                 ;
             })
             ->get();
 

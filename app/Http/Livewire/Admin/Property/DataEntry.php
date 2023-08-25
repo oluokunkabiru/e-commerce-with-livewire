@@ -212,6 +212,9 @@ class DataEntry extends Component
             $this->city = null;
         }
 
+
+       
+
         public function updatedState($newState)
         {
             // Fetch cities based on the selected state and update the $cities property

@@ -37,8 +37,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
-Route::get('/category/{slug}', Category::class)->name('category');
-Route::get('/shop', [FrontController::class, 'shop'])->name('shop');
+Route::get('/properties/category/{slug}', Category::class)->name('category');
+Route::get('/properties', [FrontController::class, 'shop'])->name('shop');
 
 Route::get('/searchTags', [SearchForm::class, 'searchTags'])->name('searchTags');
 Route::get('/search/{term}', [FrontController::class, 'search'])->name('search');

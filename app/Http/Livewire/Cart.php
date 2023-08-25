@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Cart as ModelsCart;
 use Livewire\Component;
 
 class Cart extends Component
@@ -14,13 +15,13 @@ class Cart extends Component
 
     public function delete($id)
     {
-        \App\Models\Cart::destroy($id);
+        ModelsCart::destroy($id);
         $this->emit('cartUpdated');
     }
 
     public function updateQty($id, $qty)
     {
-        $cart = \App\Models\Cart::where('id', $id)->with('attribute')->first();
+        $cart = ModelsCart::where('id', $id)->with('attribute')->first();
 
         $pQty = $cart->attribute->qty;
 
@@ -35,7 +36,7 @@ class Cart extends Component
 
     public function render()
     {
-        $this->carts = \App\Models\Cart::where('user_id', userId())
+        $this->carts = ModelsCart::where('user_id', userId())
             ->with('product')
             ->with('attribute')
             ->latest()->get();
@@ -48,6 +49,6 @@ class Cart extends Component
         return view('livewire.cart')
             ->extends('layouts.app')
             ->section('contents');
-            
+
     }
 }

@@ -13,6 +13,7 @@
         </div>
     @enderror
 </div>
+
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-text-field @error('category') input-invalid @enderror">
         <select wire:model.defer='category' class="mdc-text-field__input" id="category">
@@ -99,43 +100,7 @@
 
 
 
-{{-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-    <div class="mdc-text-field @error('tax') input-invalid @enderror">
-        <select wire:model.defer='tax' class="mdc-text-field__input" id="tax">
-            <option value="">
 
-            </option>
-            @foreach ($taxes as $tax)
-                <option {{ $tax['id'] == $tax ? 'selected' : '' }} value="{{ $tax['id'] }}">
-                    {{ $tax['description'] }}
-                </option>
-            @endforeach
-        </select>
-        <div class="mdc-line-ripple"></div>
-        <label for="tax" class="mdc-floating-label {{ $tax != '' ? 'mdc-floating-label--float-above' : '' }}">Tax<span
-                class="text-danger">*</span></label>
-    </div>
-    @error('tax')
-
-        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
-            <p class="text-danger">{{ $message }}</p>
-        </div>
-    @enderror
-</div> --}}
-{{-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-    <div class="mdc-text-field @error('lead_time') input-invalid @enderror">
-        <input class="mdc-text-field__input" wire:model.defer='lead_time' id="lead_time">
-        <div class="mdc-line-ripple"></div>
-        <label for="lead_time"
-            class="mdc-floating-label {{ $lead_time != '' ? 'mdc-floating-label--float-above' : '' }}">Lead Time</label>
-    </div>
-    @error('lead_time')
-
-        <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
-            <p class="text-danger">{{ $message }}</p>
-        </div>
-    @enderror
-</div> --}}
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-form-field mdc-checkbox-field">
         <div class="mdc-checkbox">
