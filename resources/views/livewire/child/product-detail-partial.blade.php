@@ -62,10 +62,13 @@
         <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Avalivality:</span> In Stock</p>
         <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Category:
             </span>{{ $product->category->name }}</p>
-        <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Brand: </span>{{ $product->brand->name }}</p>
-        @if ($product->model != '')
+         {{-- <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Brand: </span>{{ $product->feature }}</p> --}}
+        {{--@if ($product->model != '')
             <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Model: </span>{{ $product->model }}</p>
-        @endif
+        @endif --}}
+
+
+
         @if ($product->keywords != '')
             <p class="mb-3 smaller-font text-black f-400"><span class="f-600">Keywords:</span> {{ $product->keywords }}
             </p>
@@ -73,28 +76,48 @@
 
         <div class="d-flex mt-1">
             <p style="margin-right: 28px;" class="smaller-font text-black f-600">Size:</p>
-            @foreach ($product->details as $attr)
+
+            <ul class="list-unstyled d-flex flex-wrap f-500">
+                @foreach ($product->details as $attr)
+                    <li>
+                        <div class="button-checkbox p-0 mr-3" {{ $attr->id == $attribute ? 'attr-active' : '' }}  wire:click='attribute({{ $attr->id }})'>
+                            <input class="d-none" type="checkbox"
+                            value="{{ $attr->id }}"
+                            />
+                            <label class="btn-box hover-primary-color rounded-circle cursor-pointer"
+                                for="sizeCheck{{ $attr->id == $attribute ? 'attr-active' : '' }}">
+                                {{ $attr->size->size }}
+                            </label>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+            {{-- @foreach ($product->details as $attr)
+
+
                 <button wire:click='attribute({{ $attr->id }})'
                     class="btn btn-floating mr-2 btn-sm btn-dark {{ $attr->id == $attribute ? 'attr-active' : '' }}">{{ $attr->size->size }}</button>
-            @endforeach
+
+
+            @endforeach --}}
         </div>
 
-        <div class="d-flex mt-1">
+        {{-- <div class="d-flex mt-1">
             <p class="smaller-font mr-3 text-black f-600">Color:</p>
             @foreach ($product->details as $attr)
                 <button wire:click='attribute({{ $attr->id }})'
                     class="btn mr-2 btn-floating btn-sm {{ $attr->id == $attribute ? 'attr-active' : '' }}"
                     style="background: {{ $attr->color->value }};"></button>
             @endforeach
-        </div>
-        <div class="d-flex align-items-center mb-1">
+        </div> --}}
+        {{-- <div class="d-flex align-items-center mb-1">
             <p class="smaller-font mr-3 mt-2 text-black f-600">Quantity: </p>
             <input type="number" style="width: 80px;" wire:model.defer="qty" min="1" max="{{ $attributeArr->qty }}"
                 class="form-control py-1 px-3 bg-transparent">
-        </div>
-        <button wire:click="addToCart" class="btn btn-dark rounded-0">Add to
+        </div> --}}
+        {{-- <button wire:click="addToCart" class="btn btn-dark rounded-0">Add to
             cart</button>
-        <button wire:click="addTowishlist" class="btn btn__primary rounded-0">Add to wishlist</button>
+        <button wire:click="addTowishlist" class="btn btn__primary rounded-0">Add to wishlist</button> --}}
 
         @if (session()->has('product_success_msg'))
             <p class="py-2 px-4 mt-2 bg-secondary text-light">{{ session('product_success_msg') }}</p>

@@ -31,7 +31,7 @@
                         <div class="p-4 text-center text-uppercase text-danger">
                             <i style="font-size: 110px;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                             <h3 class="small-font f-500 p-4">
-                                No products found with "{{ $term }}"
+                                No property found with "{{ $term }}"
                             </h3>
                         </div>
                     </div>

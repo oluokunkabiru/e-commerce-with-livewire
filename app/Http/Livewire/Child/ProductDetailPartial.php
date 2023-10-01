@@ -27,7 +27,7 @@ class ProductDetailPartial extends Component
 
     public function attribute($id)
     {
-        $this->attributeArr = PropertyDetail::where('product_id', $this->product->id)
+        $this->attributeArr = PropertyDetail::where('property_id', $this->product->id)
             ->with(['maxRate', 'photo'])
             ->where('id', $id)
             ->where('qty', '>', 0)
@@ -63,7 +63,7 @@ class ProductDetailPartial extends Component
         }
 
         $preCart = Cart::where('user_id', $user_id)
-            ->where('product_id', $pid)
+            ->where('property_id', $pid)
             ->where('product_attr_id', $aid)
             ->first();
 
@@ -84,7 +84,7 @@ class ProductDetailPartial extends Component
                 'user_id'         => $user_id,
                 'registered'      => $registered,
                 'qty'             => $qty,
-                'product_id'      => $pid,
+                'property_id'      => $pid,
                 'product_attr_id' => $aid,
             ]);
             session()->flash('product_success_msg', 'Product added to cart.');
@@ -102,13 +102,13 @@ class ProductDetailPartial extends Component
 
         if (auth()->check()) {
             $wishlist = Wishlist::where('user_id', auth()->user()->id)
-                ->where('product_id', $pid)
+                ->where('property_id', $pid)
                 ->where('product_attr_id', $aid)->first();
 
             if (!$wishlist) {
                 Wishlist::create([
                     'user_id'         => auth()->user()->id,
-                    'product_id'      => $pid,
+                    'property_id'      => $pid,
                     'product_attr_id' => $aid,
                 ]);
                 session()->flash('product_success_msg', 'Product added to wishlist.');

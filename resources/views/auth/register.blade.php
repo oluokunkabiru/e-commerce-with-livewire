@@ -17,7 +17,7 @@
         </div>
         <div class="container py-4 mt-4">
             <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
+                <div class="offset-md-3 col-md-6 col-sm-12 p-4 product-card p-relative bg-white rounded-3 shadow-1-strong">
                     <h4 class="bg-light p-4 text-center text-uppercase mb-4 shadow-5 rounded">Register</h4>
 
                     <form method="POST" action="{{ route('register') }}" class="p-relative">

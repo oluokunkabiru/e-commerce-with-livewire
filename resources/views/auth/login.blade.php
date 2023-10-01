@@ -17,7 +17,7 @@
     </div>
     <div class="container py-4 mt-4">
       <div class="row">
-        <div class="offset-md-3 col-md-6 col-sm-12">
+        <div class="offset-md-3 col-md-6 col-sm-12 p-4 product-card p-relative bg-white rounded-3 shadow-1-strong">
           <form method="POST" action="{{ route('login') }}" class="p-relative" id="login-form">
             @csrf
 

@@ -10,12 +10,18 @@ use App\Models\Order;
 use App\Models\Property;
 use App\Models\User;
 use App\Notifications\OrderPlaced;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
 class FrontController extends Controller
 {
-    public function search($term)
+    public function search(Request $request)
     {
+        $term = $request->searching;
+        $country = $request->country;
+        $state = $request->state;
+        $city = $request->city;
+
         $products = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
             ->where(function ($qry) use ($term) {
@@ -24,15 +30,27 @@ class FrontController extends Controller
                     ->orWhere('short_description', 'like', '%' . $term . '%')
                     ->orWhere('description', 'like', '%' . $term . '%')
                     ->orWhere('keywords', 'like', '%' . $term . '%')
-                    ->orWhere('usage', 'like', '%' . $term . '%')
                     ->orWhere('warrenty', 'like', '%' . $term . '%')
                     ->orWhereHas('category', function ($query) use ($term) {
                         $query->where('name', 'like', '%' . $term . '%')
                             ->where('status', 1)
                             ->orWhere('slug', 'like', '%' . $term . '%');
                     })
+
+
                  ;
             })
+            ->when($country, function ($query) use ($country) {
+                $query->where('country_id', $country);
+            })
+            ->when($state, function ($query) use ($state) {
+                $query->where('state_id', $state);
+            })
+
+            ->when($city, function ($query) use ($city) {
+                $query->where('city_id', $city);
+            })
+
             ->get();
 
         return view('search', ['products' => $products, 'term' => $term]);

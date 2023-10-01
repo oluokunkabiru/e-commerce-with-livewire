@@ -31,6 +31,7 @@ use App\Http\Livewire\Cart;
 use App\Http\Livewire\Category;
 use App\Http\Livewire\Child\SearchForm;
 use App\Http\Livewire\Home;
+use App\Http\Livewire\Properties;
 use App\Http\Livewire\PropertyDetail;
 use App\Http\Livewire\Wishlist;
 use Illuminate\Support\Facades\Route;
@@ -38,10 +39,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)->name('home');
 
 Route::get('/properties/category/{slug}', Category::class)->name('category');
-Route::get('/properties', [FrontController::class, 'shop'])->name('shop');
+
+Route::get('/properties', Properties::class)->name('shop');
+
+// Route::get('/properties', [FrontController::class, 'shop'])->name('shop');
 
 Route::get('/searchTags', [SearchForm::class, 'searchTags'])->name('searchTags');
-Route::get('/search/{term}', [FrontController::class, 'search'])->name('search');
+Route::get('/search', [FrontController::class, 'search'])->name('search');
 
 Route::get('/verify/{code}', [FrontController::class, 'verify'])->name('verify');
 

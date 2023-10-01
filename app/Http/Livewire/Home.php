@@ -2,18 +2,20 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Property;
-use App\Models\State;
 use App\Models\City;
-use App\Models\Category;
+use App\Models\State;
 use App\Models\Country;
+use Livewire\Component;
+use App\Models\Category;
+use App\Models\Property;
 use Illuminate\Support\Facades\Log;
+use Stevebauman\Location\Facades\Location;
 
 class Home extends Component
 {
     public $country;
-    public $countries;
+    public $countries=[];
+
 
     public $state;
     public $states = [];
@@ -21,20 +23,21 @@ class Home extends Component
     public $city;
     public $cities = [];
 
-    public $categories;
+    public $categories =[];
+    public $category;
     public $bestSellers;
     public $featureds;
     public $trendings;
     public $discounteds;
-    public $category;
+
+
+
 
     public function updatedCountry($newCountry)
     {
         $this->states = State::where('country_id', $newCountry)->get();
         $this->state = null; // Reset selected state
         $this->city = null; // Reset selected city
-
-        // Update properties based on the selected filters
         $this->updateFilteredProperties();
     }
 
@@ -49,7 +52,6 @@ class Home extends Component
 
     public function updateCategory($newCategory)
     {
-        // Update properties based on the selected filters
         $this->updateFilteredProperties();
     }
 
@@ -121,34 +123,47 @@ class Home extends Component
         // Note: Make sure your property model has relationships defined for country, state, and category.
     }
 
+
+public function mount(){
+
+    $ip = '197.211.53.127';//request()->ip();
+    $location= Location::get($ip);
+
+
+
+
+    $this->bestSellers = Property::with('onSaleAttributes')
+        ->has('onSaleAttributes')
+        ->where('best_seller', 1)
+        ->where('status', 1)
+        ->latest()->get();
+
+    $this->featureds = Property::with('onSaleAttributes')
+        ->has('onSaleAttributes')
+        ->where('featured', 1)
+        ->where('status', 1)
+        ->latest()->get();
+
+    $this->trendings = Property::with('onSaleAttributes')
+        ->has('onSaleAttributes')
+        ->where('trending', 1)
+        ->where('status', 1)
+        ->latest()->get();
+
+    $this->discounteds = Property::with('onSaleAttributes')
+        ->has('onSaleAttributes')
+        ->where('discounted', 1)
+        ->where('status', 1)
+        ->latest()->get();
+
+    $this->categories = Category::where('status', 1)->get(['name', 'id']);
+    $this->countries = Country::get();
+
+}
+
     public function render()
     {
-        $this->bestSellers = Property::with('onSaleAttributes')
-            ->has('onSaleAttributes')
-            ->where('best_seller', 1)
-            ->where('status', 1)
-            ->latest()->get();
 
-        $this->featureds = Property::with('onSaleAttributes')
-            ->has('onSaleAttributes')
-            ->where('featured', 1)
-            ->where('status', 1)
-            ->latest()->get();
-
-        $this->trendings = Property::with('onSaleAttributes')
-            ->has('onSaleAttributes')
-            ->where('trending', 1)
-            ->where('status', 1)
-            ->latest()->get();
-
-        $this->discounteds = Property::with('onSaleAttributes')
-            ->has('onSaleAttributes')
-            ->where('discounted', 1)
-            ->where('status', 1)
-            ->latest()->get();
-
-        $this->categories = Category::where('status', 1)->get(['name', 'id']);
-        $this->countries = Country::get();
 
         return view('livewire.home')
             ->extends('layouts.app')

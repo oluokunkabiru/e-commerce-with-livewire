@@ -22,6 +22,7 @@
 
   <div class="container row my-4 py-4 product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
 
+
     <div class="row ">
         <div class="col-md-3">
             <div class="form-group @error('category') has-error @enderror">

@@ -14,11 +14,11 @@
             {{ session('product_error_msg') }}
         </div>
     @endif
-    <button wire:click='addToCart' class="btn-product btn-cart btn btn-light btn-lg btn-floating">
-        <i class="fa fa-shopping-bag" aria-hidden="true"></i></button>
+    {{-- <button wire:click='addToCart' class="btn-product btn-cart btn btn-light btn-lg btn-floating">
+        <i class="fa fa-shopping-bag" aria-hidden="true"></i></button> --}}
 
-    <button wire:click="addTowishlist" class="btn-product btn-whislist btn btn-light btn-lg btn-floating">
-        <i class="fa fa-heart" aria-hidden="true"></i></button>
+    {{-- <button wire:click="addTowishlist" class="btn-product btn-whislist btn btn-light btn-lg btn-floating">
+        <i class="fa fa-heart" aria-hidden="true"></i></button> --}}
 
     <a class="btn mb-2 btn-light p-0 shadow-0"
         href="{{ route('property.detail', [$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id]) }}">
