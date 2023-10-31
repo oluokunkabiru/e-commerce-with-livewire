@@ -15,7 +15,7 @@ class OrderDetail extends Component
 
     public function showReview($pid)
     {
-        $this->review  = Review::where('user_id', auth()->id())->where('product_attr_id', $pid)->first();
+        $this->review  = Review::where('user_id', auth()->id())->where('property_attr_id', $pid)->first();
         $this->comment = $this->review ? $this->review->comment : null;
         $rate          = $this->review ? $this->review->rate : 0;
         $this->emit('setRate', $rate);

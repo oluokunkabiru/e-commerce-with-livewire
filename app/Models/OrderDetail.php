@@ -11,19 +11,19 @@ class OrderDetail extends Model
 
     protected $guarded = [];
 
-    public function product()
+    public function property()
     {
         return $this->belongsTo(Property::class);
     }
 
     public function productDetails()
     {
-        return $this->belongsTo(PropertyDetail::class, 'product_attr_id', 'id')->with('photo');
+        return $this->belongsTo(PropertyDetail::class, 'property_attr_id', 'id')->with('photo');
     }
 
     public function review()
     {
-        return $this->hasOne(Review::class, 'product_attr_id', 'product_attr_id')
+        return $this->hasOne(Review::class, 'property_attr_id', 'property_attr_id')
             ->where('user_id', auth()->id());
     }
 }

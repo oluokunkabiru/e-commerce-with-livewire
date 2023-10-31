@@ -1,5 +1,5 @@
 @section('title')
-    Cart
+    Contact List
 @endsection
 
 <div class="p-relative">
@@ -12,7 +12,7 @@
             <button class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-chevron-right"
                     aria-hidden="true"></i></button>
             <button class="btn btn-lg btn-transparent p-3 shadow-0">
-                Cart</button>
+                Contact List</button>
         </div>
     </div>
     <div class="container py-4 mt-4">
@@ -22,7 +22,7 @@
                 <table class="table table-main table-responsive table-active rounded-3">
                     <tr>
                         <th>Image</th>
-                        <th>Product</th>
+                        <th>Property Name</th>
                         <th>Qty</th>
                         <th>Total</th>
                         <th class="text-right">Action</th>
@@ -30,13 +30,13 @@
                     @foreach ($carts as $cart)
                         <tr>
                             <td class="image-td"><a
-                                    href="{{ route('property.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
+                                    href="{{ route('property.detail', $cart->property->slug) . '?attribute=' . $cart->attribute->id }}"
                                     class="btn btn-transparent p-0 shadow-0">
                                     <img src="{{ $cart->attribute->getMedia('products')->first() !=null ? $cart->attribute->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid">
                                 </a></td>
                             <td>
-                                <h4 class="small-font f-500 text-nowrap">{{ $cart->product->name }}</h4>
-                                <p class="smaller-font">₦{{ $cart->attribute->price }}</p>
+                                <h4 class="small-font f-500 text-nowrap">{{ $cart->property->name }}</h4>
+                                <p class="smaller-font">{{ Country()->currency_symbol }}{{ $cart->attribute->price }}</p>
                             </td>
                             <td>
                                 <input type="number" data-id="{{ $cart->id }}" value="{{ $cart->qty }}"
@@ -45,7 +45,7 @@
                             </td>
 
                             <td>
-                                <p class="small-font text-black f-300">₦{{ number_format($cart->attribute->price * $cart->qty, 2) }}</p>
+                                <p class="small-font text-black f-300">{{ Country()->currency_symbol }}{{ number_format($cart->attribute->price * $cart->qty, 2) }}</p>
                             </td>
                             <td class="text-right">
                                 <button data-id="{{ $cart->id }}"
@@ -60,22 +60,22 @@
             <div class="col-md-6 shadow-1-strong col-sm-12 offset-md-6">
                 <div class="p-4 bg-light smallest-font text-uppercase">
                     <div class="d-flex justify-content-between">
-                        <p>Cart total</p>
-                        <p class="f-500">₦{{ number_format($total, 2) }}</p>
+                        <p>Total Prince</p>
+                        <p class="f-500">{{ Country()->currency_symbol }}{{ number_format($total, 2) }}</p>
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <a href="{{ route('shop') }}" class="btn btn-lg btn-dark">
                             <i class="fa fa-chevron-left mr-3"></i>Continue Checking Properties
                         </a>
                         <a href="{{ route('checkout') }}" class="btn btn-lg btn-dark">
-                            Checkout<i class="fa fa-chevron-right ml-3"></i></a>
+                            Proceed to Contact<i class="fa fa-chevron-right ml-3"></i></a>
                     </div>
                 </div>
             </div>
 
         @else
 
-            @include('partial.empty-table', ["title" => "Empty Cart"])
+            @include('partial.empty-table', ["title" => "Contact List Is Empty"])
 
         @endif
     </div>

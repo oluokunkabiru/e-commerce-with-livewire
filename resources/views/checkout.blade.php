@@ -11,11 +11,11 @@
             <button class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-chevron-right"
                     aria-hidden="true"></i></button>
             <a href="{{ route('cart') }}" class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i
-                    class="fa fa-shopping-cart mr-2" aria-hidden="true"></i>cart</a>
+                    class="fa fa-shopping-cart mr-2" aria-hidden="true"></i>Contact List</a>
             <button class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-chevron-right"
                     aria-hidden="true"></i></button>
             <button class="btn btn-lg btn-transparent p-3 shadow-0">
-                Checkout</button>
+                Proceed</button>
         </div>
     </div>
     <div class="container py-4 mt-4">
@@ -23,7 +23,7 @@
             @if ($cartCount > 0)
 
                 <div class="col-md-8 col-sm-12">
-                    <h4 class="big-font text-uppercase text-center bg-white p-4 mb-4">Checkout</h4>
+                    <h4 class="big-font text-uppercase text-center bg-white p-4 mb-4">Contact Agents</h4>
 
                     @livewire('child.checkout-form')
 
@@ -38,7 +38,7 @@
                     <div class="p-4 text-center text-uppercase text-danger">
                         <i style="font-size: 110px;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <h3 class="small-font f-500 p-4">
-                            Please add some product to your card
+                            Please add some properties to your contact list
                         </h3>
                     </div>
                 </div>

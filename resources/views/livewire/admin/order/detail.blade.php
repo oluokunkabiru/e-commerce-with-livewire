@@ -64,13 +64,13 @@
                   </a></td>
                 <td class="mdc-data-table__cell">
                   <h4 class="text-nowrap">{{ $detail->product->name }}</h4>
-                  <p class="smaller-font">₦{{ number_format($detail->productDetails->price, 2) }}</p>
+                  <p class="smaller-font">{{ Country()->currency_symbol }}{{ number_format($detail->productDetails->price, 2) }}</p>
                 </td>
                 <td class="mdc-data-table__cell">
                   {{ $detail->qty }}
                 </td>
                 <td class="mdc-data-table__cell text-right">
-                    ₦{{ number_format($detail->productDetails->price * $detail->qty, 2) }}
+                    {{ Country()->currency_symbol }}{{ number_format($detail->productDetails->price * $detail->qty, 2) }}
                 </td>
               </tr>
             @endforeach
@@ -172,7 +172,7 @@
                 Final Price
               </th>
               <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">
-                ₦ {{ number_format($order->final_price, 2) }}
+                {{ Country()->currency_symbol }} {{ number_format($order->final_price, 2) }}
               </th>
             </tr>
             <tr class="mdc-data-table__header-row">

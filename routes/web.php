@@ -38,6 +38,41 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
+Route::get('/clear', function () {
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    return "<h1>Cache Cleared successfully</h1>";
+    // return view('errors.clear-cache');
+});
+
+
+Route::get('/shutdown', function () {
+    \Illuminate\Support\Facades\Artisan::call('down');
+    return "<h1>System Shutdown successfully</h1>";
+});
+
+Route::get('/migrate', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+    return "<h1>Migrated successfully</h1>";
+    // return view('errors.clear-cache');
+});
+
+
+
+
+
+Route::get('/up', function () {
+
+
+    \Illuminate\Support\Facades\Artisan::call('up');
+    return "<h1>System is back online!</h1>";
+});
+
+
+Route::get('/storage-link', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return "<h1>System is back online!</h1>";
+});
+
 Route::get('/properties/category/{slug}', Category::class)->name('category');
 
 Route::get('/properties', Properties::class)->name('shop');
@@ -52,7 +87,7 @@ Route::get('/verify/{code}', [FrontController::class, 'verify'])->name('verify')
 Route::get('/about-us', [FrontController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('contactUs');
 
-Route::get('/cart', Cart::class)->name('cart');
+Route::get('/contact-list', Cart::class)->name('cart');
 Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
 
 Route::get('/property/{slug}', PropertyDetail::class)->name('property.detail');
@@ -114,7 +149,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/slider/edit/{id}', SliderDataEntry::class)->name('dashboard.slider.edit')->middleware('can:edit slider');
 
     Route::get('/about-us', AboutUs::class)->name('dashboard.aboutUs')->middleware('can:manage about us');
-    Route::get('/my-shop', MyShop::class)->name('dashboard.myShop')->middleware('can:manage my shop');
+    Route::get('/settings', MyShop::class)->name('dashboard.myShop')->middleware('can:manage my shop');
 
     // Contact Routes
     Route::get('/contacts', ContactsDataTable::class)->name('dashboard.contacts')->middleware('can:view contacts');

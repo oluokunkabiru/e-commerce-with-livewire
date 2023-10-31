@@ -126,6 +126,7 @@ class FrontController extends Controller
     public function orderDetail($id)
     {
         $order = Order::where('id', $id)->with('orderDetail')->first();
+        // return $order;
 
         return view('order-detail', ['order' => $order]);
     }

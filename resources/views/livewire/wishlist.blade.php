@@ -32,7 +32,7 @@
                 </a></td>
               <td>
                 <h4 class="small-font f-500 text-nowrap">{{ $wishlist->product->name }}</h4>
-                <p class="smaller-font">${{ $wishlist->attribute->price }}</p>
+                <p class="smaller-font">{{ Country()->currency_symbol }}{{ $wishlist->attribute->price }}</p>
               </td>
               <td class="text-right">
                 <button data-id="{{ $wishlist->id }}" class="btn btn-floating btn-light btn-sm remove-button">

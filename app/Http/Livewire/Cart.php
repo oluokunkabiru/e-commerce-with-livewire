@@ -37,7 +37,7 @@ class Cart extends Component
     public function render()
     {
         $this->carts = ModelsCart::where('user_id', userId())
-            ->with('product')
+            ->with('property')
             ->with('attribute')
             ->latest()->get();
 

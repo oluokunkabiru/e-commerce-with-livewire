@@ -91,6 +91,7 @@ class SearchForm extends Component
     {
         $this->categories = Category::where('status', 1)->get(['name', 'id']);
         $this->countries = Country::get();
+        CurrencyRate();
         return view('livewire.child.search-form');
     }
 }

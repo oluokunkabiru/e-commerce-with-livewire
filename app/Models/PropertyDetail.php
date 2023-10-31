@@ -55,8 +55,22 @@ class PropertyDetail extends Model implements HasMedia
     // }
 
     public function photo(): HasOne
-{
-    return $this->hasOne(Media::class, 'model_id')
-        ->where('model_type', PropertyDetail::class);
-}
+        {
+            return $this->hasOne(Media::class, 'model_id')
+                ->where('model_type', PropertyDetail::class);
+        }
+
+
+
+
+        public function getPriceAttribute($value)
+        {
+            // Manipulate the 'id' value here
+            // For example, add a prefix or any transformation you want
+            // return 'ID-' . $value;
+            // info(Currency());
+            return ($value * session()->get('rate') );
+        }
+
+
 }

@@ -36,10 +36,10 @@
                         </td>
                         <td>
                             <p class="small-font text-black f-300">
-                                ${{ $order->tax + $order->total_price - $order->final_price }}</p>
+                                {{ Country()->currency_symbol }}{{ $order->tax + $order->total_price - $order->final_price }}</p>
                         </td>
                         <td>
-                            <p class="small-font text-black f-300">${{ $order->final_price }}</p>
+                            <p class="small-font text-black f-300">{{ Country()->currency_symbol }}{{ $order->final_price }}</p>
                         </td>
                         <td>
                             <span

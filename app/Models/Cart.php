@@ -11,13 +11,13 @@ class Cart extends Model
 
     protected $guarded = [];
 
-    public function product()
+    public function property()
     {
         return $this->belongsTo(Property::class);
     }
 
     public function attribute()
     {
-        return $this->belongsTo(PropertyDetail::class, 'product_attr_id')->with('photo');
+        return $this->belongsTo(PropertyDetail::class, 'property_attr_id')->with('photo');
     }
 }

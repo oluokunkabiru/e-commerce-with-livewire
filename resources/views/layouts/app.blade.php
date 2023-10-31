@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css" integrity="sha512-vIgFb4o1CL8iMGoIF7cYiEVFrel13k/BkTGvs0hGfVnlbV6XjAA0M0oEHdWqGdAVRTDID3vIZPOHmKdrMAUChA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha512-rRQtF4V2wtAvXsou4iUAs2kXHi3Lj9NE7xJR77DE7GHsxgY9RTWy93dzMXgDIG8ToiRTD45VsDNdTiUagOFeZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    
+
     <!-- Material Design for Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" />
 
@@ -94,7 +94,19 @@
                     <button id="searchToggle" class="btn btn-white btn-floating" data-mdb-toggle="tooltip" title="search"><i class="fas fa-search"></i></button>
 
                     @guest
-                    <a href="{{ route('login') }}" class="btn btn-white btn-floating" data-mdb-toggle="tooltip" title="Login/Register"><i class="fas fa-sign-in-alt"></i></a>
+                    <a href="{{ route('login') }}" class="btn btn-white " data-mdb-toggle="tooltip" title="Login/Register">
+
+                        Login
+                          {{-- <i class="fas fa-sign-in-alt"></i> --}}
+                       </a>
+
+
+                       <a href="{{ route('register') }}" class="btn btn-white " data-mdb-toggle="tooltip" title="Login/Register">
+
+                           Register
+                             {{-- <i class="fas fa-sign-in-alt"></i> --}}
+                          </a>
+                    {{-- <a href="{{ route('login') }}" class="btn btn-white btn-floating" data-mdb-toggle="tooltip" title="Login/Register"><i class="fas fa-sign-in-alt"></i></a> --}}
                     @endguest
                     @auth
                     <button type="button" class="btn btn-floating btn-white" data-mdb-toggle="dropdown" aria-expanded="false">
@@ -114,7 +126,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('order') }}" class="dropdown-item f-500">
-                                    <i class="fas fa-history mr-3"></i>My Order</a>
+                                    <i class="fas fa-history mr-3"></i>Enquiries</a>
                             </li>
                             @if (count(auth()->user()->permissions))
                             <li>

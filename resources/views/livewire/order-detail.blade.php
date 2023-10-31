@@ -3,7 +3,7 @@
     <table class="table table-main table-responsive table-active rounded-3">
         <tr>
             <th>Image</th>
-            <th>Product</th>
+            <th>Property Name</th>
             <th>Qty</th>
             <th>Final price</th>
             <th class="text-right">Action</th>
@@ -11,19 +11,19 @@
         @foreach ($orders as $order)
             <tr>
                 <td class="image-td"><a
-                        href="{{ route('product.detail', $order->product->slug) . '?attribute=' . $order->productDetails->id }}"
+                        href="{{ route('product.detail', $order->property->slug) . '?attribute=' . $order->productDetails->id }}"
                         class="btn btn-transparent p-0 shadow-0">
-                        <img src="{{  $order->productDetails->getMedia('products')->first() !=null ? $order->productDetails->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
+                        <img src="{{  $order->propertyDetails->getMedia('products')->first() !=null ? $order->productDetails->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
                     </a></td>
                 <td>
                     <h4 class="small-font f-500 text-nowrap">{{ $order->product->name }}</h4>
-                    <p class="smaller-font">${{ $order->productDetails->price }}</p>
+                    <p class="smaller-font">{{ Country()->currency_symbol }}{{ $order->productDetails->price }}</p>
                 </td>
                 <td>
                     <p class="small-font text-black f-300">{{ $order->qty }}</p>
                 </td>
                 <td>
-                    <p class="small-font text-black f-300">${{ $order->productDetails->price * $order->qty }}</p>
+                    <p class="small-font text-black f-300">{{ Country()->currency_symbol }}{{ $order->productDetails->price * $order->qty }}</p>
                 </td>
                 <td class="text-right">
                     <button onClick="setProductId({{ $order->productDetails->id }})" data-mdb-toggle="modal"

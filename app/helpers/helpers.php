@@ -62,7 +62,7 @@ function cartTotal($uid = null)
 {
     $carts = Cart::where('user_id', $uid ?? userId())
         ->with('attribute')
-        ->with('product')
+        ->with('property')
         ->get();
     $total = 0;
     foreach ($carts as $cart) {
@@ -75,9 +75,9 @@ function cartTotal($uid = null)
 function cartTax($carts)
 {
     $total = 0;
-    foreach ($carts as $cart) {
-        $total += ($cart->attribute->price * $cart->product->tax->value) / 100;
-    }
+    // foreach ($carts as $cart) {
+    //     $total += ($cart->attribute->price * $cart->product->tax->value) / 100;
+    // }
 
     return $total;
 }
@@ -85,7 +85,7 @@ function cartTax($carts)
 function finalPrice($uid = null)
 {
     $carts = Cart::where('user_id', $uid ?? userId())
-        ->with('product')
+        ->with('property')
         ->with('attribute')
         ->get();
     $total = 0;

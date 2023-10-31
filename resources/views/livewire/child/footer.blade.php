@@ -66,11 +66,11 @@
                     <a href="{{ route('login') }}" class="btn btn-transparent shadow-0 btn-lg text-light">Login</a><br>
                     <a href="{{ route('register') }}"
                         class="btn btn-transparent shadow-0 btn-lg text-light">Register</a><br>
-                    <a href="{{ route('cart') }}" class="btn btn-transparent shadow-0 btn-lg text-light">My Cart</a><br>
-                    <a href="{{ route('checkout') }}"
+                    {{-- <a href="{{ route('cart') }}" class="btn btn-transparent shadow-0 btn-lg text-light">My Cart</a><br> --}}
+                    {{-- <a href="{{ route('checkout') }}"
                         class="btn btn-transparent shadow-0 btn-lg text-light">Checkout</a><br>
                     <a href="{{ route('wishlist') }}"
-                        class="btn btn-transparent shadow-0 btn-lg text-light">wishlist</a><br>
+                        class="btn btn-transparent shadow-0 btn-lg text-light">wishlist</a><br> --}}
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">

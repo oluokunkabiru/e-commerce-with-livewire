@@ -19,13 +19,13 @@ class Order extends Model
     public function orderDetail()
     {
         return $this->hasMany(OrderDetail::class)
-            ->with(['product', 'productDetails', 'review']);
+            ->with(['property', 'productDetails', 'review']);
     }
 
     public function details()
     {
         return $this->hasMany(OrderDetail::class)
-            ->with(['product', 'productDetails']);
+            ->with(['property', 'productDetails']);
     }
 
     public function userStatus()

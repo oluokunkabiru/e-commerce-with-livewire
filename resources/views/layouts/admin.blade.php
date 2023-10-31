@@ -39,7 +39,7 @@
         <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
             <div class="mdc-drawer__header">
                 <a href="{{ route('dashboard.home') }}" class="brand-logo">
-                    <img class="img-fluid" src="{{ @settings()->getMedia('logo_primary')->first()!=null?@settings()->getMedia('logo_primary')->first()->getFullUrl():null }}" alt="{{ settings()->name }}">
+                    <img style="width:100px" class="img-fluid" src="{{ @settings()->getMedia('logo_primary')->first()!=null?@settings()->getMedia('logo_primary')->first()->getFullUrl():null }}" alt="{{ settings()->name }}">
 
 
 
@@ -99,7 +99,7 @@
                         <x-nav-link can="view user" icon="person_outline" label="User" route="dashboard.user" />
                         <x-nav-link can="view contacts" icon="contact_mail" label="Contacts" route="dashboard.contacts" />
                         <x-nav-link can="manage about us" icon="groups" label="About Us" route="dashboard.aboutUs" />
-                        <x-nav-link can="manage my shop" icon="storefront" label="My Shop" route="dashboard.myShop" />
+                        <x-nav-link can="manage my shop" icon="settings" label="Settings" route="dashboard.myShop" />
 
                     </nav>
                 </div>

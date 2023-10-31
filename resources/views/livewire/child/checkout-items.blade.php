@@ -2,17 +2,17 @@
 
     @include('partial.component-loading')
 
-    <h5 class="smaller-font text-uppercase text-center mb-4">your Order</h5>
+    <h5 class="smaller-font text-uppercase text-center mb-4">Enquiry properties</h5>
 
     @foreach ($carts as $cart)
         <div class="my-2 d-flex justify-content-between align-items-center">
-            <a href="{{ route('property.detail', $cart->product->slug) . '?attribute=' . $cart->attribute->id }}"
+            <a href="{{ route('property.detail', $cart->property->slug) . '?attribute=' . $cart->attribute->id }}"
                 class="btn btn-transparent p-0 shadow-0">
                 <img src="{{ $cart->attribute->getMedia('products')->first() !=null ? $cart->attribute->getMedia('products')->first()->getFUllUrl():null }}" alt="" width="60px" class="img-fluid">
             </a>
             <div class="">
-                <p class="smallest-font mb-0">{{ $cart->product->name }}({{ $cart->qty }})</p>
-                <p class="smallest-font f-500 m-0">₦{{ $cart->attribute->price * $cart->qty }}</p>
+                <p class="smallest-font mb-0">{{ $cart->property->name }}({{ $cart->qty }})</p>
+                <p class="smallest-font f-500 m-0">{{ Country()->currency_symbol }}{{ $cart->attribute->price * $cart->qty }}</p>
             </div>
             <button data-id="{{ $cart->id }}" class="remove-button btn btn-floating shadow-0 btn-transparent">
                 <i class="fa fa-trash-alt" aria-hidden="true"></i>
@@ -21,8 +21,8 @@
     @endforeach
     <div class="mt-4 text-uppercase">
         <div class="d-flex justify-content-between">
-            <p>Cart Sub Total</p>
-            <p class="f-500">₦{{ $subTotal }}</p>
+            <p>Property Total</p>
+            <p class="f-500">{{ Country()->currency_symbol }}{{ $subTotal }}</p>
         </div>
 
 
@@ -30,17 +30,17 @@
         @if ($appliedCouponExtra > 0)
             <div class="d-flex justify-content-between">
                 <p>Coupon Extra</p>
-                <p class="f-500">₦{{ $appliedCouponExtra }}</p>
+                <p class="f-500">{{ Country()->currency_symbol }}{{ $appliedCouponExtra }}</p>
             </div>
         @endif
         <hr>
         <div class="d-flex justify-content-between">
             <p>Total</p>
-            <p class="f-500">₦{{ $total }}</p>
+            <p class="f-500">{{ Country()->currency_symbol }}{{ $total }}</p>
         </div>
         <div>
             <form wire:submit.prevent='submit' class="d-flex">
-                <input placeholder="apply coupon" wire:model.defer="coupon" type="text" class="form-control">
+                <input placeholder="Apply Coupon" wire:model.defer="coupon" type="text" class="form-control">
                 <button class="btn btn-dark">Ok</button>
             </form>
             @error('coupon')
@@ -77,26 +77,26 @@
 
 
 @push('extra-js')
-    <script src="https://js.paystack.co/v1/inline.js"></script>
+    {{-- <script src="https://js.paystack.co/v1/inline.js"></script> --}}
 
 
     <script>
         $(document).ready(function ()
         {
 
-            Livewire.on("formSubmit", () => {
-                const form = document.querySelector("#checkoutForm")
-                // console.log(form);
-                var options = {
-                    'name': document.getElementById('name').value,
-                    'address_line_1': document.getElementById('address').value,
-                    'address_city': document.getElementById('city').value,
-                    'address_zip': document.getElementById('zip').value,
-                    'address_state': document.getElementById('state').value,
-                }
-                payWithPaystack();
+        //     Livewire.on("formSubmit", () => {
+        //         const form = document.querySelector("#checkoutForm")
+        //         // console.log(form);
+        //         var options = {
+        //             'name': document.getElementById('name').value,
+        //             'address_line_1': document.getElementById('address').value,
+        //             'address_city': document.getElementById('city').value,
+        //             'address_zip': document.getElementById('zip').value,
+        //             'address_state': document.getElementById('state').value,
+        //         }
+        //         payWithPaystack();
 
-        })
+        // })
 
                 // stripe.createToken(card, options).then(function(result) {
                 //     if (result.error) {
@@ -123,62 +123,62 @@
 
 
 
-        function payWithPaystack() {
-		var handler = PaystackPop.setup({
-			key: "{{ env('PAYSTACK_PUBLIC_KEY') }}",
-			email: $("#email").val(),
-			amount: "{{ $total * 100 }}",//This is payment in kobo, so 200 times 100 kobo = #200 ,
-			currency: "NGN",
-			ref: "{{ str_replace(' ', '_', config('app.name')).'_'.  str_pad(rand(10, 10000000000), 10, '0', STR_PAD_LEFT)}}",//matric_no.replace(/\//g, "_")+ Math.floor(Math.random() * 10),
-			firstname: $("#name").val(),// $("[name='firstname']").val(),
-			lastname: " ",//$("[name='lastname']").val() ,
-			// label: "Optional string that replaces customer email"
-			metadata: {
-				custom_fields: [
-					{
-						display_name: "Mobile Number",
-						variable_name: "mobile_number",
-						value: "08130584550" //$("[name='tel_no']").val()
-					},
+    //     function payWithPaystack() {
+	// 	var handler = PaystackPop.setup({
+	// 		key: "{{ env('PAYSTACK_PUBLIC_KEY') }}",
+	// 		email: $("#email").val(),
+	// 		amount: "{{ $total * 100 }}",//This is payment in kobo, so 200 times 100 kobo = #200 ,
+	// 		currency: "NGN",
+	// 		ref: "{{ str_replace(' ', '_', config('app.name')).'_'.  str_pad(rand(10, 10000000000), 10, '0', STR_PAD_LEFT)}}",//matric_no.replace(/\//g, "_")+ Math.floor(Math.random() * 10),
+	// 		firstname: $("#name").val(),// $("[name='firstname']").val(),
+	// 		lastname: " ",//$("[name='lastname']").val() ,
+	// 		// label: "Optional string that replaces customer email"
+	// 		metadata: {
+	// 			custom_fields: [
+	// 				{
+	// 					display_name: "Mobile Number",
+	// 					variable_name: "mobile_number",
+	// 					value: "08130584550" //$("[name='tel_no']").val()
+	// 				},
 
-                    {
-						display_name: "Address",
-						variable_name: "address",
-						value: $("#address").val()
-					},
+    //                 {
+	// 					display_name: "Address",
+	// 					variable_name: "address",
+	// 					value: $("#address").val()
+	// 				},
 
-                    {
-						display_name: "City",
-						variable_name: "city",
-						value: $("#city").val()
-					},
-                    {
-						display_name: "State",
-						variable_name: "state",
-						value: $("#state").val()
-					},
-                    {
-						display_name: "Company",
-						variable_name: "company",
-						value: $("#company").val()
-					}
-				]
-			},
-			callback: function (response) {
-                console.log(response);
-			       if (response.reference != '') {
+    //                 {
+	// 					display_name: "City",
+	// 					variable_name: "city",
+	// 					value: $("#city").val()
+	// 				},
+    //                 {
+	// 					display_name: "State",
+	// 					variable_name: "state",
+	// 					value: $("#state").val()
+	// 				},
+    //                 {
+	// 					display_name: "Company",
+	// 					variable_name: "company",
+	// 					value: $("#company").val()
+	// 				}
+	// 			]
+	// 		},
+	// 		callback: function (response) {
+    //             console.log(response);
+	// 		       if (response.reference != '') {
 
-                        Livewire.emit("submit", response);
+    //                     Livewire.emit("submit", response);
 
-                    }
-				},
+    //                 }
+	// 			},
 
-		onClose: function () {
-				alert('window closed');
-		}
-		});
-		handler.openIframe();
-	}
+	// 	onClose: function () {
+	// 			alert('window closed');
+	// 	}
+	// 	});
+	// 	handler.openIframe();
+	// }
 
 
 

@@ -129,7 +129,7 @@ public function mount(){
     $ip = '197.211.53.127';//request()->ip();
     $location= Location::get($ip);
 
-
+// info(['rate'=>Currency()]);
 
 
     $this->bestSellers = Property::with('onSaleAttributes')

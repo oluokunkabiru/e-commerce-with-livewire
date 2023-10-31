@@ -14,11 +14,11 @@
             {{ session('product_error_msg') }}
         </div>
     @endif
-    {{-- <button wire:click='addToCart' class="btn-product btn-cart btn btn-light btn-lg btn-floating">
-        <i class="fa fa-shopping-bag" aria-hidden="true"></i></button> --}}
+    <button wire:click='addToCart' class="btn-product btn-cart btn btn-light btn-lg btn-floating">
+        <i class="fa fa-phone" aria-hidden="true"></i></button>
 
-    {{-- <button wire:click="addTowishlist" class="btn-product btn-whislist btn btn-light btn-lg btn-floating">
-        <i class="fa fa-heart" aria-hidden="true"></i></button> --}}
+    <button wire:click="addTowishlist" class="btn-product btn-whislist btn btn-light btn-lg btn-floating">
+        <i class="fa fa-heart" aria-hidden="true"></i></button>
 
     <a class="btn mb-2 btn-light p-0 shadow-0"
         href="{{ route('property.detail', [$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id]) }}">
@@ -33,15 +33,15 @@
     </a>
     <h1 class="small-font">{{ $product->name }}</h1>
 
-    <div class="d-flex stars mb-2 justify-content-center">
+    {{-- <div class="d-flex stars mb-2 justify-content-center">
         @include('partial.star',['star' => $rate])
-    </div>
+    </div> --}}
 
     <div class="h-25px d-flex justify-content-center">
-        <p class="text-line-through smaller-font f-500 mr-3 text-gray">₦{{ number_format($product->onSaleAttributes->first()->mrp, 2) }}
+        <p class="text-line-through smaller-font f-500 mr-3 text-gray"> {{ Country()->currency_symbol }} {{ number_format(($product->onSaleAttributes->first()->mrp), 2) }}
         </p>
-        <p class="smaller-font text-black f-600">₦{{ number_format($product->onSaleAttributes->first()->price) }}</p>
+        <p class="smaller-font text-black f-600">{{ Country()->currency_symbol }} {{ number_format(($product->onSaleAttributes->first()->price), 2) }}</p>
     </div>
     <p class="smaller-font pb-3 {{ $moreAttr > 0 ? 'text-black' : 'invisible' }}">{{ $moreAttr }} more
-        attribute{{ $moreAttr > 1 ? 's' : '' }}</p>
+     attribute{{ $moreAttr > 1 ? 's' : '' }}</p>
 </div>

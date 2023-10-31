@@ -1,4 +1,4 @@
-<form class="p-relative" id="checkoutForm" wire:submit.prevent='$emit("formSubmit")'>
+<form class="p-relative" id="checkoutForm" wire:submit.prevent='submit'>
 
     @include('partial.component-loading')
 
@@ -109,13 +109,13 @@
         <p class="mb-4 text-danger smaller-font">{{ session('card_error') }}</p>
     @endif
 
-    <button class="input-control btn btn-lg btn-dark btn-block mb-3">Pay and place order</button>
+    <button type="submit" class="input-control btn btn-lg btn-dark btn-block mb-3">Place your contact</button>
 </form>
 
 @push('extra-js')
 
     {{-- <script src="https://js.stripe.com/v3/"></script> --}}
-    <script src="https://js.paystack.co/v1/inline.js"></script>
+    {{-- <script src="https://js.paystack.co/v1/inline.js"></script> --}}
 
 
     <script>

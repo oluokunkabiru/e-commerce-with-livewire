@@ -64,7 +64,7 @@ class ProductDetailPartial extends Component
 
         $preCart = Cart::where('user_id', $user_id)
             ->where('property_id', $pid)
-            ->where('product_attr_id', $aid)
+            ->where('property_attr_id', $aid)
             ->first();
 
         $pQty = PropertyDetail::where('id', $aid)->get('qty')->first()->qty;
@@ -78,16 +78,16 @@ class ProductDetailPartial extends Component
 
         if ($preCart) {
             $preCart->update(['qty' => $qty]);
-            session()->flash('product_success_msg', 'Cart product quantity updated.');
+            session()->flash('product_success_msg', 'Contact List quantity updated.');
         } else {
             Cart::create([
                 'user_id'         => $user_id,
                 'registered'      => $registered,
                 'qty'             => $qty,
                 'property_id'      => $pid,
-                'product_attr_id' => $aid,
+                'property_attr_id' => $aid,
             ]);
-            session()->flash('product_success_msg', 'Product added to cart.');
+            session()->flash('product_success_msg', 'Property added to contact list.');
             if ($isEmit) {
                 $this->emit('cartUpdated');
             }
@@ -103,20 +103,20 @@ class ProductDetailPartial extends Component
         if (auth()->check()) {
             $wishlist = Wishlist::where('user_id', auth()->user()->id)
                 ->where('property_id', $pid)
-                ->where('product_attr_id', $aid)->first();
+                ->where('property_attr_id', $aid)->first();
 
             if (!$wishlist) {
                 Wishlist::create([
                     'user_id'         => auth()->user()->id,
                     'property_id'      => $pid,
-                    'product_attr_id' => $aid,
+                    'property_attr_id' => $aid,
                 ]);
-                session()->flash('product_success_msg', 'Product added to wishlist.');
+                session()->flash('product_success_msg', 'Property added to wishlist.');
             } else {
-                session()->flash('product_success_msg', 'Product already in wishlist.');
+                session()->flash('product_success_msg', 'Property already in wishlist.');
             }
         } else {
-            session()->flash('product_error_msg', 'Please login to add product in wishlist.');
+            session()->flash('product_error_msg', 'Please login to add property in wishlist.');
         }
     }
 

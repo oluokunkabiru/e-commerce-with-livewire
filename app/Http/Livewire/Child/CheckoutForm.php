@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
+use App\Models\PropertyDetail;
 use App\Models\User;
 use App\Notifications\OrderPlaced;
 use Cartalyst\Stripe\Exception\BadRequestException;
@@ -15,6 +16,7 @@ use Cartalyst\Stripe\Exception\NotFoundException;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -51,7 +53,7 @@ class CheckoutForm extends Component
         ];
     }
 
-    public function submit($token)
+    public function submit()
     {
         // dd($token);
         $validatedData = $this->validate();
@@ -101,43 +103,23 @@ class CheckoutForm extends Component
 
             $message = null;
 
-            try {
-
-                // Stripe::charges()->create([
-                //     'amount'        => $order->final_price,
-                //     'currency'      => 'USD',
-                //     'source'        => $stripeToken["id"],
-                //     'description'   => 'This payments belongs to order id ' . $order->id,
-                //     'receipt_email' => $order->email,
-                //     'metadata'      => [],
-                // ]);
-
+         
                 Order::find($order->id)->update([
-                    'payment_status' => $token['status'],
-                    'payment_type'   => $token["message"],
+                    'payment_status' => 'pending',
+                    'payment_type'   => 'Awaiting',
                 ]);
-            } catch (CardErrorException $e) {
-                $message = $e->getMessage();
-            } catch (BadRequestException $e) {
-                $message = $e->getMessage();
-            } catch (InvalidRequestException $e) {
-                $message = $e->getMessage();
-            } catch (NotFoundException $e) {
-                $message = $e->getMessage();
-            } catch (Exception $e) {
-                $message = $e->getMessage();
-            }
+           
 
             session()->flash('card_error', $message);
 
             foreach ($carts as $cart) {
                 OrderDetail::create([
                     'order_id'        => $order->id,
-                    'product_id'      => $cart->product_id,
-                    'product_attr_id' => $cart->product_attr_id,
+                    'property_id'      => $cart->property_id,
+                    'property_attr_id' => $cart->property_attr_id,
                     'qty'             => $cart->qty,
                 ]);
-                $pd = ProductDetail::find($cart->product_attr_id);
+                $pd = PropertyDetail::find($cart->property_attr_id);
                 $pd->update(['qty' => $pd->qty - $cart->qty]);
                 $cart->delete();
             }
@@ -157,7 +139,7 @@ class CheckoutForm extends Component
                 Notification::send(auth()->user(), new OrderPlaced($data));
             }
 
-            session()->flash('order_placed', 'Your order has been successfully placed.');
+            session()->flash('order_placed', 'We have received your request successfully.');
             return redirect()->route('order.detail', $order->id);
         } else {
             session()->flash('error_msg', 'Please enter valid login information.');
@@ -182,6 +164,7 @@ class CheckoutForm extends Component
         $hash = str_shuffle('absdkmfnejfmkedmsmf109948394344usdnfjenejm');
 
         $newUser['verification_code'] = $hash;
+        $newUser['password'] = Hash::make($newUser['password']);
 
         if ($user) {
             $user->update(["verification_code" => $hash]);
@@ -206,7 +189,7 @@ class CheckoutForm extends Component
             $this->address  = auth()->user()->address;
             $this->city     = auth()->user()->city;
             $this->state    = auth()->user()->state;
-            $this->compoany = auth()->user()->compoany;
+            $this->company = auth()->user()->company;
         }
     }
 

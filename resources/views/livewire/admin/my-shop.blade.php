@@ -3,7 +3,7 @@
 @endsection
 
 @section('title')
-  My Shop
+  Settings
 @endsection
 
 <div class="">

@@ -8,21 +8,21 @@ Dashboard
         <div class="mdc-layout-grid__inner">
 
             @include('admin.dashboard.overview-card', ['key' => 'one', "label" => "Earning", "value" =>
-            $totalEarning, "logo" => "₦", "tooltip" => "this month", "type" => "success"])
+            $totalEarning, "logo" => Country()->currency_symbol, "tooltip" => "this month", "type" => "success"])
 
-            @include('admin.dashboard.overview-card', ['key' => 'two', "label" => "Order delivered", "value" =>
+            @include('admin.dashboard.overview-card', ['key' => 'two', "label" => "Property Agreed", "value" =>
             $totalOrder, "logo" => "check_circle", "tooltip" => "this month", "type" => "primary"])
 
-            @include('admin.dashboard.overview-card', ['key' => 'third', "label" => "User cancel order", "value" =>
+            @include('admin.dashboard.overview-card', ['key' => 'third', "label" => "User Cancel Agreement", "value" =>
             $userCancelOrder, "logo" => "error", "tooltip" => "this month", "type" => "danger"])
 
-            @include('admin.dashboard.overview-card', ['key' => 'third', "label" => "Pending payment", "value" =>
+            @include('admin.dashboard.overview-card', ['key' => 'third', "label" => "Pending Payment", "value" =>
             $pendingPayment, "logo" => "warning", "tooltip" => "this month", "type" => "warning"])
 
             <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
                 <div class="mdc-card">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-2 mb-sm-0">Earning Statistics</h4>
+                        <h4 class="card-title mb-2 mb-sm-0">Selling Statistics</h4>
                     </div>
                     <div class="chart-container mt-4">
                         <canvas id="earningChart" height="260"></canvas>
@@ -33,7 +33,7 @@ Dashboard
                 <div class="mdc-card">
                     <div class="d-flex d-lg-block d-xl-flex justify-content-between">
                         <div>
-                            <h4 class="card-title">Order Statistics</h4>
+                            <h4 class="card-title">Property Request Statistics</h4>
                         </div>
                         <div id="sales-legend" class="d-flex flex-wrap"></div>
                     </div>

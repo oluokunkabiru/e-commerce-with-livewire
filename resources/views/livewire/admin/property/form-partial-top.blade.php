@@ -42,7 +42,7 @@
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
     <div class="mdc-text-field @error('country') input-invalid @enderror">
         <select wire:model="country" class="mdc-text-field__input" id="country">
-            <option value="">Select Country</option>
+            <option value=""></option>
             @foreach ($countries as $countrys)
                 <option value="{{ $countrys->id }}" {{ $countrys->id == $country ? 'selected' : '' }}>{{ $countrys->name }}</option>
             @endforeach

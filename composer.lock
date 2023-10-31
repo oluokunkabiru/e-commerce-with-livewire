@@ -4,76 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "433e4f123619b1bdb19de330df03d540",
+    "content-hash": "6046a68b2218acbaff195e6010d3d93b",
     "packages": [
-        {
-            "name": "akaunting/laravel-money",
-            "version": "3.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/akaunting/laravel-money.git",
-                "reference": "cbc66d1dc457c169f6081e0ae6c661b499dad301"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/akaunting/laravel-money/zipball/cbc66d1dc457c169f6081e0ae6c661b499dad301",
-                "reference": "cbc66d1dc457c169f6081e0ae6c661b499dad301",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^8.67|^9.0",
-                "illuminate/support": "^8.67|^9.0",
-                "illuminate/view": "^8.67|^9.0",
-                "php": "^8.0",
-                "vlucas/phpdotenv": "^5.4.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.23|^7.4",
-                "phpunit/phpunit": "^9.5",
-                "vimeo/psalm": "^4.23"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Akaunting\\Money\\Provider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Akaunting\\Money\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Denis Duliçi",
-                    "email": "info@akaunting.com",
-                    "homepage": "https://akaunting.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Currency formatting and conversion package for Laravel",
-            "keywords": [
-                "convert",
-                "currency",
-                "format",
-                "laravel",
-                "money"
-            ],
-            "support": {
-                "issues": "https://github.com/akaunting/laravel-money/issues",
-                "source": "https://github.com/akaunting/laravel-money/tree/3.1.2"
-            },
-            "time": "2022-07-27T08:16:36+00:00"
-        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
@@ -304,6 +236,73 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "browner12/helpers",
+            "version": "v3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/browner12/helpers.git",
+                "reference": "0e66da06d750255f871fc5d9801e83b25e6942b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/browner12/helpers/zipball/0e66da06d750255f871fc5d9801e83b25e6942b2",
+                "reference": "0e66da06d750255f871fc5d9801e83b25e6942b2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.0",
+                "scrutinizer/ocular": "^1.1",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "suggest": {
+                "moneyphp/money": "Money value object."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "browner12\\helpers\\HelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "browner12\\helpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Brown",
+                    "email": "browner12@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "generic helpers",
+            "homepage": "https://github.com/browner12/helpers",
+            "keywords": [
+                "browner12",
+                "helpers"
+            ],
+            "support": {
+                "issues": "https://github.com/browner12/helpers/issues",
+                "source": "https://github.com/browner12/helpers/tree/v3.5.0"
+            },
+            "time": "2023-02-26T23:53:40+00:00"
         },
         {
             "name": "cartalyst/stripe",
@@ -1191,66 +1190,6 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
-        },
-        {
-            "name": "everapi/freecurrencyapi-php",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/everapihq/freecurrencyapi-php.git",
-                "reference": "61514ca4124b6c5e4de823a546fe08a3dd8c3c9e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/everapihq/freecurrencyapi-php/zipball/61514ca4124b6c5e4de823a546fe08a3dd8c3c9e",
-                "reference": "61514ca4124b6c5e4de823a546fe08a3dd8c3c9e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.4",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "pestphp/pest": "^1.20",
-                "spatie/ray": "^1.28"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FreeCurrencyApi\\FreeCurrencyApi\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dominik Kukacka",
-                    "email": "office@everapi.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A PHP wrapper for the freecurrencyapi.com API",
-            "homepage": "https://github.com/everapihq/freecurrencyapi-php",
-            "keywords": [
-                "api",
-                "currency api",
-                "exchange rates data",
-                "foreign exchange rates API",
-                "free currency api ",
-                "free currency conversion API",
-                "freecurrencyapi-php",
-                "freecurrencyapi.com",
-                "rates API"
-            ],
-            "support": {
-                "issues": "https://github.com/everapihq/freecurrencyapi-php/issues",
-                "source": "https://github.com/everapihq/freecurrencyapi-php/tree/master"
-            },
-            "time": "2023-05-26T09:26:01+00:00"
         },
         {
             "name": "fakerphp/faker",

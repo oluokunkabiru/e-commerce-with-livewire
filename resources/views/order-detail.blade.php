@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    Order Detial
+    Contacting Property Details
 @endsection
 
 @section('contents')
     <div class="bradcaump py-4">
         <div class="container">
             <a href="{{ route('order') }}" class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i
-                    class="fa fa-history mr-2" aria-hidden="true"></i>Order</a>
+                    class="fa fa-history mr-2" aria-hidden="true"></i>Contact List</a>
             <button class="btn btn-lg btn-transparent mr--6 p-3 shadow-0"><i class="fa fa-chevron-right"
                     aria-hidden="true"></i></button>
             <button class="btn btn-lg btn-transparent p-3 shadow-0">
-                Order detial</button>
+                Contacting Property detial</button>
         </div>
     </div>
     <div class="container py-2">
@@ -44,22 +44,22 @@
             <div class="p-4 bg-light smallest-font text-uppercase">
                 <div class="d-flex justify-content-between">
                     <p>total</p>
-                    <p class="f-500">₦{{ $order->total_price }}</p>
+                    <p class="f-500">{{ Country()->currency_symbol }}{{ $order->total_price }}</p>
                 </div>
-                <div class="d-flex justify-content-between">
+                {{-- <div class="d-flex justify-content-between">
                     <p>TAX</p>
                     <p class="f-500">{{ number_format($order->tax, 2) }}</p>
-                </div>
+                </div> --}}
                 @if ($order->tax + $order->total_price - $order->final_price > 0)
                     <div class="d-flex justify-content-between">
                         <p>Discount</p>
-                        <p class="f-500">₦{{ number_format($order->tax + $order->total_price - $order->final_price, 2) }}</p>
+                        <p class="f-500">{{ Country()->currency_symbol }}{{ number_format($order->tax + $order->total_price - $order->final_price, 2) }}</p>
                     </div>
                 @endif
                 <hr>
                 <div class="d-flex justify-content-between">
                     <p>Final price</p>
-                    <p class="f-500">₦{{ number_format($order->final_price, 2) }}</p>
+                    <p class="f-500">{{ Country()->currency_symbol }}{{ number_format($order->final_price, 2) }}</p>
                 </div>
             </div>
         </div>
