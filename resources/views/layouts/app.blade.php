@@ -82,11 +82,12 @@
                     <ul class="mb-0 list-unstyled d-md-initial d-lg-flex">
                         <li><a class="btn btn-white my-md-2 shadow-0 mx-lg-1 @yield('home')" href="{{ route('home') }}">Home</a>
                         </li>
+                        <li><a class="btn btn-white my-md-2 shadow-0 mx-lg-1 @yield('about-us')" href="{{ route('aboutUs') }}">About
+                            Us</a></li>
 
                         @livewire('child.shop-menu')
 
-                        <li><a class="btn btn-white my-md-2 shadow-0 mx-lg-1 @yield('about-us')" href="{{ route('aboutUs') }}">About
-                                Us</a></li>
+
                         <li><a class="btn btn-white my-md-2 shadow-0 mx-lg-1 @yield('contact-us')" href=" {{ route('contactUs') }}">Contact Us</a></li>
                     </ul>
                 </div>

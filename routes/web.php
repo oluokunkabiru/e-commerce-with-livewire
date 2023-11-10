@@ -85,6 +85,7 @@ Route::get('/search', [FrontController::class, 'search'])->name('search');
 Route::get('/verify/{code}', [FrontController::class, 'verify'])->name('verify');
 
 Route::get('/about-us', [FrontController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/about-us/{category}', [FrontController::class, 'categoryAbout'])->name('categoryAbout');
 Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('contactUs');
 
 Route::get('/contact-list', Cart::class)->name('cart');

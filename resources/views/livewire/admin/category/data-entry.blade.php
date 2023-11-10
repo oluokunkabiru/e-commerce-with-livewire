@@ -86,8 +86,19 @@
 
                                 @include('admin.form.photo-input')
 
+                                <div
+                                class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
+                                <span class="text-area-label">Description<span class="text-danger">*</span></span>
+                                <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='about'>{!! $about !!}</textarea>
+                                @error('about')
+                                    <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+                                        <p class="text-danger">{{ $message }}</p>
+                                    </div>
+                                @enderror
+                            </div>
+
                                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-                                    <button type="submit"
+                                    <button type="submit"  id="submitBtn"
                                         class="text-uppercase mdc-button mdc-button--raised mdc-ripple-upgraded w-100">
                                         Save
                                     </button>
@@ -101,3 +112,98 @@
         </div>
     </div>
 </div>
+
+
+@section('extra-js')
+    <script src="{{ mix('js/admin-product.js') }}"></script>
+    <script src="{{ asset('common/js/ckeditor.js') }}"></script>
+
+    <script>
+        let textareaData = [];
+
+        document.addEventListener('livewire:load', () => {
+            Livewire.on('removeAttribute', index => {
+                if (confirm("Are you sure? This action can't be undone") == true) {
+                    Livewire.emit("removeAttr", index);
+                }
+            });
+
+            ckeditor();
+
+            document.querySelector("#submitBtn").addEventListener('click', () => {
+                textareaData.forEach(textarea => {
+                    eval(textarea[2]).set(textarea[1], textarea[0].getData());
+                });
+            });
+        });
+
+        Livewire.on('setEditor', () => {
+            ckeditor();
+        });
+
+        function ckeditor() {
+            let textareas = document.querySelectorAll("textarea[editor='true']");
+
+            textareas.forEach((textarea, key) => {
+                ClassicEditor
+                    .create(textarea, {
+                        toolbar: {
+                            items: [
+                                'bold',
+                                'italic',
+                                'link',
+                                '|',
+                                'bulletedList',
+                                'numberedList',
+                                '|',
+                                'outdent',
+                                'indent',
+                                '|',
+                                'blockQuote',
+                                'insertTable',
+                                'mediaEmbed',
+                                '|',
+                                'undo',
+                                'redo',
+                                '|',
+                                'highlight',
+                                'alignment',
+                                '|',
+                                'fontSize',
+                                'fontBackgroundColor',
+                                'fontColor',
+                                '|',
+                                'htmlEmbed',
+                                'removeFormat',
+                                '|',
+                                'subscript',
+                                'superscript',
+                                '|',
+                                'underline'
+                            ]
+                        },
+                        language: 'en',
+                        table: {
+                            contentToolbar: [
+                                'tableColumn',
+                                'tableRow',
+                                'mergeTableCells'
+                            ]
+                        },
+                        licenseKey: '',
+                        title: false
+                    })
+                    .then(editor => {
+                        textareaData[key] = [
+                            editor = editor,
+                            model = textarea.getAttribute("data-model"),
+                            that = textarea.getAttribute("data-that")
+                        ];
+                        textarea.parentNode.querySelector(".ck-content h1").style.display = "none"
+                    });
+
+            });
+        }
+
+    </script>
+@endsection

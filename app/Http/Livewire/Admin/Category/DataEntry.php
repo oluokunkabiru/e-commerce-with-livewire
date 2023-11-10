@@ -21,6 +21,7 @@ class DataEntry extends Component
 
     public $editId = '';
     public $category;
+    public $about ;
     public $in_home_page;
     public $parent_category = null;
     public $parent_category_arr;
@@ -29,7 +30,10 @@ class DataEntry extends Component
     public $photoPreview = '';
 
     protected $listeners = ['submit'];
-
+    public function dehydrate()
+    {
+        $this->emit('setEditor');
+    }
     public function updatedPhoto()
     {
         if ($this->photo) {
@@ -43,10 +47,12 @@ class DataEntry extends Component
         $validationArr = '' != $this->editId ? [
             'name' => ['required', Rule::unique('categories')->ignore($this->editId)],
             'slug' => ['required', Rule::unique('categories')->ignore($this->editId)],
+            'about'=>'required|string',
         ]
         : [
             'name' => 'required|unique:categories',
             'slug' => 'required|unique:categories',
+            'about' =>'required|string',
         ];
 
         if ($this->photo && '' != $this->editId) {
@@ -62,6 +68,7 @@ class DataEntry extends Component
             'slug'            => $this->slug,
             'in_home_page'    => $this->in_home_page,
             'parent_category' => $this->parent_category,
+            'about' => $this->about,
         ];
 
         $status = "added";
@@ -100,6 +107,7 @@ class DataEntry extends Component
             $this->in_home_page    = $this->category->in_home_page;
             $this->parent_category = $this->category->parent_category;
             $this->editId          = $this->category->id;
+            $this->about =$this->category->about;
         }
 
         $this->parent_category_arr = '' != $this->editId ? Category::where('status', 1)->where('id', '!=', $this->editId)->get(['name', 'id'])->toArray()

@@ -12,9 +12,7 @@
       <div class="mdc-layout-grid__cell--span-12">
         <div class="mdc-card">
           <h6 class="card-title">
-            My Shop
-
-
+            Company Settings
           </h6>
           <div class="template-demo">
             <form wire:submit.prevent='submit'>

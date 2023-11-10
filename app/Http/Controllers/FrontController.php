@@ -89,6 +89,14 @@ class FrontController extends Controller
         return view('about-us', ['aboutUs' => $aboutUs]);
     }
 
+
+
+    public function categoryAbout($category){
+        $category =  Category::where('slug', $category)->first();
+
+        return view('category-write-up', compact(['category']));
+
+    }
     public function contactUs()
     {
         $myShop = MyShop::first();

@@ -1,3 +1,14 @@
+@if ($categories->count() > 0)
+
+@foreach ($categories as $category)
+<li><a class="btn btn-white my-md-2 shadow-0 mx-lg-1  {{ Str::contains(Request::url(), route('categoryAbout', $category->slug) ) ? 'active' : '' }}" href="{{ route('categoryAbout', $category->slug) }}">
+    {{ $category->name }}
+</a></li>
+@endforeach
+
+@endif
+
+
 <li class="p-relative sub-menu-container">
   <a href="{{ route('shop') }}" class="sub-menu-root @yield('shop') btn btn-white my-md-2 shadow-0 mx-lg-1">Properties
   </a>

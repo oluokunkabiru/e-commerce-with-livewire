@@ -14,7 +14,7 @@
                 </a>
                 <h1 class="small-font my-3">{{ $category->name }}</h1>
                 <p class="smaller-font pb-4">{{ $category->products_count }}
-                    Product{{ $category->products_count > 1 ? 's' : '' }}</p>
+                    Propert{{ $category->products_count > 1 ? 'ies' : 'y' }}</p>
             </div>
         </div>
     @endforeach
