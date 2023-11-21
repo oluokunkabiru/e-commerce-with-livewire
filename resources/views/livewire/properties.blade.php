@@ -47,7 +47,7 @@
 
             <div class="col-md-3">
                 <div class="form-group @error('country') has-error @enderror">
-                    <label for="country">Country <span class="text-danger">*</span></label>
+                    {{-- <label for="country">Country <span class="text-danger">*</span></label> --}}
                     <select wire:model="country" class="form-control" id="country">
                         <option value="">Select Country</option>
                         @foreach ($countries as $country)
@@ -63,7 +63,7 @@
 
             <div class="col-md-3">
                 <div class="form-group @error('state') has-error @enderror">
-                    <label for="state">State <span class="text-danger">*</span></label>
+                    {{-- <label for="state">State <span class="text-danger">*</span></label> --}}
                     <select wire:model="state" class="form-control" id="state">
                         <option value="">Select State</option>
                         @foreach ($states as $state)
@@ -78,7 +78,7 @@
 
             <div class="col-md-3">
                 <div class="form-group @error('city') has-error @enderror">
-                    <label for="city">City <span class="text-danger">*</span></label>
+                    {{-- <label for="city">City <span class="text-danger">*</span></label> --}}
                     <select wire:model="city" class="form-control" id="city">
                         <option value="">Select City</option>
                         @foreach ($cities as $city)

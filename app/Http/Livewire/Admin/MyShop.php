@@ -70,7 +70,7 @@ class MyShop extends Component
             'linkedin'          => 'nullable|url',
             'google_plus'       => 'nullable|url',
             'logo_primary'      => 'nullable|image|mimes:jpeg,png,jpg,svg',
-            'logo_secondary'    => 'nullable|image|mimes:jpeg,png,jpg,svg',
+            // 'logo_secondary'    => 'nullable|image|mimes:jpeg,png,jpg,svg',
             'favicon'           => 'nullable|mimes:jpeg,png,jpg,svg,ico',
         ]);
 
@@ -83,12 +83,12 @@ class MyShop extends Component
                         ->toMediaCollection("favicon");
                 }
 
-                if ($validatedData['logo_secondary']) {
-                    $this->myShop->clearMediaCollection('logo_secondary');
-                    $this->myShop->addMedia($validatedData['logo_secondary'])
-                        ->usingFileName("logo_secondary.png")
-                        ->toMediaCollection("logo_secondary");
-                }
+                // if ($validatedData['logo_secondary']) {
+                //     $this->myShop->clearMediaCollection('logo_secondary');
+                //     $this->myShop->addMedia($validatedData['logo_secondary'])
+                //         ->usingFileName("logo_secondary.png")
+                //         ->toMediaCollection("logo_secondary");
+                // }
 
                 if ($validatedData['logo_primary']) {
                     $this->myShop->clearMediaCollection('logo_primary');
@@ -112,9 +112,9 @@ class MyShop extends Component
                     ->usingFileName("logo_primary.png")
                     ->toMediaCollection("logo_primary")
 
-                    ->addMedia($validatedData['logo_secondary'])
-                    ->usingFileName("logo_secondary.png")
-                    ->toMediaCollection("logo_secondary")
+                    // ->addMedia($validatedData['logo_secondary'])
+                    // ->usingFileName("logo_secondary.png")
+                    // ->toMediaCollection("logo_secondary")
 
                     ->addMedia($validatedData['favicon'])
                     ->usingFileName("favicon.png")
@@ -122,7 +122,7 @@ class MyShop extends Component
 
                 unset($validatedData['favicon']);
                 unset($validatedData['logo_primary']);
-                unset($validatedData['logo_secondary']);
+                // unset($validatedData['logo_secondary']);
             }
 
         }

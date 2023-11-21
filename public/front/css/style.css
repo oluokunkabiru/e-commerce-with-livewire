@@ -149,6 +149,11 @@ body {
     display: flex;
     height: 500px;
 }
+@media (max-width: 576px) {
+    .slider__fixed--height {
+        height: 200px; /* Adjusted height for smaller screens */
+    }
+}
 .slider--one .slide {
     align-items: center;
     display: flex;

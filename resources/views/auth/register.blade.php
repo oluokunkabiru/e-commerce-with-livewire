@@ -38,7 +38,7 @@
 
                         <button class="btn btn-lg btn-dark btn-block">submit</button>
 
-                        <a href="{{ route('login') }}" class="text-black smaller-font float-end mt-2">Allready Register?
+                        <a href="{{ route('login') }}" class="text-black smaller-font float-end mt-2">Already Register?
                             Login</a>
                     </form>
 

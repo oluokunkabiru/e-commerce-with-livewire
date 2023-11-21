@@ -26,7 +26,7 @@
     <div class="row ">
         <div class="col-md-3">
             <div class="form-group @error('category') has-error @enderror">
-                <label for="category">Category <span class="text-danger">*</span></label>
+                {{-- <label for="category">Category <span class="text-danger">*</span></label> --}}
                 <select wire:model.defer='category' class="form-control" id="category">
                     <option value="">Select Category</option>
                     @foreach ($categories as $category)
@@ -43,7 +43,7 @@
 
         <div class="col-md-3">
             <div class="form-group @error('country') has-error @enderror">
-                <label for="country">Country <span class="text-danger">*</span></label>
+                {{-- <label for="country">Country <span class="text-danger">*</span></label> --}}
                 <select wire:model="country" class="form-control" id="country">
                     <option value="">Select Country</option>
                     @foreach ($countries as $country)
@@ -59,7 +59,7 @@
 
         <div class="col-md-3">
             <div class="form-group @error('state') has-error @enderror">
-                <label for="state">State <span class="text-danger">*</span></label>
+                {{-- <label for="state">State <span class="text-danger">*</span></label> --}}
                 <select wire:model="state" class="form-control" id="state">
                     <option value="">Select State</option>
                     @foreach ($states as $state)
@@ -74,7 +74,7 @@
 
         <div class="col-md-3">
             <div class="form-group @error('city') has-error @enderror">
-                <label for="city">City <span class="text-danger">*</span></label>
+                {{-- <label for="city">City <span class="text-danger">*</span></label> --}}
                 <select wire:model="city" class="form-control" id="city">
                     <option value="">Select City</option>
                     @foreach ($cities as $city)
@@ -93,7 +93,7 @@
   <!-- Start Slider Area -->
 
   {{-- Category Area --}}
-  @livewire('child.home-categories')
+  {{-- @livewire('child.home-categories') --}}
   {{-- ! Category Area --}}
 
   @if ($bestSellers->count() > 0)

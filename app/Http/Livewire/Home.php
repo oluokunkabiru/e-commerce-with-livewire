@@ -38,6 +38,7 @@ class Home extends Component
         $this->states = State::where('country_id', $newCountry)->get();
         $this->state = null; // Reset selected state
         $this->city = null; // Reset selected city
+        // $this->country =  $newCountry;
         $this->updateFilteredProperties();
     }
 
@@ -45,6 +46,7 @@ class Home extends Component
     {
         $this->cities = City::where('state_id', $newState)->get();
         $this->city = null; // Reset selected city
+        // $this->state =  $newState;
 
         // Update properties based on the selected filters
         $this->updateFilteredProperties();
@@ -52,6 +54,7 @@ class Home extends Component
 
     public function updateCategory($newCategory)
     {
+        $this->category = $newCategory;
         $this->updateFilteredProperties();
     }
 
@@ -126,21 +129,31 @@ class Home extends Component
 
 public function mount(){
 
-    $ip = '197.211.53.127';//request()->ip();
-    $location= Location::get($ip);
+    // $ip = request()->ip();
+    // $location= Location::get($ip);
 
 // info(['rate'=>Currency()]);
+
+// info(['country'=>$this->country]);
+
+$this->country =Country()->id;
 
 
     $this->bestSellers = Property::with('onSaleAttributes')
         ->has('onSaleAttributes')
         ->where('best_seller', 1)
+        ->when($this->country, function ($query) {
+            $query->where('country_id', $this->country);
+        })
         ->where('status', 1)
         ->latest()->get();
 
     $this->featureds = Property::with('onSaleAttributes')
         ->has('onSaleAttributes')
         ->where('featured', 1)
+        ->when($this->country, function ($query) {
+            $query->where('country_id', $this->country);
+        })
         ->where('status', 1)
         ->latest()->get();
 
@@ -148,16 +161,26 @@ public function mount(){
         ->has('onSaleAttributes')
         ->where('trending', 1)
         ->where('status', 1)
+        ->when($this->country, function ($query) {
+            $query->where('country_id', $this->country);
+        })
         ->latest()->get();
 
     $this->discounteds = Property::with('onSaleAttributes')
         ->has('onSaleAttributes')
         ->where('discounted', 1)
         ->where('status', 1)
+        ->when($this->country, function ($query) {
+            $query->where('country_id', $this->country);
+        })
         ->latest()->get();
 
-    $this->categories = Category::where('status', 1)->get(['name', 'id']);
+    $this->categories = Category::where('status', 1)->where('in_home_page', '!=', 1)->get(['name', 'id']);
     $this->countries = Country::get();
+    $this->states = State::where('country_id', $this->country)->get();
+
+
+
 
 }
 

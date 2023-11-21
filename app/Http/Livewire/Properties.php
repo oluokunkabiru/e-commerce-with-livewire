@@ -33,8 +33,9 @@ class Properties extends Component
     public $discounteds;
 
 
-    public function updatedCount($newCountry)
+    public function updatedCountry($newCountry)
     {
+        info($newCountry);
         $this->states = State::where('country_id', $newCountry)->get();
         $this->state = null; // Reset selected state
         $this->city = null; // Reset selected city
@@ -50,7 +51,8 @@ class Properties extends Component
 
     public function updateCategory($newCategory)
     {
-        info(['category'=>$this->category]);
+        // info(['category'=>$this->category]);
+        $this->category =  $newCategory;
 
         $this->updateFilteredProperties();
     }
@@ -59,6 +61,7 @@ class Properties extends Component
     {
 
         $this->countries = Country::get();
+
 
         $this->categories = Category::withCount('products')
             ->when($this->category, function ($cat){
@@ -78,6 +81,12 @@ class Properties extends Component
 
 
     public function mount(){
+
+        $this->country =Country()->id;
+        // $this->states = State::where('country_id', $this->country)->get();
+
+
+        
         $this->countries = Country::get();
         $this->categories = Category::withCount('products')
             ->when($this->category, function ($cat){
@@ -85,7 +94,9 @@ class Properties extends Component
             })
             ->has('products')
             ->where('status', 1)
-            ->where('in_home_page', 1)
+            // ->where('in_home_page', 1)
+            ->where('in_home_page', '!=', 1)
+
             // ->whereHas('photo')
             ->orderBy('products_count', 'desc')
             ->get();

@@ -68,14 +68,14 @@
     </div>
     <!--Main Navigation-->
     <header class="z-7 bg-body">
-        <div class="container-fluid py-2 shadow-3">
-            <div class="container d-flex align-items-center justify-content-between">
+        <div class="container py-2 shadow-3">
+            <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     <button id="sidebarToggle" class="mr-2 z-9 btn btn-floating btn-light">
                         <i class="fa fa-bars m-0" aria-hidden="true"></i>
                     </button>
                     <div class="logo-container">
-                        <img src="{{ @settings()->getMedia('logo_primary')->first()!=null?@settings()->getMedia('logo_primary')->first()->getFullUrl():null }}" class="img-fluid" alt="{{ settings()->name }}">
+                        <img style="width: 50px" src="{{ @settings()->getMedia('logo_primary')->first()!=null?@settings()->getMedia('logo_primary')->first()->getFullUrl():null }}" class="img-fluid" alt="{{ settings()->name }}">
                     </div>
                 </div>
                 <div class="link-container z-8 bg-body">
@@ -91,23 +91,18 @@
                         <li><a class="btn btn-white my-md-2 shadow-0 mx-lg-1 @yield('contact-us')" href=" {{ route('contactUs') }}">Contact Us</a></li>
                     </ul>
                 </div>
-                <div class="">
-                    <button id="searchToggle" class="btn btn-white btn-floating" data-mdb-toggle="tooltip" title="search"><i class="fas fa-search"></i></button>
-
+                <div class="ml-auto px-sm-1 px-2">
+                    <button id="searchToggle" class="btn btn-white btn-floating d-none d-sm-inline" data-mdb-toggle="tooltip" title="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
                     @guest
-                    <a href="{{ route('login') }}" class="btn btn-white " data-mdb-toggle="tooltip" title="Login/Register">
-
+                    <a href="{{ route('login') }}" class="btn btn-white  btn-sm" data-mdb-toggle="tooltip" title="Login/Register">
                         Login
-                          {{-- <i class="fas fa-sign-in-alt"></i> --}}
                        </a>
-
-
-                       <a href="{{ route('register') }}" class="btn btn-white " data-mdb-toggle="tooltip" title="Login/Register">
-
-                           Register
-                             {{-- <i class="fas fa-sign-in-alt"></i> --}}
+                       <a href="{{ route('register') }}" class="btn btn-white  btn-sm" data-mdb-toggle="tooltip" title="Login/Register">
+                           Signup
                           </a>
-                    {{-- <a href="{{ route('login') }}" class="btn btn-white btn-floating" data-mdb-toggle="tooltip" title="Login/Register"><i class="fas fa-sign-in-alt"></i></a> --}}
                     @endguest
                     @auth
                     <button type="button" class="btn btn-floating btn-white" data-mdb-toggle="dropdown" aria-expanded="false">

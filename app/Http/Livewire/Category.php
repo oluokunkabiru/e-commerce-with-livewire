@@ -74,14 +74,20 @@ class Category extends Component
     {
         // Log::info($slug);
         $this->category = ModelsCategory::where('slug', $slug)->with('subCategories')->firstOrFail();
-        $this->categories = ModelsCategory::where('status', 1)->get(['name', 'id']);
+        $this->categories = ModelsCategory::where('status', 1)->where('in_home_page', '!=', 1)->get(['name', 'id']);
         $this->countries = Country::get();
         // Country();
     }
 
     public function render()
     {
-        $qry = Property::where('category_id', $this->category->id);
+        $this->country =Country()->id;
+
+        $qry = Property::where('category_id', $this->category->id)
+        ->when($this->country, function ($query) {
+            $query->where('country_id', $this->country);
+        })
+        ;
 
         $qry->with('onSaleAttributes', function ($query) {
             if ($this->minPrice > 0) {

@@ -291,16 +291,16 @@
                   </div>
                 @enderror
 
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
+                {{-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
                   <input wire:loading.attr='disabled' type="file"  accept="image/*" wire:target='logo_secondary' class="d-none"
                     wire:model='logo_secondary' id="logo_secondary">
                   <label for="logo_secondary" wire:loading.class='disabled' wire:target='logo_secondary'
                     class="mdc-button mdc-button--unelevated filled-button--dark mdc-ripple-upgraded text-uppercase w-100 py-4">
                     Secondary logo</label>
-                </div>
+                </div> --}}
 
-                @if ($logo_secondary && $logo_secondary->temporaryUrl())
-                {{-- <h1>{{ $logo_secondary }}   {{ $logo_secondary->temporaryUrl() }}</h1> --}}
+                {{-- @if ($logo_secondary && $logo_secondary->temporaryUrl())
+                <h1>{{ $logo_secondary }}   {{ $logo_secondary->temporaryUrl() }}</h1>
                   @if ($logoSecondaryPreview == '')
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
@@ -310,9 +310,9 @@
                   @if ($logoSecondaryPreview == '')
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
-                @endif
+                @endif --}}
 
-                @if ($logoSecondaryPreview != '')
+                {{-- @if ($logoSecondaryPreview != '')
                   @if (!$logo_secondary)
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
@@ -325,13 +325,13 @@
                   @if (!$logo_secondary)
                     <div class="mdc-layout-grid__cell--span-3-desktop"></div>
                   @endif
-                @endif
+                @endif --}}
 
-                @error('logo_secondary')
+                {{-- @error('logo_secondary')
                   <div class="text-center bg-danger mx-0 py-2 mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                     <p class="text-light m-0">{{ $message }}</p>
                   </div>
-                @enderror
+                @enderror --}}
 
 
                 <div class="d-flex align-items-center mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop">
