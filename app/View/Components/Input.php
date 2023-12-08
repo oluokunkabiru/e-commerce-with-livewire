@@ -11,19 +11,21 @@ class Input extends Component
     public $autofocus;
     public $type;
     public $value;
+    public $others;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $label = null, $autofocus = false, $type = 'text', $value = null)
+    public function __construct($name, $label = null, $autofocus = false, $type = 'text', $value = null, $others=null)
     {
         $this->name      = $name;
         $this->label     = $label ?? ucwords($name);
         $this->autofocus = $autofocus;
         $this->type      = $type;
         $this->value     = $value;
+        $this->others =  $others;
     }
 
     /**

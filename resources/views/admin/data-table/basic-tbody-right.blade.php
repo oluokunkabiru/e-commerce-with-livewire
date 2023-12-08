@@ -1,7 +1,10 @@
 <td class="mdc-data-table__cell ">
+    what
     {{ dataTableDate($item->created_at) }}
     <br>
     {{ dataTableTime($item->created_at) }}
+
+    
 </td>
 
 @can('edit ' . $that)
@@ -35,12 +38,14 @@
             </div>
         @else
             <button aria-describedby="tt_table_status_{{ $item->id }}"
+                
                 wire:click='status({{ $item->id }}, {{ $item->status }})'
+
                 class="mdc-icon-button btn-status btn-responsive material-icons btn-circle {{ $item->status == 1 ? 'btn-active' : '' }}">{{ $item->status == 1 ? 'arrow_upward' : 'arrow_downward' }}</button>
             <div id="tt_table_status_{{ $item->id }}" class="mdc-tooltip" role="tooltip" aria-hidden="true">
                 <div class="mdc-tooltip__surface">
                     @if ($item->status == 1)
-                        Deactivate this {{ $that }}
+                        Deactivate this {{ $that }} 
                     @else
                         Activate this {{ $that }}
                     @endif

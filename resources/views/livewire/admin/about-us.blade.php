@@ -34,14 +34,25 @@
 
                                 <div
                                     class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
-                                    <span class="text-area-label">Our Vision<span class="text-danger">*</span></span>
-                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='vision'>{!! $vision !!}</textarea>
-                                    @error('vision')
+                                    <span class="text-area-label">Agent Agreement<span class="text-danger">*</span></span>
+                                    <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='agreement'>{!! $agreement !!}</textarea>
+                                    @error('agreement')
                                         <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
                                             <p class="text-danger">{{ $message }}</p>
                                         </div>
                                     @enderror
                                 </div>
+
+                                <div
+                                class="editor-full text-area-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop text-area-filled @error('description') input-invalid @enderror">
+                                <span class="text-area-label">Our Vision<span class="text-danger">*</span></span>
+                                <textarea editor="true" class="mdc-text-field__input" wire:ignore data-that="@this" data-model='vision'>{!! $vision !!}</textarea>
+                                @error('vision')
+                                    <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
+                                        <p class="text-danger">{{ $message }}</p>
+                                    </div>
+                                @enderror
+                            </div>
 
 
                                 <div

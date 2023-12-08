@@ -2,28 +2,40 @@
 
 namespace App\Http\Livewire\Child;
 
+use App\Models\Country;
+use Exception;
 use App\Models\Cart;
+use App\Models\City;
+use App\Models\User;
 use App\Models\Order;
+use App\Models\State;
+use Livewire\Component;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
 use App\Models\PropertyDetail;
-use App\Models\User;
+use Illuminate\Validation\Rule;
 use App\Notifications\OrderPlaced;
-use Cartalyst\Stripe\Exception\BadRequestException;
-use Cartalyst\Stripe\Exception\CardErrorException;
-use Cartalyst\Stripe\Exception\InvalidRequestException;
-use Cartalyst\Stripe\Exception\NotFoundException;
-use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
+use Cartalyst\Stripe\Exception\NotFoundException;
+use Cartalyst\Stripe\Exception\CardErrorException;
+use Cartalyst\Stripe\Exception\BadRequestException;
+use Cartalyst\Stripe\Exception\InvalidRequestException;
 
 class CheckoutForm extends Component
 {
-    public $name, $email, $mobile, $zip, $address, $city, $state, $company, $password;
+    public $name, $email, $mobile, $zip, $address,  $company, $password;
+    public $country;
+    public $countries=[];
+
+
+    public $state;
+    public $states = [];
+
+    public $city;
+    public $cities = [];
 
     protected $listeners = ["submit"];
 
@@ -36,6 +48,20 @@ class CheckoutForm extends Component
 
     // ];
 
+    public function updatedCountry($newCountry)
+    {
+        $this->states = State::where('country_id', $newCountry)->get();
+        $this->state = null; // Reset selected state
+        $this->city = null; // Reset selected city
+        
+    }
+
+    public function updatedState($newState)
+    {
+        $this->cities = City::where('state_id', $newState)->get();
+        $this->city = null; // Reset selected city
+      
+    }
 
     public function rules()
     {
@@ -46,8 +72,9 @@ class CheckoutForm extends Component
             'mobile'   => "required|string",
             'zip'      => "required|numeric",
             'address'  => "required|string",
-            'city'     => "required|string",
-            "state"    => "required|string",
+            'city'     => "required|numeric",
+            'country'     => "required|numeric",
+            "state"    => "required|numeric",
             "company"  => "nullable|string",
             "password" => Rule::requiredIf(!auth()->check()),
         ];
@@ -181,16 +208,25 @@ class CheckoutForm extends Component
 
     public function mount()
     {
+        $this->country =Country()->id;
+
+        
         if (auth()->check()) {
             $this->name     = auth()->user()->name;
             $this->email    = auth()->user()->email;
             $this->mobile   = auth()->user()->mobile;
             $this->zip      = auth()->user()->zip;
             $this->address  = auth()->user()->address;
-            $this->city     = auth()->user()->city;
-            $this->state    = auth()->user()->state;
+            $this->city     = auth()->user()->city_id;
+            $this->state    = auth()->user()->state_id;
+            $this->country    = auth()->user()->country_id ? auth()->user()->country_id :Country()->id;
             $this->company = auth()->user()->company;
         }
+
+
+        $this->countries = Country::get();
+        $this->states = State::where('country_id', $this->country)->get();
+
     }
 
     public function render()

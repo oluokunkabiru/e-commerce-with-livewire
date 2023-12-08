@@ -37,7 +37,7 @@ class OrderDetail extends Component
             'user_id'         => auth()->id(),
             'comment'         => $this->comment,
             'rate'            => $rate,
-            'product_attr_id' => $pid,
+            'property_attr_id' => $pid,
         ];
 
         $this->review ? $this->review->update($arr) : Review::create($arr);

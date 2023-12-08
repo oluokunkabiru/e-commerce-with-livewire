@@ -15,6 +15,8 @@ class DataTable extends Component
     public $best_seller;
     public $discounted;
     public $trending;
+    // public $status;
+
 
     use WithProductDataTable;
 
@@ -81,7 +83,9 @@ class DataTable extends Component
     {
         $obj = $this->obj;
 
-        $qry = $obj->with(['category', 'country', 'state', 'city'])->withCount('propertyDetails')->where(function ($query) {
+        $qry = $obj->with(['category', 'country', 'state', 'city'])->withCount('propertyDetails')->when(!auth()->user()->hasRole("Super Admin"), function($q){
+            return $q->where('user_id', auth()->user()->id);
+        })->where(function ($query) {
             $query->where('name', 'like', '%' . $this->search . '%')
                 ->orWhereHas('category', function ($qry) {
                     $qry->where('name', 'like', '%' . $this->search . '%')

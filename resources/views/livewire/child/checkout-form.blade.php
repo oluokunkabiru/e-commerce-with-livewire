@@ -40,27 +40,66 @@
             @enderror
         </div>
     </div>
+
+
+    <div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group @error('country') has-error @enderror">
+            {{-- <label for="country">Country <span class="text-danger">*</span></label> --}}
+            <select wire:model="country" class="form-control bg-light" id="country">
+                <option value="">Select Country</option>
+                @foreach ($countries as $country)
+                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                @endforeach
+            </select>
+            @error('country')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="form-group @error('state') has-error @enderror">
+            {{-- <label for="state">State <span class="text-danger">*</span></label> --}}
+            <select wire:model="state" class="form-control bg-light" id="state">
+                <option value="">Select State</option>
+                @foreach ($states as $state)
+                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
+            </select>
+            @error('state')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group @error('city') has-error @enderror">
+            {{-- <label for="city">City <span class="text-danger">*</span></label> --}}
+            <select wire:model="city" class="form-control" id="city">
+                <option value="">Select City</option>
+                @foreach ($cities as $city)
+                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
+            </select>
+            @error('city')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+    </div>
+</div>
+
     <div class="form-group mb-3">
         <label class="form-label">Address<span class="text-danger">*</span></label>
-        <input id="address" wire:model.defer="address" required id="address" type="text" class="form-control input-control">
+        <textarea name="" wire:model.defer="address"  class="form-control input-control" required id="address"  ></textarea>
         @error('address')
             <p class="text-danger smaller-font">{{ $message }}</p>
         @enderror
     </div>
-    <div class="form-group mb-3">
-        <label class="form-label">City<span class="text-danger">*</span></label>
-        <input id="city" wire:model.defer="city" required city="city" type="text" class="form-control input-control">
-        @error('city')
-            <p class="text-danger smaller-font">{{ $message }}</p>
-        @enderror
-    </div>
-    <div class="form-group mb-3">
-        <label class="form-label">State<span class="text-danger">*</span></label>
-        <input id="state" wire:model.defer="state" required id="state" type="text" class="form-control input-control">
-        @error('state')
-            <p class="text-danger smaller-font">{{ $message }}</p>
-        @enderror
-    </div>
+
+
     <div class="form-group mb-3">
         <label class="form-label">Company</label>
         <input wire:model.defer="company" id="company" required autofocus type="text" class="form-control input-control">
@@ -97,10 +136,10 @@
         </h3>
     @endif
 
-    <label class="form-label">Payment details</label>
+    {{-- <label class="form-label">Payment details</label>
     <div wire:ignore class="mb-1" id="card-element">
         <!-- A Stripe Element will be inserted here. -->
-    </div>
+    </div> --}}
 
     <!-- Used to display form errors. -->
     <p id="card-errors" class="mb-4 text-danger smaller-font"></p>

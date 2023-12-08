@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->string('comment');
             $table->tinyInteger('rate');
             $table->bigInteger('user_id');
-            $table->bigInteger('product_attr_id');
+            $table->bigInteger('property_attr_id');
             $table->timestamps();
         });
     }

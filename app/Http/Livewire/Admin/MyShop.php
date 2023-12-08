@@ -17,7 +17,7 @@ class MyShop extends Component
     public $mobile1;
     public $mobile2;
     public $mail1;
-    public $mail2;
+    public $agent_fee;
     public $address;
     public $map;
     public $youtube;
@@ -59,7 +59,7 @@ class MyShop extends Component
             'mobile1'           => 'required',
             'mobile2'           => '',
             'mail1'             => 'required|email',
-            'mail2'             => 'nullable|email',
+            'agent_fee'         => 'nullable|numeric|max:50',
             'address'           => 'required',
             'map'               => 'required',
             'timezone'          => ['nullable', Rule::in($this->timezones)],
@@ -74,7 +74,7 @@ class MyShop extends Component
             'favicon'           => 'nullable|mimes:jpeg,png,jpg,svg,ico',
         ]);
 
-        if (can('manage my shop')) {
+        if (can('manage settings')) {
             if ($this->myShop) {
                 if ($validatedData['favicon']) {
                     $this->myShop->clearMediaCollection('favicon');
@@ -144,7 +144,7 @@ class MyShop extends Component
             $this->mobile1              = $this->myShop->mobile1;
             $this->mobile2              = $this->myShop->mobile2;
             $this->mail1                = $this->myShop->mail1;
-            $this->mail2                = $this->myShop->mail2;
+            $this->agent_fee            = $this->myShop->agent_fee;
             $this->address              = $this->myShop->address;
             $this->map                  = $this->myShop->map;
             $this->youtube              = $this->myShop->youtube;

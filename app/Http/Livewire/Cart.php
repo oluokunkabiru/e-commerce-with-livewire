@@ -43,7 +43,7 @@ class Cart extends Component
 
         $this->total = 0;
         foreach ($this->carts as $cart) {
-            $this->total += $cart->attribute->price * $cart->qty;
+            $this->total += (@$cart->attribute->price+(0.01*settings()->agent_fee*@$cart->attribute->price)) * $cart->qty;
         }
 
         return view('livewire.cart')

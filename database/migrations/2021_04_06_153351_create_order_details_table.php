@@ -17,7 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->bigInteger('order_id');
             $table->bigInteger('product_id');
-            $table->bigInteger('product_attr_id');
+            $table->bigInteger('property_attr_id');
             $table->bigInteger('qty');
             $table->timestamps();
         });

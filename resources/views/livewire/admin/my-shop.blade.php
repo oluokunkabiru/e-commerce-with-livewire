@@ -97,12 +97,12 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
                   <div class="mdc-text-field">
-                    <input class="mdc-text-field__input" wire:model.defer='mail2' id="mail2">
+                    <input class="mdc-text-field__input" type="number" max="50" wire:model.defer='agent_fee' id="agent_fee">
                     <div class="mdc-line-ripple"></div>
-                    <label for="mail2"
-                      class="mdc-floating-label {{ $mail2 != '' ? 'mdc-floating-label--float-above' : '' }}">Mail</label>
+                    <label for="agent_fee"
+                      class="mdc-floating-label {{ $agent_fee != '' ? 'mdc-floating-label--float-above' : '' }}">Agent Fee</label>
                   </div>
-                  @error('mail2')
+                  @error('agent_fee')
                     <div class="mdc-layout-grid__cell ml-3 mdc-layout-grid__cell--span-12">
                       <p class="text-danger">{{ $message }}</p>
                     </div>

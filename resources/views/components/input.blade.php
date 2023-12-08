@@ -1,7 +1,7 @@
 <div class="form-group mb-4 p-relative">
     <label class="form-label">{{ $label }}</label>
 
-    <input value="{{ $value }}" {{ $autofocus ? 'autofocus' : null }} type="{{ $type }}" name="{{ $name }}"
+    <input value="{{ $value }}" {{ $others }} {{ $autofocus ? 'autofocus' : null }} type="{{ $type }}" name="{{ $name }}"
         class="{{ $type == 'password' ? 'f-pwd' : null }} form-control">
 
     @if ($name == 'password')

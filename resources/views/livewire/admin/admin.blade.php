@@ -2,6 +2,18 @@
 Dashboard
 @endsection
 
+@section('extra-css')
+<style>
+    #social-links li {
+            display: inline-block;
+            padding: 5px;
+            text-align: center;
+            list-style: none;
+        }
+</style>
+
+@endsection
+
 <div>
     <div class="mdc-layout-grid">
         @can('view dashboard')
@@ -18,7 +30,25 @@ Dashboard
 
             @include('admin.dashboard.overview-card', ['key' => 'third', "label" => "Pending Payment", "value" =>
             $pendingPayment, "logo" => "warning", "tooltip" => "this month", "type" => "warning"])
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+                <div class="mdc-card">
+                    <a href="#">{{ route('register', 'referral_code='. auth()->user()->referral_code) }}</a>
+                    <div class="mt-2" id="shareButton{{ auth()->user()->referral_code }}">
+                        {!! \Share::page(
+                            route('register', 'referral_code='. auth()->user()->referral_code),
+                        )
+                            ->facebook()
+                            ->twitter()
+                            ->linkedin()
+                            ->telegram()
+                            ->whatsapp()
+                            ->reddit()
+                             !!}
+                      </div>
 
+                </div>
+            </div>
+            
             <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
                 <div class="mdc-card">
                     <div class="d-flex justify-content-between align-items-center">

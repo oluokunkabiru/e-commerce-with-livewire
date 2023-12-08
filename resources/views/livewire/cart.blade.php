@@ -36,7 +36,7 @@
                                 </a></td>
                             <td>
                                 <h4 class="small-font f-500 text-nowrap">{{ $cart->property->name }}</h4>
-                                <p class="smaller-font">{{ Country()->currency_symbol }}{{ $cart->attribute->price }}</p>
+                                <p class="smaller-font">{{ Country()->currency_symbol }}{{ $cart->attribute->price+(0.01*settings()->agent_fee*$cart->attribute->price) }}</p>
                             </td>
                             <td>
                                 <input type="number" data-id="{{ $cart->id }}" value="{{ $cart->qty }}"
@@ -45,7 +45,7 @@
                             </td>
 
                             <td>
-                                <p class="small-font text-black f-300">{{ Country()->currency_symbol }}{{ number_format($cart->attribute->price * $cart->qty, 2) }}</p>
+                                <p class="small-font text-black f-300">{{ Country()->currency_symbol }}{{ number_format(($cart->attribute->price+(0.01*settings()->agent_fee*$cart->attribute->price)) * $cart->qty, 2) }}</p>
                             </td>
                             <td class="text-right">
                                 <button data-id="{{ $cart->id }}"

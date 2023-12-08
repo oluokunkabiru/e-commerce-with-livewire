@@ -7,7 +7,7 @@
     </button>
     <div class="mdc-expansion-panel" id="{{ $rand }}">
         <nav class="mdc-list mdc-drawer-submenu">
-            {{ $slot }}
+            {{ $slot }} 
         </nav>
     </div>
 </div>

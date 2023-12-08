@@ -23,7 +23,6 @@
     <a class="btn mb-2 btn-light p-0 shadow-0"
         href="{{ route('property.detail', [$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id]) }}">
         <img observe="true" style="width:100%; height:150px; object-fit:cover" observe-src="{{ $product->onSaleAttributes->first()->getMedia('products')->first() !=null?$product->onSaleAttributes->first()->getMedia('products')->first()->getFullUrl():null }}"
-        {{-- <img observe="true" observe-src="{{ $product->onSaleAttributes->first()->photo->url }}" --}}
             class="img-fluid my-4" alt="">
         <div style="height: 255px;" class="img-progress">
             <div class="spinner-border text__primary" role="status">
@@ -31,7 +30,7 @@
             </div>
         </div>
     </a>
-    <h1 class="small-font">{{ $product->name }}</h1>
+    <h1 class="small-font">{{ $product->name }}   </h1>
 
     {{-- <div class="d-flex stars mb-2 justify-content-center">
         @include('partial.star',['star' => $rate])
@@ -40,7 +39,7 @@
     <div class="h-25px d-flex justify-content-center">
         <p class="text-line-through smaller-font f-500 mr-3 text-gray"> {{ Country()->currency_symbol }} {{ number_format(($product->onSaleAttributes->first()->mrp), 2) }}
         </p>
-        <p class="smaller-font text-black f-600">{{ Country()->currency_symbol }} {{ number_format(($product->onSaleAttributes->first()->price), 2) }}</p>
+        <p class="smaller-font text-black f-600">{{ Country()->currency_symbol }} {{ number_format((($product->onSaleAttributes->first()->price)+(0.01*settings()->agent_fee*$product->onSaleAttributes->first()->price)), 2) }} </p>
     </div>
     <p class="smaller-font pb-3 {{ $moreAttr > 0 ? 'text-black' : 'invisible' }}">{{ $moreAttr }} more
      attribute{{ $moreAttr > 1 ? 's' : '' }}</p>

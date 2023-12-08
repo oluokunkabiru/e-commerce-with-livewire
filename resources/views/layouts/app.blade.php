@@ -20,6 +20,30 @@
 
 
     <!-- Material Design for Bootstrap -->
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" /> --}}
+    {{-- <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.min.css"
+    rel="stylesheet" 
+  /> --}}
+  {{-- <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+        rel="stylesheet"
+        />
+    <!-- Font face -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
+
+    <!-- Responsive Design -->
+    <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+
+
+
+
+    <!-- Material Design for Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" />
 
     <!-- Font face -->
@@ -33,27 +57,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    @yield('extra-css')
-
-    <script defer src="{{ mix('js/app.js') }}"></script>
-
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    <!-- Custom scripts -->
-    <script type="text/javascript" src="{{ asset('front/js/main.js') }}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
     @livewireStyles
-    @livewireScripts
-
-    @yield('extra-js')
-
-    @stack("extra-js")
+    @yield('extra-css')
+    @stack("extra-css")
 </head>
 
 <body class="">
@@ -124,7 +130,7 @@
                                 <a href="{{ route('order') }}" class="dropdown-item f-500">
                                     <i class="fas fa-history mr-3"></i>Enquiries</a>
                             </li>
-                            @if (count(auth()->user()->permissions))
+                            @if (auth()->user()->getPermissionsViaRoles()->count())
                             <li>
                                 <a href="{{ route('dashboard.home') }}" class="dropdown-item f-500">
                                     <i class="fa fa-tachometer-alt mr-3"></i>Dashboard</a>
@@ -164,12 +170,37 @@
 
     @livewire('child.footer')
 
+    
+
+
     <div class="p-4 text-center bg-black w-100">
         <h4 class="small-font text-light p-4 f-300">Copyright&copy; <a href="{{ route('home') }}" class="text__primary">{{ config('app.name') }}</a> {{ date('Y') }}. All
             Right
             Reserved.</h4>
     </div>
     <!--Footer-->
+    
+    
+
+
+<script defer src="{{ mix('js/app.js') }}"></script>
+
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- Custom scripts -->
+<script type="text/javascript" src="{{ asset('front/js/main.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  @yield('extra-js')
+    @stack('extra-js')
+ @livewireScripts
+    
+  
+   
 </body>
 
 </html>

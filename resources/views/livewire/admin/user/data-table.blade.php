@@ -245,9 +245,13 @@
                                     @include('admin.data-table.basic-thead-left')
 
                                     @include('admin.data-table.th', ['name' => 'name'])
+                                    @include('admin.data-table.th', ['name' => 'role'])
+
                                     @include('admin.data-table.th', ['name' => 'email'])
                                     @include('admin.data-table.th', ['name' => 'mobile'])
-                                    @include('admin.data-table.th', ['name' => 'city'])
+                                    <th class="mdc-data-table__header-cell">Country</th>
+                                    <th class="mdc-data-table__header-cell">State</th>
+                                    <th class="mdc-data-table__header-cell">City</th>
 
                                     <th class="mdc-data-table__header-cell">
                                         Added On
@@ -270,6 +274,10 @@
                                         <td class="mdc-data-table__cell ">
                                             {{ $item->name }}
                                         </td>
+
+                                        <td class="mdc-data-table__cell ">
+                                            {{ $item->getRoleNames()->first() }}
+                                        </td>
                                         <td class="mdc-data-table__cell ">
                                             {{ $item->email }}
                                             @if ($item->email_verified_at)
@@ -287,7 +295,14 @@
                                             {{ $item->mobile }}
                                         </td>
                                         <td class="mdc-data-table__cell ">
-                                            {{ $item->city }}
+                                            {{ $item->country?->name }}
+                                        </td>
+
+                                        <td class="mdc-data-table__cell ">
+                                            {{ $item->state?->name }}
+                                        </td>
+                                        <td class="mdc-data-table__cell ">
+                                            {{ $item->city?->name }}
                                         </td>
 
                                         <td class="mdc-data-table__cell ">

@@ -156,7 +156,7 @@ trait WithProductDataTable
 
     public function trash()
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $this->onlyTrashed = true;
             $this->resetPage();
             $this->clearSelected();
@@ -183,7 +183,7 @@ trait WithProductDataTable
 
     public function deleteChecked()
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $this->obj->destroy($this->selected);
             $this->clearSelected();
         }
@@ -191,7 +191,7 @@ trait WithProductDataTable
 
     public function forceDeleteChecked()
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $items = $this->obj->onlyTrashed()->with('productDetails')->whereIn('id', $this->selected)->get();
             foreach ($items as $item) {
                 foreach ($item->productDetails as $itemDetail) {
@@ -206,7 +206,7 @@ trait WithProductDataTable
 
     public function directForceDeleteChecked()
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $items = $this->obj->with('productDetails')->whereIn('id', $this->selected)->get();
             foreach ($items as $item) {
                 foreach ($item->productDetails as $itemDetail) {
@@ -221,7 +221,7 @@ trait WithProductDataTable
 
     public function forceDelete($id)
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $data = $this->obj->onlyTrashed()->with('productDetails')->find($id);
             if ($data) {
                 foreach ($data->productDetails as $itemDetail) {
@@ -235,7 +235,7 @@ trait WithProductDataTable
 
     public function restoreChecked()
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $this->obj->onlyTrashed()->whereIn('id', $this->selected)->restore();
             $this->clearSelected();
         }
@@ -243,37 +243,52 @@ trait WithProductDataTable
 
     public function activeChecked()
     {
-        if (can('edit product')) {
+        info(['hello'=>'Testing']);
+        if (can('edit property')) {
             $this->obj->whereIn('id', $this->selected)->update(['status' => 1]);
         }
     }
 
     public function deactiveChecked()
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $this->obj->whereIn('id', $this->selected)->update(['status' => 0]);
         }
     }
 
     public function status($id, $status)
     {
-        if (can('edit product')) {
+        info(["status"=>$status]);
+        if (can('disabled property') || can('approved property')) {
+            // info(["status role"=>$status]);
+            if (can('approved property') && can('approved property') ) {
+                $data   = $this->obj->findOrFail($id);
+                $status = (1 == $status) ? 0 : 1;
+                $data->update(['status' => $status]);            }
+
+          
+        }elseif(can('approved property')){
+
+                $data   = $this->obj->findOrFail($id);
+                $status = (1 == $status) ? 1 : 1;
+                $data->update(['status' => $status]); 
+        }else{
             $data   = $this->obj->findOrFail($id);
-            $status = (1 == $status) ? 0 : 1;
-            $data->update(['status' => $status]);
+            $status = (1 == $status) ? 0 : 0;
+            $data->update(['status' => $status]); 
         }
     }
 
     public function delete($id)
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $this->obj->destroy($id);
         }
     }
 
     public function restoreRow($id)
     {
-        if (can('edit product')) {
+        if (can('edit property')) {
             $data = $this->obj->onlyTrashed()->find($id);
             if ($data) {
                 $data->restore();

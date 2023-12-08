@@ -169,13 +169,13 @@ class DataTable extends Component
 
     public function getModelProperty($paginate = true)
     {
-        $qry = User::where(function ($query) {
+        $qry = User::with(['country', 'state', 'city'])->when(!auth()->user()->hasRole("Super Admin"), function($q){
+            return $q->where('refer_by', auth()->user()->id);
+        })->where(function ($query) {
             $query->where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%')
                 ->orWhere('mobile', 'like', '%' . $this->search . '%')
                 ->orWhere('address', 'like', '%' . $this->search . '%')
-                ->orWhere('city', 'like', '%' . $this->search . '%')
-                ->orWhere('state', 'like', '%' . $this->search . '%')
                 ->orWhere('company', 'like', '%' . $this->search . '%')
                 ->orWhere('zip', 'like', '%' . $this->search . '%')
                 ->orWhere('id', 'like', '%' . $this->search . '%');

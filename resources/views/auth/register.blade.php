@@ -19,6 +19,9 @@
             <div class="row">
                 <div class="offset-md-3 col-md-6 col-sm-12 p-4 product-card p-relative bg-white rounded-3 shadow-1-strong">
                     <h4 class="bg-light p-4 text-center text-uppercase mb-4 shadow-5 rounded">Register</h4>
+                    @php
+                        $referralCode = request('referral_code');
+                    @endphp
 
                     <form method="POST" action="{{ route('register') }}" class="p-relative">
 
@@ -27,6 +30,9 @@
                         <x-input value="{{ old('name') }}" autofocus name="name" />
                         <x-input value="{{ old('email') }}" type="email" name="email" />
                         <x-input value="{{ old('mobile') }}" type="tel" name="mobile" />
+                        @if ($referralCode )
+                        <x-input others="readonly" value="{{ $referralCode }}" type="text" aria-readonly readonly name="referral_code" />
+                        @endif
                         <x-input type="password" name="password" />
                         <x-input type="password" name="password_confirmation" label="Password Confirmation" />
 

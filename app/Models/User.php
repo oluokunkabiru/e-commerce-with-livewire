@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'verification_code',
+        'refer_by',
     ];
 
     /**
@@ -36,6 +39,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'verification_code',
     ];
 
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['name'])
+            ->saveSlugsTo('referral_code')
+            ->slugsShouldBeNoLongerThan(8)
+            ->usingSeparator('-')
+            ;
+    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -44,4 +56,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+
+    public function state(){
+        return $this->belongsTo(State::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
+
 }

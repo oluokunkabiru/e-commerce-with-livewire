@@ -97,8 +97,12 @@ class Admin extends Component
             $this->pendingPayment = $order->where('created_at', '>=', $start)->where('created_at', '<=', $end)
                 ->where('payment_status', 'pending')->sum('final_price');
 
-            $this->totalUser = User::where('email_verified_at', '!=', null)->count();
-            $this->item      = Property::count();
+            $this->totalUser = User::where('email_verified_at', '!=', null)->when(!auth()->user()->hasRole("Super Admin"), function($q){
+                return $q->where('refer_by', auth()->user()->id);
+            })->count();
+            $this->item      = Property::when(!auth()->user()->hasRole("Super Admin"), function($q){
+                return $q->where('user_id', auth()->user()->id);
+            })->count();
         }
     }
 
@@ -111,6 +115,9 @@ class Admin extends Component
     {
         return Order::where('created_at', '>=', $start)->where('created_at', '<=', $end)
             ->where('payment_status', 'success')
+            ->when(!auth()->user()->hasRole("Super Admin"), function($q){
+                return $q->where('user_id', auth()->user()->id);
+            })
             ->sum('final_price');
     }
 

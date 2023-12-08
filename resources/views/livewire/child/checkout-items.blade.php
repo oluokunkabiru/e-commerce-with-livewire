@@ -12,7 +12,7 @@
             </a>
             <div class="">
                 <p class="smallest-font mb-0">{{ $cart->property->name }}({{ $cart->qty }})</p>
-                <p class="smallest-font f-500 m-0">{{ Country()->currency_symbol }}{{ $cart->attribute->price * $cart->qty }}</p>
+                <p class="smallest-font f-500 m-0">{{ Country()->currency_symbol }}{{ ($cart->attribute->price+(0.01*settings()->agent_fee*$cart->attribute->price)) * $cart->qty }}</p>
             </div>
             <button data-id="{{ $cart->id }}" class="remove-button btn btn-floating shadow-0 btn-transparent">
                 <i class="fa fa-trash-alt" aria-hidden="true"></i>

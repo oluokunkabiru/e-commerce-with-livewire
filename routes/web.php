@@ -17,6 +17,7 @@ use App\Http\Livewire\Admin\Coupon\DataTable as CouponDataTable;
 use App\Http\Livewire\Admin\MyShop;
 use App\Http\Livewire\Admin\Order\DataTable as OrderDataTable;
 use App\Http\Livewire\Admin\Order\Detail as OrderDetail;
+use App\Http\Livewire\Admin\Permission;
 use App\Http\Livewire\Admin\Property\DataEntry;
 use App\Http\Livewire\Admin\Property\DataTable;
 use App\Http\Livewire\Admin\Size\DataEntry as SizeDataEntry;
@@ -150,7 +151,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/slider/edit/{id}', SliderDataEntry::class)->name('dashboard.slider.edit')->middleware('can:edit slider');
 
     Route::get('/about-us', AboutUs::class)->name('dashboard.aboutUs')->middleware('can:manage about us');
-    Route::get('/settings', MyShop::class)->name('dashboard.myShop')->middleware('can:manage my shop');
+    Route::get('/settings', MyShop::class)->name('dashboard.myShop')->middleware('can:manage settings');
 
     // Contact Routes
     Route::get('/contacts', ContactsDataTable::class)->name('dashboard.contacts')->middleware('can:view contacts');
@@ -159,4 +160,6 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     // Order Routes
     Route::get('/order', OrderDataTable::class)->name('dashboard.order')->middleware('can:view order');
     Route::get('/order/{id}', OrderDetail::class)->name('dashboard.order.detail')->middleware('can:view order');
+    // Permission Routes
+    Route::get('permissions', Permission::class)->name('dashboard.permissions')->middleware('can:view permission');
 });

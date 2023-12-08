@@ -34,7 +34,6 @@ class Footer extends Component
                 "mobile1",
                 "mobile2",
                 "mail1",
-                "mail2",
             ]);
             cache()->put("app.footer", $this->myShop, now()->addHours(72));
         }

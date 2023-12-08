@@ -105,6 +105,11 @@
 
 
 
+@push('extra-js')
+    
+
+    
+
 <script>
     $("#searchProduct").autocomplete({
         minLength: 3,
@@ -116,3 +121,4 @@
     });
 
 </script>
+@endpush

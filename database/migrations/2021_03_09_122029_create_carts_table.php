@@ -19,7 +19,7 @@ class CreateCartsTable extends Migration
             $table->tinyInteger('registered')->default(1);
             $table->integer('qty');
             $table->bigInteger('product_id');
-            $table->bigInteger('product_attr_id');
+            $table->bigInteger('property_attr_id');
             $table->timestamps();
         });
     }

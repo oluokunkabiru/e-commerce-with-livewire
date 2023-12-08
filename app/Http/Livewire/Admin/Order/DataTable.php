@@ -202,7 +202,9 @@ class DataTable extends Component
     public function getModelProperty($paginate = true)
     {
         $obj = $this->obj;
-        $qry = $obj->where(function ($query) {
+        $qry = $obj->when(!auth()->user()->hasRole("Super Admin"), function($q){
+            return $q->where('user_id', auth()->user()->id);
+        })->where(function ($query) {
             $query->orWhere('name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%')
                 ->orWhere('mobile', 'like', '%' . $this->search . '%')

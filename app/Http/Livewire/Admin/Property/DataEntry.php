@@ -100,8 +100,8 @@ class DataEntry extends Component
 
             'attributes.*.feature'  => ['required', new NotNull],
             'attributes.*.size'   => ['required', new NotNull],
-            'attributes.*.price'  => ['required', new NotNull, 'integer'],
-            'attributes.*.qty'    => ['required', new NotNull, 'integer'],
+            'attributes.*.price'  => ['required', new NotNull, 'numeric'],
+            'attributes.*.qty'    => ['required', new NotNull, 'numeric'],
             'attributes.*.status' => [Rule::in([1, 0])],
             'attributes.*.photo'  => [
                 'nullable',
@@ -134,8 +134,8 @@ class DataEntry extends Component
             'best_seller'         => ['required', Rule::in([0, 1])],
             'attributes.*.feature'  => ['required', new NotNull],
             'attributes.*.size'   => ['required', new NotNull],
-            'attributes.*.price'  => ['required', new NotNull, 'integer'],
-            'attributes.*.qty'    => ['required', new NotNull, 'integer'],
+            'attributes.*.price'  => ['required', new NotNull, 'numeric'],
+            'attributes.*.qty'    => ['required', new NotNull, 'numeric'],
             'attributes.*.status' => [Rule::in([1, 0])],
             'attributes.*.photo'  => 'image|mimes:jpeg,jpg,png',
         ];
@@ -271,14 +271,23 @@ class DataEntry extends Component
             // 'lead_time'               => $this->lead_time,
             // 'tax_id'                  => $this->tax,
             'promo'                   => $this->promo,
+            
             'featured'                => $this->featured,
             'discounted'              => $this->discounted,
             'trending'                => $this->trending,
             'best_seller'             => $this->best_seller,
         ];
 
+        // if(!auth()->user()->hasRole("Super Admin") ){
+        //     $form['user_id'=> auth()->user()->id,'status'=>0];
+        //     // $form['status'=>0];
+        // }
+        if (!auth()->user()->hasRole("Super Admin")) {
+            $form += ['user_id' => auth()->user()->id, 'status' => 0];
+            // $form += ['status' => 0];
+        }
 
-        Log::info($form);
+        // Log::info($form);
         $status = "added";
 
         if ($this->editId !='' && $this->property && can('edit property')) {

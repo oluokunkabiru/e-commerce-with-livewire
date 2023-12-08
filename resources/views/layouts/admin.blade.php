@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{{ asset('admins/vendors/css/vendor.bundle.base.css') }}">
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css" integrity="sha512-QfDd74mlg8afgSqm3Vq2Q65e9b3xMhJB4GZ9OcHDVy1hZ6pqBJPWWnMsKDXM7NINoKqJANNGBuVRIpIJ5dogfA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- endinject -->
 
 
@@ -60,6 +60,7 @@
                             <x-nav-link can="view property" label="All" route="dashboard.property" />
                             <x-nav-link can="add property" label="Add" route="dashboard.property.add" />
                         </x-collapse-nav-link>
+                        <x-nav-link  can="view permission" icon="lock" label="Role And Permission" route="dashboard.permissions" />
 
                         <x-collapse-nav-link permissions="view category,add category" icon="apps" label="Category">
                             <x-nav-link can="view category" label="All" route="dashboard.category" />
@@ -99,7 +100,7 @@
                         <x-nav-link can="view user" icon="person_outline" label="User" route="dashboard.user" />
                         <x-nav-link can="view contacts" icon="contact_mail" label="Contacts" route="dashboard.contacts" />
                         <x-nav-link can="manage about us" icon="groups" label="About Us" route="dashboard.aboutUs" />
-                        <x-nav-link can="manage my shop" icon="settings" label="Settings" route="dashboard.myShop" />
+                        <x-nav-link can="manage settings" icon="settings" label="Settings" route="dashboard.myShop" />
 
                     </nav>
                 </div>
@@ -120,13 +121,13 @@
                             </button>
                             <div class="mdc-menu mdc-menu-surface" tabindex="-1">
                                 <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-                                    @can('manage my shop')
+                                    @can('manage settings')
                                     <a class="d-flex text-dark mdc-list-item" href="{{ route('dashboard.myShop') }}">
                                         <div class="item-thumbnail item-thumbnail-icon-only">
                                             <i class="mdi mdi-alert-circle-outline text-primary"></i>
                                         </div>
                                         <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                            <h6 class="item-subject font-weight-normal">My Shop</h6>
+                                            <h6 class="item-subject font-weight-normal">Setting</h6>
                                         </div>
                                     </a>
                                     @endcan

@@ -37,14 +37,14 @@ class PropertyDetail extends Model implements HasMedia
 
     public function maxRate()
     {
-        return $this->hasMany(Review::class, 'product_attr_id')
-            ->addSelect('product_attr_id', 'product_attr_id', DB::raw("MAX(reviews.rate) AS max_rate"))
-            ->groupBy('product_attr_id');
+        return $this->hasMany(Review::class, 'property_attr_id')
+            ->addSelect('property_attr_id', 'property_attr_id', DB::raw("MAX(reviews.rate) AS max_rate"))
+            ->groupBy('property_attr_id');
     }
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'product_attr_id')->with('user');
+        return $this->hasMany(Review::class, 'property_attr_id')->with('user');
     }
 
     // public function photo()

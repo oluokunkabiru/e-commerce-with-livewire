@@ -83,9 +83,9 @@ class CheckoutItems extends Component
         $this->appliedCoupon      = session('appliedCoupon');
         $this->appliedCouponCode  = session('appliedCouponCode');
         $this->appliedCouponExtra = session('appliedCouponExtra');
-
         $this->total -= $this->appliedCouponExtra;
-
+        $this->subTotal += (0.01*settings()->agent_fee*$this->subTotal);
+        $this->total +=(0.01*settings()->agent_fee*$this->total);
         return view('livewire.child.checkout-items');
     }
 }

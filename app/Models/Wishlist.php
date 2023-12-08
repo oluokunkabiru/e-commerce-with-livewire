@@ -18,6 +18,6 @@ class Wishlist extends Model
 
     public function attribute()
     {
-        return $this->belongsTo(ProductDetail::class, 'product_attr_id')->with('photo');
+        return $this->belongsTo(ProductDetail::class, 'property_attr_id')->with('photo');
     }
 }

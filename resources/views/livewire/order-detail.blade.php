@@ -11,12 +11,12 @@
         @foreach ($orders as $order)
             <tr>
                 <td class="image-td"><a
-                        href="{{ route('product.detail', $order->property->slug) . '?attribute=' . $order->productDetails->id }}"
+                        href="{{ route('property.detail', $order->property->slug) . '?attribute=' . $order->productDetails->id }}"
                         class="btn btn-transparent p-0 shadow-0">
-                        <img src="{{  $order->propertyDetails->getMedia('products')->first() !=null ? $order->productDetails->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
+                        <img src="{{  $order->propertyDetails?->getMedia('products')->first() !=null ? $order->productDetails->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid" alt="">
                     </a></td>
                 <td>
-                    <h4 class="small-font f-500 text-nowrap">{{ $order->product->name }}</h4>
+                    <h4 class="small-font f-500 text-nowrap">{{ $order->property->name }}</h4>
                     <p class="smaller-font">{{ Country()->currency_symbol }}{{ $order->productDetails->price }}</p>
                 </td>
                 <td>

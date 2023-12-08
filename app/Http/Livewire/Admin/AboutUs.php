@@ -11,6 +11,7 @@ class AboutUs extends Component
     public $mission;
     public $vision;
     public $what_we_do;
+    public $agreement;
 
     public function dehydrate()
     {
@@ -38,6 +39,7 @@ class AboutUs extends Component
                 'about' => $this->about,
                 'mission' => $this->mission,
                 'vision' => $this->vision,
+                'agreement' => $this->agreement,
                 'what_we_do' => $this->what_we_do,
             ]);
         } else {
@@ -56,6 +58,7 @@ class AboutUs extends Component
         $this->about = AboutsUs::first()->about;
         $this->mission = AboutsUs::first()->mission;
         $this->vision = AboutsUs::first()->vision;
+        $this->agreement = AboutsUs::first()->agreement;
         $this->what_we_do = AboutsUs::first()->what_we_do;
     }
 

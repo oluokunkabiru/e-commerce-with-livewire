@@ -29,9 +29,11 @@ class CollapseNavLink extends Component
      * @return \Illuminate\Contracts\View\View|string
      */
     public function render()
-    {
-        // info(auth()->user()->hasAnyDirectPermission($this->permissions));
-        return auth()->user()->hasAnyDirectPermission($this->permissions)
+    {        
+        // auth()->user()->hasAnyDirectPermission($this->permissions)
+        // info(auth()->user()->hasAnyDirectPermission($this->permissions));getPermissionsViaRoles getAllPermissions
+        return 
+        auth()->user()->hasAnyPermission($this->permissions)
         ? view('components.collapse-nav-link')
         : null;
     }

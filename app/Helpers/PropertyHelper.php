@@ -1,11 +1,31 @@
 <?php
 
 use App\Models\Country;
+use App\Models\MyShop;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Session;
 
+if (!function_exists('settings')) {
+
+    /**
+     * description
+     *
+     * @param
+     * @return
+     */
+
+
+
+    function settings()
+    {
+        $settings =  MyShop::first();
+        return $settings;
+
+
+    }
+}
 if (!function_exists('CurrencyRate')) {
 
     /**

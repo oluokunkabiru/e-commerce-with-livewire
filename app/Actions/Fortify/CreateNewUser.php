@@ -23,6 +23,7 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name'     => ['required', 'string', 'max:255'],
             'mobile'   => ['required', 'max:255'],
+            'referral_code'=>'sometimes|nullable|string',Rule::exists('users', 'referral_code'),
             'email'    => [
                 'required',
                 'string',
@@ -33,11 +34,22 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        // return dd($input);
+        $user = [
             'name'     => $input['name'],
             'email'    => $input['email'],
             'mobile'   => $input['mobile'],
             'password' => Hash::make($input['password']),
-        ]);
+        ];
+        if($input['referral_code']){
+        $referBy = User::where('referral_code', $input['referral_code'])->first();
+        // return dd($referBy);
+        if($referBy !=null){
+            $user['refer_by'] = $referBy->id;
+        }
+        }
+        // return dd($user);
+
+        return User::create($user);
     }
 }

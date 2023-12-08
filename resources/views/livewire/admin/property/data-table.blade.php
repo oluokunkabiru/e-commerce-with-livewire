@@ -200,10 +200,16 @@
                                     @include('admin.data-table.th', ['name' => 'name'])
 
                                     <th class="mdc-data-table__header-cell ">
-                                        category
+                                        Category
                                     </th>
                                     <th class="mdc-data-table__header-cell ">
                                         Country
+                                    </th>
+                                    <th class="mdc-data-table__header-cell ">
+                                        State
+                                    </th>
+                                    <th class="mdc-data-table__header-cell ">
+                                        City
                                     </th>
                                     <th class="mdc-data-table__header-cell ">
                                         Attribute
@@ -230,8 +236,17 @@
                                                 href="{{ route('dashboard.category.edit', $item->category->id) }}">{{ $item->category->name }}</a>
                                         </td>
                                         <td class="mdc-data-table__cell ">
-                                            {{ @$item->counrty->name }}
+                                            {{ @$item->country->name }} 
                                         </td>
+
+                                        <td class="mdc-data-table__cell ">
+                                            {{ @$item->state->name }} 
+                                        </td>
+
+                                        <td class="mdc-data-table__cell ">
+                                            {{ @$item->city->name }} 
+                                        </td>
+
                                         <td class="mdc-data-table__cell product-status-td">
                                             <button aria-describedby="tt_product_status_{{ $item->id }}"
                                                 class="mdc-button mdc-button--raised icon-button filled-button--dark mdc-ripple-upgraded">
