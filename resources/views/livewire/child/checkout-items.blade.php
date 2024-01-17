@@ -34,15 +34,25 @@
             </div>
         @endif
         <hr>
+        
         <div class="d-flex justify-content-between">
             <p>Total</p>
             <p class="f-500">{{ Country()->currency_symbol }}{{ $total }}</p>
         </div>
         <div>
             <form wire:submit.prevent='submit' class="d-flex">
-                <input placeholder="Apply Coupon" wire:model.defer="coupon" type="text" class="form-control">
+                <div class="form-group mb-3 row">
+                    <div class="col-md-12 my-2">                
+                        <input placeholder="Apply Coupon" wire:model.defer="coupon" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-12 my-2">                
+                        <input placeholder="Referral Code" wire:model="referral_code" type="text" class="form-control">
+                    </div>
                 <button class="btn btn-dark">Ok</button>
+                </div>
             </form>
+
+            
             @error('coupon')
                 <p class="text-danger">{{ $message }}</p>
             @enderror

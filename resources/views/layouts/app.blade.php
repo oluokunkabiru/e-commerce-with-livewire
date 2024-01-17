@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>@yield('title') - {{ settings()->name }}</title>
+    @stack('meta')
     <!-- fabicon -->
     <link rel="shortcut icon" href="{{ @settings()->getMedia('favicon')->first()->getFullUrl() }}" type="image/x-icon" />
 
@@ -103,10 +104,11 @@
                     </button>
                     
                     @guest
-                    <a href="{{ route('login') }}" class="btn btn-white  btn-sm" data-mdb-toggle="tooltip" title="Login/Register">
+                    <a href="{{ route('login') }}" class="btn btn-white  btn-sm" >
                         Login
                        </a>
-                       <a href="{{ route('register') }}" class="btn btn-white  btn-sm" data-mdb-toggle="tooltip" title="Login/Register">
+                       {{-- data-mdb-toggle="tooltip" title="Login"  data-mdb-toggle="tooltip" title="Register"--}}
+                       <a href="{{ route('register') }}" class="btn btn-white  btn-sm">
                            Signup
                           </a>
                     @endguest

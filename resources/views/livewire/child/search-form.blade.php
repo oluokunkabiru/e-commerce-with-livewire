@@ -1,4 +1,4 @@
-<form class="d-flex p-4">
+<form  id="searchProductForm" class="d-flex p-4">
 
 
 
@@ -115,7 +115,7 @@
         minLength: 3,
         source: "{{ route('searchTags') }}",
     });
-    $("form").on('submit', function(e) {
+    $("#searchProductForm").on('submit', function(e) {
         e.preventDefault();
         @this.search = $("#searchProduct").val();
     });

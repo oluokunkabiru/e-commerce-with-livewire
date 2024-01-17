@@ -41,7 +41,7 @@ class CreateNewUser implements CreatesNewUsers
             'mobile'   => $input['mobile'],
             'password' => Hash::make($input['password']),
         ];
-        if($input['referral_code']){
+        if(isset($input['referral_code'])){
         $referBy = User::where('referral_code', $input['referral_code'])->first();
         // return dd($referBy);
         if($referBy !=null){

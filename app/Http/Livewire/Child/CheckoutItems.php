@@ -18,6 +18,7 @@ class CheckoutItems extends Component
     public $appliedCoupon;
     public $appliedCouponCode;
     public $appliedCouponExtra = 0;
+    public $referral_code ;
 
     public function delete($id)
     {

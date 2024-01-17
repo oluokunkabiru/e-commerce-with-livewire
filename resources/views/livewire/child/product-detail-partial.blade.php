@@ -1,3 +1,14 @@
+@push('extra-css')
+<style>
+    #social-links li {
+            display: inline-block;
+            padding: 5px;
+            text-align: center;
+            list-style: none;
+        }
+</style>
+
+@endpush
 <div class="row p-relative">
     @include('partial.component-loading')
     <div class="product-detail-images col-md-5 col-sm-12">
@@ -45,6 +56,20 @@
             {{ $product->name }}
         </h5>
 
+        <div class="my-1">
+            {!! \Share::page(
+                route('property.detail', array_filter([$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id, (auth()->user() ? 'referral_code='.auth()->user()->referral_code:null)])),
+                $product->name
+            )
+                ->facebook()
+                ->twitter()
+                ->linkedin()
+                ->telegram()
+                ->whatsapp()
+                ->reddit()
+                 !!}
+         </div>
+
         <div class="d-flex stars mb-2">
             @include('partial.star',['star' => $rate])
         </div>
@@ -59,7 +84,7 @@
             {!! $product->short_description !!}
         </div>
 
-        <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Avalivality:</span> In Stock</p>
+        {{-- <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Avalivality:</span> In Stock</p> --}}
         <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Category:
             </span>{{ $product->category->name }}</p>
          {{-- <p class="mb-2 smaller-font text-black f-400"><span class="f-600">Brand: </span>{{ $product->feature }}</p> --}}
@@ -115,9 +140,9 @@
             <input type="number" style="width: 80px;" wire:model.defer="qty" min="1" max="{{ $attributeArr->qty }}"
                 class="form-control py-1 px-3 bg-transparent">
         </div> --}}
-        {{-- <button wire:click="addToCart" class="btn btn-dark rounded-0">Add to
-            cart</button>
-        <button wire:click="addTowishlist" class="btn btn__primary rounded-0">Add to wishlist</button> --}}
+        <button wire:click="addToCart" class="btn btn-dark rounded-0">Add to
+            contact</button>
+        <button wire:click="addTowishlist" class="btn btn__primary rounded-0">Add to wishlist</button>
 
         @if (session()->has('product_success_msg'))
             <p class="py-2 px-4 mt-2 bg-secondary text-light">{{ session('product_success_msg') }}</p>

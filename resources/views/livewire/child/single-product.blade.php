@@ -1,3 +1,16 @@
+@push('extra-css')
+<style>
+    #social-links li {
+            display: inline-block;
+            padding: 5px;
+            text-align: center;
+            list-style: none;
+        }
+</style>
+
+@endpush
+
+
 <div class="product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
     <div wire:loading.delay.class='show' class="single-product-progress-spin w-100 d-flex justify-content-center z-11">
         <div class="spinner-border text__primary" role="status">
@@ -43,4 +56,21 @@
     </div>
     <p class="smaller-font pb-3 {{ $moreAttr > 0 ? 'text-black' : 'invisible' }}">{{ $moreAttr }} more
      attribute{{ $moreAttr > 1 ? 's' : '' }}</p>
+
+
+     <div class="my-1">
+        
+        {!! \Share::page(
+            route('property.detail', array_filter([$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id, (auth()->user() ? 'referral_code='.auth()->user()->referral_code:null)])),
+            $product->name
+        )
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->telegram()
+            ->whatsapp()
+            ->reddit()
+             !!}
+
+     </div>
 </div>

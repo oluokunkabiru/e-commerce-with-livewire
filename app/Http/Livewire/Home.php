@@ -38,7 +38,6 @@ class Home extends Component
         $this->states = State::where('country_id', $newCountry)->get();
         $this->state = null; // Reset selected state
         $this->city = null; // Reset selected city
-        // $this->country =  $newCountry;
         $this->updateFilteredProperties();
     }
 
@@ -46,9 +45,6 @@ class Home extends Component
     {
         $this->cities = City::where('state_id', $newState)->get();
         $this->city = null; // Reset selected city
-        // $this->state =  $newState;
-
-        // Update properties based on the selected filters
         $this->updateFilteredProperties();
     }
 
@@ -62,7 +58,6 @@ class Home extends Component
     {
         $this->bestSellers = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
-            ->where('best_seller', 1)
             ->where('status', 1)
             ->when($this->country, function ($query) {
                 $query->where('country_id', $this->country);
@@ -78,7 +73,6 @@ class Home extends Component
 
         $this->featureds = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
-            ->where('featured', 1)
             ->where('status', 1)
             ->when($this->country, function ($query) {
                 $query->where('country_id', $this->country);
@@ -94,7 +88,6 @@ class Home extends Component
 
         $this->trendings = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
-            ->where('trending', 1)
             ->where('status', 1)
             ->when($this->country, function ($query) {
                 $query->where('country_id', $this->country);
@@ -175,7 +168,9 @@ $this->country =Country()->id;
         })
         ->latest()->get();
 
-    $this->categories = Category::where('status', 1)->where('in_home_page', '!=', 1)->get(['name', 'id']);
+    $this->categories = Category::where('status', 1)
+    ->where('in_home_page', '!=', 1)
+    ->get();
     $this->countries = Country::get();
     $this->states = State::where('country_id', $this->country)->get();
 

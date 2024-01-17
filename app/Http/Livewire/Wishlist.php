@@ -10,7 +10,7 @@ class Wishlist extends Component
 
     public function remove($id)
     {
-        \App\Models\wishlist::destroy($id);
+        \App\Models\Wishlist::destroy($id);
     }
 
     public function render()

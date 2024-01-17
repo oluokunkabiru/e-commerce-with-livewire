@@ -27,7 +27,7 @@
         <div class="col-md-3">
             <div class="form-group @error('category') has-error @enderror">
                 {{-- <label for="category">Category <span class="text-danger">*</span></label> --}}
-                <select wire:model.defer='category' class="form-control" id="category">
+                <select wire:model='category' class="form-control" id="category">
                     <option value="">Select Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">
@@ -44,7 +44,7 @@
         <div class="col-md-3">
             <div class="form-group @error('country') has-error @enderror">
                 {{-- <label for="country">Country <span class="text-danger">*</span></label> --}}
-                <select wire:model="country" class="form-control" id="country">
+                <select wire:model="country"  wire:loading.attr="disabled" class="form-control" id="country">
                     <option value="">Select Country</option>
                     @foreach ($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -60,7 +60,7 @@
         <div class="col-md-3">
             <div class="form-group @error('state') has-error @enderror">
                 {{-- <label for="state">State <span class="text-danger">*</span></label> --}}
-                <select wire:model="state" class="form-control" id="state">
+                <select wire:model="state" wire:loading.attr="disabled" class="form-control" id="state">
                     <option value="">Select State</option>
                     @foreach ($states as $state)
                         <option value="{{ $state->id }}">{{ $state->name }}</option>
@@ -75,7 +75,7 @@
         <div class="col-md-3">
             <div class="form-group @error('city') has-error @enderror">
                 {{-- <label for="city">City <span class="text-danger">*</span></label> --}}
-                <select wire:model="city" class="form-control" id="city">
+                <select wire:model="city" wire:loading.attr="disabled" class="form-control" id="city">
                     <option value="">Select City</option>
                     @foreach ($cities as $city)
                         <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -86,6 +86,10 @@
                 @enderror
             </div>
         </div>
+    </div>
+
+    <div wire:loading role="status">
+         <i class="spinner-border spinner-border-sm"></i> <span class="visually-hidden">Please Wait...</span>
     </div>
 
 </div>

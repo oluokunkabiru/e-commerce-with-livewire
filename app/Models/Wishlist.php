@@ -13,11 +13,11 @@ class Wishlist extends Model
 
     public function product()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(Property::class, 'property_id');
     }
 
     public function attribute()
     {
-        return $this->belongsTo(ProductDetail::class, 'property_attr_id')->with('photo');
+        return $this->belongsTo(PropertyDetail::class, 'property_attr_id')->with('photo');
     }
 }

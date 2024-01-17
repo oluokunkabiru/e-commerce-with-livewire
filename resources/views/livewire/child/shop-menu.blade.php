@@ -12,7 +12,8 @@
 <li class="p-relative sub-menu-container">
   <a href="{{ route('shop') }}" class="sub-menu-root @yield('shop') btn btn-white my-md-2 shadow-0 mx-lg-1">Properties
   </a>
-  @if ($categories->count() > 0)
+
+  {{-- @if ($categories->count() > 0)
     <ul class="sub-menu bg-white shadow-1-strong py-2 rounded-3">
       @foreach ($categories as $category)
         <li class="p-relative"><a href="{{ route('category', $category->slug) }}"
@@ -47,5 +48,9 @@
         </li>
       @endforeach
     </ul>
-  @endif
+  @endif --}}
+
+  
+
+
 </li>

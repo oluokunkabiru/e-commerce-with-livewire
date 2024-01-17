@@ -40,7 +40,7 @@
               </h3>
             @endif
 
-            <button class="btn btn-lg btn-dark btn-block">submit</button>
+            <button type="submit" class="btn btn-lg btn-dark btn-block">submit</button>
             <a href="{{ route('register') }}" class="text-black smaller-font float-end mt-2">New here?
               Register</a>
           </form>
@@ -51,7 +51,7 @@
 
 @endsection
 
-<script>
+{{-- <script>
   document.addEventListener('livewire:load', function() {
     document.querySelector("#login-form").addEventListener('submit', function(e) {
       e.preventDefault();
@@ -61,4 +61,4 @@
     });
   });
 
-</script>
+</script> --}}

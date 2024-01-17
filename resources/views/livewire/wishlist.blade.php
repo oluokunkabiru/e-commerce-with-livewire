@@ -26,7 +26,7 @@
           @foreach ($wishlists as $wishlist)
             <tr>
               <td class="image-td"><a
-                  href="{{ route('product.detail', $wishlist->product->slug) . '?attribute=' . $wishlist->attribute->id }}"
+                  href="{{ route('property.detail', $wishlist->product->slug) . '?attribute=' . $wishlist->attribute->id }}"
                   class="btn btn-transparent p-0 shadow-0">
                   <img src="{{ $wishlist->attribute->getMedia('products')->first() !=null ? $wishlist->attribute->getMedia('products')->first()->getFUllUrl():null }}" class="img-fluid">
                 </a></td>

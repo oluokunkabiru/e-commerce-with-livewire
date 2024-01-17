@@ -1,6 +1,19 @@
 @section('title')
   {{ $product->name }}
 @endsection
+
+@push('meta')
+     <meta name="description"
+        content="{{ substr(strip_tags($product->short_description), 0 , 80) }}">
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ $product->name }}" />
+    <meta property="og:image:alt" content="{{ $product->name }}" />
+    <meta property="og:description"
+        content="{{ substr(strip_tags($product->short_description), 0 , 80) }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="{{ $product->onSaleAttributes->first()->getMedia('products')->first() !=null?$product->onSaleAttributes->first()->getMedia('products')->first()->getFullUrl():null }}" />
+    <meta property="fb:app_id" content="421991560027667" />
+@endpush
 <div>
   <div class="p-relative">
     @include('partial.component-loading')
@@ -23,32 +36,32 @@
       {!! $product->description !!}
     </div>
   </div>
-  @if ($product->technical_specification != '')
+  {{-- @if ($product->technical_specification != '')
     <div class="pt-4 product-detail-detail">
       <h5 class="small-font text__primary text-decoration-underline text-uppercase">Technical Specification</h5>
       <div class="readall-text editor-text">
         {!! $product->technical_specification !!}
       </div>
     </div>
-  @endif
-  @if ($product->usage != '')
+  @endif --}}
+  {{-- @if ($product->usage != '')
     <div class="pt-4 product-detail-detail">
       <h5 class="small-font text__primary text-decoration-underline text-uppercase">Usage</h5>
       <div class="readall-text editor-text">
         {!! $product->usage !!}
       </div>
     </div>
-  @endif
-  @if ($product->warrenty != '')
+  @endif --}}
+  {{-- @if ($product->warrenty != '')
     <div class="pt-4 product-detail-detail">
       <h5 class="small-font text__primary text-decoration-underline text-uppercase">Warrenty</h5>
       <div class="readall-text editor-text">
         {!! $product->warrenty !!}
       </div>
     </div>
-  @endif
+  @endif --}}
 
-  <div class="mt-4 pt-4 product-detail-detail">
+  {{-- <div class="mt-4 pt-4 product-detail-detail">
     <h5 class="small-font text__primary text-decoration-underline text-uppercase">Rating and review</h5>
     <div class="my-4 py-4">
       <div class="col-md-12 col-sm-12">
@@ -84,7 +97,7 @@
         @endforeach
       </div>
     </div>
-  </div>
+  </div> --}}
 </div>
 <script>
   $(".readall-text").readall({

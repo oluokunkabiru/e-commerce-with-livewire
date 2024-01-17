@@ -1,0 +1,36 @@
+[2024-01-16 16:21:46] local.INFO: array (
+  'propertis' => 
+  Illuminate\Database\Eloquent\Collection::__set_state(array(
+     'items' => 
+    array (
+    ),
+     'escapeWhenCastingToString' => false,
+  )),
+)  
+[2024-01-16 16:21:50] local.INFO: array (
+  'propertis' => 
+  Illuminate\Database\Eloquent\Collection::__set_state(array(
+     'items' => 
+    array (
+    ),
+     'escapeWhenCastingToString' => false,
+  )),
+)  
+[2024-01-16 16:21:55] local.INFO: array (
+  'propertis' => 
+  Illuminate\Database\Eloquent\Collection::__set_state(array(
+     'items' => 
+    array (
+    ),
+     'escapeWhenCastingToString' => false,
+  )),
+)  
+[2024-01-16 16:21:58] local.INFO: array (
+  'propertis' => 
+  Illuminate\Database\Eloquent\Collection::__set_state(array(
+     'items' => 
+    array (
+    ),
+     'escapeWhenCastingToString' => false,
+  )),
+)  
