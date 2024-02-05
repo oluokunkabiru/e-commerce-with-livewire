@@ -52,6 +52,7 @@ class PropertyDetail extends Model implements HasMedia
     //     return $this->hasOne(Media::class, 'model_id')
     //         ->where('model_type', ProductDetail::class)
     //         ->withDefault(['url' => null]);
+    // $product->onSaleAttributes->first()->getMedia('products')->first() !=null?$product->onSaleAttributes->first()->getMedia('products')->first()->getFullUrl():null
     // }
 
     public function photo(): HasOne

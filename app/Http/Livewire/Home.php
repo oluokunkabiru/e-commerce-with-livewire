@@ -48,6 +48,12 @@ class Home extends Component
         $this->updateFilteredProperties();
     }
 
+    public function updatedCity($newState)
+    {
+        $this->updateFilteredProperties();
+    }
+
+
     public function updateCategory($newCategory)
     {
         $this->category = $newCategory;
@@ -65,11 +71,17 @@ class Home extends Component
             ->when($this->state, function ($query) {
                 $query->where('state_id', $this->state);
             })
+            ->when($this->city, function ($query) {
+                $query->where('city_id', $this->city);
+            })
             ->when($this->category, function ($query) {
                 $query->where('category_id', $this->category);
             })
             ->latest()
             ->get();
+
+
+
 
         $this->featureds = Property::with('onSaleAttributes')
             ->has('onSaleAttributes')
@@ -79,6 +91,9 @@ class Home extends Component
             })
             ->when($this->state, function ($query) {
                 $query->where('state_id', $this->state);
+            })
+            ->when($this->city, function ($query) {
+                $query->where('city_id', $this->city);
             })
             ->when($this->category, function ($query) {
                 $query->where('category_id', $this->category);
@@ -94,6 +109,9 @@ class Home extends Component
             })
             ->when($this->state, function ($query) {
                 $query->where('state_id', $this->state);
+            })
+            ->when($this->city, function ($query) {
+                $query->where('city_id', $this->city);
             })
             ->when($this->category, function ($query) {
                 $query->where('category_id', $this->category);
@@ -111,11 +129,18 @@ class Home extends Component
             ->when($this->state, function ($query) {
                 $query->where('state_id', $this->state);
             })
+            ->when($this->city, function ($query) {
+                $query->where('city_id', $this->city);
+            })
             ->when($this->category, function ($query) {
                 $query->where('category_id', $this->category);
             })
             ->latest()
             ->get();
+
+
+            // info(['country'=>$this->country, 'state'=>$this->state, 'city'=>$this->city]);
+
         // Note: Make sure your property model has relationships defined for country, state, and category.
     }
 

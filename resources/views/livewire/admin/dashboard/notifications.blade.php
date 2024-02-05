@@ -21,7 +21,7 @@
       @forelse ($products as $product)
         <a href="{{ route('dashboard.property.edit', $product->property->id) }}" class="mdc-list-item" role="menuitem">
           <div class="item-thumbnail">
-            <img src="{{ $product->photo->url }}" alt="user">
+            <img src="{{ $product->first()->getMedia('products')->first()->getFullUrl() }}">
           </div>
           <div class="item-content d-flex align-items-start flex-column justify-content-center">
             <h6 class="item-subject font-weight-normal">{{ $product->property->name }}</h6>

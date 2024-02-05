@@ -20,7 +20,7 @@ class Notifications extends Component
 
     public function mount()
     {
-        $this->products = PropertyDetail::where('qty', "<", 6)->with(["property", 'photo'])->get();
+        $this->products = PropertyDetail::where('qty', "<", 6)->withCount(['property'])->with(["property", 'photo'])->where("alert", 1)->get();
         $this->count    = PropertyDetail::where('qty', "<", 6)->where("alert", 1)->count();
     }
 

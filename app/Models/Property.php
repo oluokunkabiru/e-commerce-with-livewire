@@ -5,15 +5,49 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Property extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasSlug;
 
     protected $dates = ['deleted_at'];
 
     protected $guarded = [];
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['name'])
+            ->saveSlugsTo('slug')
+            ->slugsShouldBeNoLongerThan(50)
+            ->usingSeparator('-')
+            ;
+    }
+
+    protected $fillable = [
+        'name',
+        'category_id',
+        'country_id',
+        'warrenty',
+        'short_description',
+        'description',
+        'keywords',
+        'technical_specification',
+        'promo',
+        'featured',
+        'discounted',
+        'trending',
+        'best_seller',
+        'status',
+        'state_id',
+        'city_id',
+        'user_id',
+    ];
+
 
     public function propertyDetails()
     {

@@ -15,7 +15,7 @@
 @enderror --}}
 
 <div class="mdc-text-field">
-    <input class="mdc-text-field__input" wire:model.defer='attributes.{{ $loopIndex }}.price'>
+    <input type="number" class="mdc-text-field__input" wire:model.defer='attributes.{{ $loopIndex }}.price'>
     <label class="mdc-floating-label mdc-floating-label--float-above">Price<span class="text-danger">*</span></label>
 </div>
 @error('attributes.' . $loopIndex . '.price')
@@ -23,7 +23,7 @@
 @enderror
 
 <div class="mdc-text-field">
-    <input class="mdc-text-field__input" wire:model.defer='attributes.{{ $loopIndex }}.qty'>
+    <input type="number" class="mdc-text-field__input" wire:model.defer='attributes.{{ $loopIndex }}.qty'>
     <label class="mdc-floating-label mdc-floating-label--float-above">Qty<span class="text-danger">*</span></label>
 </div>
 @error('attributes.' . $loopIndex . '.qty')

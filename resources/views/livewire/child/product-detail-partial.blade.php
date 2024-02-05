@@ -93,17 +93,17 @@
         @endif --}}
 
 
-
+{{-- 
         @if ($product->keywords != '')
             <p class="mb-3 smaller-font text-black f-400"><span class="f-600">Keywords:</span> {{ $product->keywords }}
             </p>
-        @endif
+        @endif --}}
 
         <div class="d-flex mt-1">
             <p style="margin-right: 28px;" class="smaller-font text-black f-600">Size:</p>
 
             <ul class="list-unstyled d-flex flex-wrap f-500">
-                @foreach ($product->details as $attr)
+                @foreach ($product->details->unique('size') as $attr)
                     <li>
                         <div class="button-checkbox p-0 mr-3" {{ $attr->id == $attribute ? 'attr-active' : '' }}  wire:click='attribute({{ $attr->id }})'>
                             <input class="d-none" type="checkbox"

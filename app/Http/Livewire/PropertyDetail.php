@@ -29,14 +29,14 @@ class PropertyDetail extends Component
     public function getRate()
     {
         for ($i = 1; $i <= 5; $i++) {
-            $this->rate[$i] = $this->attribute->reviews->where('rate', $i)
-                ->count();
+            // $this->rate[$i] = $this->attribute?->reviews?->where('rate', $i)
+            //     ->count();
         }
     }
 
     public function getReviews()
     {
-        $this->reviews = $this->attribute->reviews;
+        // $this->reviews = $this->attribute->reviews;
     }
 
     public function mount($slug, Request $request)

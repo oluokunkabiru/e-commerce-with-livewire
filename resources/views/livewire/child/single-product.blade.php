@@ -11,8 +11,8 @@
 @endpush
 
 
-<div class="product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
-    <div wire:loading.delay.class='show' class="single-product-progress-spin w-100 d-flex justify-content-center z-11">
+<div  wire:ignore.self class="product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
+    <div wire:loading class="single-product-progress-spin w-100 d-flex justify-content-center z-11">
         <div class="spinner-border text__primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -35,9 +35,9 @@
 
     <a class="btn mb-2 btn-light p-0 shadow-0"
         href="{{ route('property.detail', [$product->slug, 'attribute=' . $product->onSaleAttributes->first()->id]) }}">
-        <img observe="true" style="width:100%; height:150px; object-fit:cover" observe-src="{{ $product->onSaleAttributes->first()->getMedia('products')->first() !=null?$product->onSaleAttributes->first()->getMedia('products')->first()->getFullUrl():null }}"
+        <img  style="width:100%; height:150px; object-fit:cover" src="{{ $product->onSaleAttributes->first()->getMedia('products')->first() !=null?$product->onSaleAttributes->first()->getMedia('products')->first()->getFullUrl():null }}"
             class="img-fluid my-4" alt="">
-        <div style="height: 255px;" class="img-progress">
+        <div wire:loading  style="height: 255px;" class="img-progress">
             <div class="spinner-border text__primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>

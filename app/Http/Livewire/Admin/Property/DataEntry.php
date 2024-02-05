@@ -32,7 +32,7 @@ class DataEntry extends Component
     public $category;
     public $brand;
     public $name;
-    public $slug;
+    // public $slug;
     public $model;
     public $short_description;
     public $description;
@@ -82,8 +82,7 @@ class DataEntry extends Component
     protected function rules()
     {
         return '' != $this->editId ? [
-            'name'                => ['required', Rule::unique('properties')->ignore($this->editId)],
-            'slug'                => ['required', Rule::unique('properties')->ignore($this->editId)],
+            'name'                => ['required', 'string'],
             'category'            => ['required', 'integer'],
             'state'               => ['required', 'integer'],
             'country'               => ['required', 'integer'],
@@ -117,8 +116,7 @@ class DataEntry extends Component
             ],
         ]
         : [
-            'name'                => 'required|unique:properties',
-            'slug'                => 'required|unique:properties',
+            'name'                => 'required|string',
             'category'            => ['required', 'integer'],
             'state'               => ['required', 'integer'],
             'country'               => ['required', 'integer'],
@@ -247,7 +245,7 @@ class DataEntry extends Component
     public function submit()
     {
 
-        $this->slug = '' != $this->slug ? Str::slug($this->slug) : Str::slug($this->name);
+        // $this->slug = '' != $this->slug ? Str::slug($this->slug) : Str::slug($this->name);
 
         $this->promo       = 'true' == $this->promo ? 1 : 0;
         $this->featured    = 'true' == $this->featured ? 1 : 0;
@@ -259,7 +257,7 @@ class DataEntry extends Component
 
         $form = [
             'name'                    => $this->name,
-            'slug'                    => $this->slug,
+            // 'slug'                    => $this->slug,
             'category_id'             => $this->category,
             'country_id'                => $this->country,
             'state_id'                => $this->state,
@@ -371,7 +369,7 @@ class DataEntry extends Component
         if ('' != $id) {
             $this->property                 = Property::where('id', $id)->with('PropertyDetails')->firstOrFail();
             $this->name                    = $this->property->name;
-            $this->slug                    = $this->property->slug;
+            // $this->slug                    = $this->property->slug;
             $this->category                = $this->property->category_id;
             $this->country                   = $this->property->country_id;
             $this->city                   = $this->property->city_id;

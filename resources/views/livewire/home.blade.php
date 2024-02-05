@@ -1,132 +1,143 @@
 @section('title')
-  Home
+    Home
 @endsection
 @section('home')
-  active
+    active
 @endsection
 
 @section('extra-css')
-  <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}" />
 @endsection
 
 <div class="">
-  @include('partial.component-loading')
-  <!-- Start Slider Area -->
-  <div style="height: 500px;" class="mb-4 slider__container slider--one bg__cat--3">
-    @livewire('child.home-slider')
-  </div>
-
-
-
-  {{-- Country Filter --}}
-
-  <div class="container row my-4 py-4 product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
-
-
-    <div class="row ">
-        <div class="col-md-3">
-            <div class="form-group @error('category') has-error @enderror">
-                {{-- <label for="category">Category <span class="text-danger">*</span></label> --}}
-                <select wire:model='category' class="form-control" id="category">
-                    <option value="">Select Category</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('category')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="form-group @error('country') has-error @enderror">
-                {{-- <label for="country">Country <span class="text-danger">*</span></label> --}}
-                <select wire:model="country"  wire:loading.attr="disabled" class="form-control" id="country">
-                    <option value="">Select Country</option>
-                    @foreach ($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                    @endforeach
-                </select>
-                @error('country')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-
-
-        <div class="col-md-3">
-            <div class="form-group @error('state') has-error @enderror">
-                {{-- <label for="state">State <span class="text-danger">*</span></label> --}}
-                <select wire:model="state" wire:loading.attr="disabled" class="form-control" id="state">
-                    <option value="">Select State</option>
-                    @foreach ($states as $state)
-                        <option value="{{ $state->id }}">{{ $state->name }}</option>
-                    @endforeach
-                </select>
-                @error('state')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="form-group @error('city') has-error @enderror">
-                {{-- <label for="city">City <span class="text-danger">*</span></label> --}}
-                <select wire:model="city" wire:loading.attr="disabled" class="form-control" id="city">
-                    <option value="">Select City</option>
-                    @foreach ($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->name }}</option>
-                    @endforeach
-                </select>
-                @error('city')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
+    @include('partial.component-loading')
+    <!-- Start Slider Area -->
+    <div style="height: 500px;" class="mb-4 slider__container slider--one bg__cat--3">
+        @livewire('child.home-slider')
     </div>
 
-    <div wire:loading role="status">
-         <i class="spinner-border spinner-border-sm"></i> <span class="visually-hidden">Please Wait...</span>
-    </div>
 
-</div>
 
-  <!-- Start Slider Area -->
+    {{-- Country Filter --}}
 
-  {{-- Category Area --}}
-  {{-- @livewire('child.home-categories') --}}
-  {{-- ! Category Area --}}
+    <div class="container row my-4 py-4 product-card p-relative text-center w-100 bg-white rounded-3 shadow-1-strong">
 
-  @if ($bestSellers->count() > 0)
 
-    <!-- Best Seller -->
-    <div class="text-center">
-      <h3 class="bigger-font f-500 text-uppercase text__primary">Best Seller</h3>
-    </div>
-    <div class="slide__container pb-4 mb-4 slider__activation__wrap owl-carousel product-carousel">
-      @foreach ($bestSellers as $bestSeller)
-        <div wire:key='{{ $bestSeller->id }}' class="single__slide animation__style01 slider__fixed--height">
-          <div class="container">
-            <div class="row align-items__center">
-              <div class="col-md-12">
-                <div class="slide">
-                  <div class="slider__inner">
-                    @livewire('child.single-product', ['product' => $bestSeller],
-                    key('best_seller_'.$bestSeller->id))
-                  </div>
+        <div class="row ">
+            <div class="col-md-3">
+                <div class="form-group @error('category') has-error @enderror">
+                    {{-- <label for="category">Category <span class="text-danger">*</span></label> --}}
+                    <select wire:model='category'  wire:loading.attr="disabled" wire:target="updateFilteredProperties" class="form-control" id="category">
+                        <option value="">Select Category</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      @endforeach
-    </div>
-  @endif
 
-  @if ($featureds->count() > 0 || $trendings->count() > 0 || $discounteds->count() > 0)
+            <div class="col-md-3">
+                <div class="form-group @error('country') has-error @enderror">
+                    {{-- <label for="country">Country <span class="text-danger">*</span></label> --}}
+                    <select wire:model="country"  wire:loading.attr="disabled" wire:target="updateFilteredProperties" class="form-control" id="country">
+                        <option value="">Select Country</option>
+                        @foreach ($countries as $country)
+                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('country')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="form-group @error('state') has-error @enderror">
+                    {{-- <label for="state">State <span class="text-danger">*</span></label> --}}
+                    <select wire:model="state"  wire:loading.attr="disabled" wire:target="updateFilteredProperties" class="form-control" id="state">
+                        <option value="">Select State</option>
+                        @foreach ($states as $state)
+                            <option value="{{ $state->id }}">{{ $state->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('state')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group @error('city') has-error @enderror">
+                    {{-- <label for="city">City <span class="text-danger">*</span></label> --}}
+                    <select wire:model="city"  wire:loading.attr="disabled" wire:target="updateFilteredProperties" class="form-control" id="city">
+                        <option value="">Select City</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('city')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
+        <div wire:loading role="status">
+            <i class="spinner-border spinner-border-sm"></i> <span class="visually-hidde">Please Wait...</span>
+        </div>
+
+    </div>
+
+    <!-- Start Slider Area -->
+
+    {{-- Category Area --}}
+    {{-- @livewire('child.home-categories') --}}
+    {{-- ! Category Area --}}
+
+
+    @if ($bestSellers->count() > 0)
+        <!-- Best Seller -->
+        <div class="text-center">
+            <h3 class="bigger-font f-500 text-uppercase text__primary">Best Seller</h3>
+        </div>
+
+
+        {{-- <div wire:ignore.self class="slide__container pb-4 mb-4 slider__activation__wrap owl-carousel product-carousel"> --}}
+
+          <div class="container">
+            <div class="row">
+
+            @foreach ($bestSellers as $bestSeller)
+            <div class="my-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              @livewire('child.single-product', ['product' => $bestSeller], key('best_seller_' . $bestSeller->id))
+              {{-- @livewire('child.single-product', ['product' => $product], key(time().$product->id)) --}}
+             
+          </div>
+                {{-- <div wire:key='{{ $bestSeller->id }}' class="single__slide animation__style01 slider__fixed--height">
+
+                        <div class="col-md-4 align-items__center">
+                                <div class="slide">
+                                    <div class="slider__inner">
+
+                                        @livewire('child.single-product', ['product' => $bestSeller], key('best_seller_' . $bestSeller->id))
+                                    </div>
+                                </div>
+                            </div> --}}
+                      
+            @endforeach  
+          </div>
+                    {{-- </div>
+                </div> --}}
+        </div>
+    @endif
+
+    @if ($featureds->count() > 0 || $trendings->count() > 0 || $discounteds->count() > 0)
     <section class="">
       <!-- Tabs navs -->
       <ul class="nav nav-tabs justify-content-center" id="ex1" role="tablist">
@@ -235,106 +246,120 @@
     </section>
   @endif
 
-  {{-- Brand --}}
-  {{-- <section class="">
+    {{-- Brand --}}
+    {{-- <section class="">
     @livewire('child.home-brands')
   </section> --}}
-  {{-- ! Brand --}}
+    {{-- ! Brand --}}
 
 </div>
-<script>
-  document.addEventListener('livewire:load', function() {
-    $(".home-slider").owlCarousel({
-      loop: true,
-      margin: 0,
-      nav: true,
-      smartSpeed: 1000,
-      autoplay: true,
-      navText: [
-        '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-left"></i>',
-        '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-right"></i>',
-      ],
-      autoplayTimeout: 5000,
-      autoplayHoverPause: true,
-      items: 1,
-      dots: true,
-      lazyLoad: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        767: {
-          items: 1,
-        },
-        991: {
-          items: 1,
-        },
-      },
-    });
-    $(".slider__container").css("height", "100%");
 
-    $(".product-carousel").owlCarousel({
-      loop: false,
-      margin: 0,
-      nav: true,
-      smartSpeed: 1000,
-      autoplay: true,
-      navText: [
-        '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-left"></i>',
-        '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-right"></i>',
-      ],
-      autoplayTimeout: 3000,
-      autoplayHoverPause: true,
-      items: 4,
-      dots: false,
-      lazyLoad: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        767: {
-          items: 2,
-        },
-        991: {
-          items: 4,
-        },
-      },
-    });
+@push('extra-css')
+<style>
+    #social-links li {
+            display: inline-block;
+            padding: 5px;
+            text-align: center;
+            list-style: none;
+        }
+</style>
 
-    $(".brand-carousel").owlCarousel({
-      loop: true,
-      margin: 0,
-      nav: true,
-      smartSpeed: 1000,
-      autoplay: true,
-      navText: [
-        '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-left"></i>',
-        '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-right"></i>',
-      ],
-      autoplayTimeout: 2000,
-      autoplayHoverPause: true,
-      items: 6,
-      dots: false,
-      lazyLoad: true,
-      responsive: {
-        0: {
-          items: 2,
-        },
-        767: {
-          items: 4,
-        },
-        991: {
-          items: 6,
-        },
-      },
-    });
+@endpush
 
-    $(".nav-tabs .nav-item .nav-link").first().addClass('active');
-    $(".tab-content .tab-pane").first().addClass('show active');
-  });
-
-</script>
 @section('extra-js')
-  <!-- Owl Carousel -->
-  <script type="text/javascript" src="{{ asset('front/vendor/owl.carousel.min.js') }}"></script>
+    <!-- Owl Carousel -->
+    <script type="text/javascript" src="{{ asset('front/vendor/owl.carousel.min.js') }}"></script>
+
+
+    <script>
+      document.addEventListener('livewire:load', function() {
+          $(".home-slider").owlCarousel({
+              loop: true,
+              margin: 0,
+              nav: true,
+              smartSpeed: 1000,
+              autoplay: true,
+              navText: [
+                  '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-left"></i>',
+                  '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-right"></i>',
+              ],
+              autoplayTimeout: 5000,
+              autoplayHoverPause: true,
+              items: 1,
+              dots: true,
+              lazyLoad: true,
+              responsive: {
+                  0: {
+                      items: 1,
+                  },
+                  767: {
+                      items: 1,
+                  },
+                  991: {
+                      items: 1,
+                  },
+              },
+          });
+          $(".slider__container").css("height", "100%");
+  
+          $(".product-carousel").owlCarousel({
+              loop: false,
+              margin: 0,
+              nav: true,
+              smartSpeed: 1000,
+              autoplay: true,
+              navText: [
+                  '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-left"></i>',
+                  '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-right"></i>',
+              ],
+              autoplayTimeout: 3000,
+              autoplayHoverPause: true,
+              items: 4,
+              dots: false,
+              lazyLoad: true,
+              responsive: {
+                  0: {
+                      items: 1,
+                  },
+                  767: {
+                      items: 2,
+                  },
+                  991: {
+                      items: 4,
+                  },
+              },
+          });
+  
+          $(".brand-carousel").owlCarousel({
+              loop: true,
+              margin: 0,
+              nav: true,
+              smartSpeed: 1000,
+              autoplay: true,
+              navText: [
+                  '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-left"></i>',
+                  '<button class="btn btn-floating btn-light"><i class="fas fa-chevron-right"></i>',
+              ],
+              autoplayTimeout: 2000,
+              autoplayHoverPause: true,
+              items: 6,
+              dots: false,
+              lazyLoad: true,
+              responsive: {
+                  0: {
+                      items: 2,
+                  },
+                  767: {
+                      items: 4,
+                  },
+                  991: {
+                      items: 6,
+                  },
+              },
+          });
+  
+          $(".nav-tabs .nav-item .nav-link").first().addClass('active');
+          $(".tab-content .tab-pane").first().addClass('show active');
+      });
+  </script>
 @endsection

@@ -49,8 +49,6 @@ class CountryProperties extends Component
     public function updatedCountry($newCountry)
     {
         $this->states = State::where('country_id', $newCountry)->get();
-        // info(['category'=>$newCountry]);
-
         $this->state = null; // Reset selected state
         $this->city = null; // Reset selected city
         $this->updateFilteredProperties();
@@ -69,6 +67,10 @@ class CountryProperties extends Component
         $this->updateFilteredProperties();
     }
 
+    public function updatedCity($newState)
+    {
+        $this->updateFilteredProperties();
+    }
     public function updateFilteredProperties()
     {
         $this->properties = Property::with('onSaleAttributes')
@@ -85,12 +87,18 @@ class CountryProperties extends Component
             })
 
             ->when($this->city, function ($query) {
-                $query->where('city_id', $this->category);
+                $query->where('city_id', $this->city);
             })
             ->latest()
             ->get();
 
-            info(['propertis'=>$this->properties]);
+            // info(['country'=>$this->country, 'state'=>$this->state, 'city'=>$this->city]);
+
+
+
+
+
+            // info(['propertis'=>$this->properties]);
 
        
     }
