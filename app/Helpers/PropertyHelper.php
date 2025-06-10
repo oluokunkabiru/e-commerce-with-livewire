@@ -84,7 +84,8 @@ if (!function_exists('CurrencyRate')) {
                     $errorMessage = $e->getResponse()->getBody()->getContents();
                     $errorMessage = json_decode($errorMessage, TRUE);
                     $errorMessage = $errorMessage['message'];
-                    $errorMessage = $errorMessage['description'];
+                    Log::error($errorMessage);
+                    // $errorMessage = $errorMessage['description'];
                 } else {
                     // RequestException without response (e.g., connection error)
                     $statusCode = 500;

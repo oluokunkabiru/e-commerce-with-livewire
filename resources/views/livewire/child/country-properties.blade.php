@@ -67,7 +67,7 @@
     </div>
 
     <div wire:loading role="status">
-        <i class="spinner-border spinner-border-sm"></i> <span class="visually-hidden">Please Wait...</span>
+        <i class="spinner-border spinner-border-sm"></i> <span class="visually-hidd">Please Wait...</span>
    </div>
 
  

@@ -171,6 +171,16 @@
                     </div>
                 </footer>
                 <!-- partial -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '13307bd690221d9e66a0d6c669b486c6',
+                        'format' : 'iframe',
+                        'height' : 60,
+                        'width' : 468,
+                        'params' : {}
+                    };
+                    document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/13307bd690221d9e66a0d6c669b486c6/invoke.js"></scr' + 'ipt>');
+                </script>
             </div>
         </div>
     </div>

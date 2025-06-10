@@ -160,6 +160,8 @@
     </header>
     <!--Main Navigation-->
 
+  
+
     <!--Main layout-->
     <main class="z-1 bg-container">
         <div class="container py-4">
@@ -172,7 +174,7 @@
 
     @livewire('child.footer')
 
-    
+  
 
 
     <div class="p-4 text-center bg-black w-100">
@@ -181,6 +183,9 @@
             Reserved.</h4>
     </div>
     <!--Footer-->
+
+    <script async="async" data-cfasync="false" src="//pl22413347.toprevenuegate.com/05c35568f419bebde28efae27a682954/invoke.js"></script>
+    <div id="container-05c35568f419bebde28efae27a682954"></div>
     
     
 
