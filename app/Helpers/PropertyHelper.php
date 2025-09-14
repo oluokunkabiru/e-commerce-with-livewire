@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Session;
+use Stevebauman\Location\Facades\Location;
 
 if (!function_exists('settings')) {
 
@@ -141,7 +142,7 @@ if (!function_exists('Country')) {
     function Country()
     {
         $ip = env('APP_DEBUG') ? '149.102.229.247':request()->ip();
-        $location= Stevebauman\Location\Facades\Location::get($ip);
+        $location= Location::get($ip);
         $country = Country::where('name', $location->countryName)->first();
         return $country;
 

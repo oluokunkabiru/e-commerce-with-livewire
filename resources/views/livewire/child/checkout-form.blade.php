@@ -102,7 +102,7 @@
 
     <div class="form-group mb-3">
         <label class="form-label">Company</label>
-        <input wire:model.defer="company" id="company" required autofocus type="text" class="form-control input-control">
+        <input wire:model.defer="company" id="company" autofocus type="text" class="form-control input-control">
         @error('company')
             <p class="text-danger smaller-font">{{ $message }}</p>
         @enderror

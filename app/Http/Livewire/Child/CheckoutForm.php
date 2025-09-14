@@ -85,6 +85,11 @@ class CheckoutForm extends Component
         // dd($token);
         $validatedData = $this->validate();
 
+
+        $validatedData['city_id']    = $this->city;
+        $validatedData['state_id']   = $this->state;
+        $validatedData['country_id'] = $this->country;
+
         $credentials = [
             'email'    => $this->email,
             'password' => $this->password,
