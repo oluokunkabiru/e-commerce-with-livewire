@@ -131,6 +131,8 @@ class CheckoutForm extends Component
             $validatedData['payment_status'] = 'pending';
             $validatedData['order_status']   = $orderStatus;
 
+            // dd($validatedData);
+
             $order = Order::create($validatedData);
 
             $message = null;

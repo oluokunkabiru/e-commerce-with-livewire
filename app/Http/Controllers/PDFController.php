@@ -15,7 +15,8 @@ class PDFController extends Controller
         //     $order = $order->where("user_id", auth()->id());
         // }
 
-        $order = $order->with("details")->findOrFail($id);
+        $order = $order->with(["details"])->findOrFail($id);
+        // return $order;
 
         return PDF::loadView('pdf.invoice', ["order" => $order])
             ->download('order_' . $order->id . '_invoice_' . time() . '.pdf');

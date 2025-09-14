@@ -14,6 +14,20 @@ class Order extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $with = ['city', 'state', 'country'];
+    protected $fillable = [
+        'city_id', 
+        'state_id', 
+        'country_id',
+        'address',
+        'company',
+        'email',
+        'name',
+        'mobile',
+        'zip',
+        'password',
+    ];
+
     use SoftDeletes;
 
     public function orderDetail()

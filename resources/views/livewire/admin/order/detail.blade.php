@@ -59,11 +59,11 @@
             @foreach ($order->orderDetail as $detail)
               <tr class="mdc-data-table__row">
                 <td class="mdc-data-table__cell img-td"><a
-                    href="{{ route('dashboard.product.edit', $detail->product->id) }}">
+                    href="{{ $detail->product ? route('dashboard.product.edit', $detail->product->id) : '#' }}">
                     <img src="{{  $detail->productDetails->photo->url }}" class="img-fluid" alt="">
                   </a></td>
                 <td class="mdc-data-table__cell">
-                  <h4 class="text-nowrap">{{ $detail->product->name }}</h4>
+                  <h4 class="text-nowrap">{{ $detail->product->name ?? "NIL" }}</h4>
                   <p class="smaller-font">{{ Country()->currency_symbol }}{{ number_format($detail->productDetails->price, 2) }}</p>
                 </td>
                 <td class="mdc-data-table__cell">
@@ -116,7 +116,7 @@
                 city
               </th>
               <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">
-                {{ $order->city }}
+                {{ $order->city->name??"NIL" }}
               </th>
             </tr>
             <tr class="mdc-data-table__header-row">
@@ -124,7 +124,7 @@
                 state
               </th>
               <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">
-                {{ $order->state }}
+                {{ $order->state->name??"NIL" }}
               </th>
             </tr>
             <tr class="mdc-data-table__header-row">

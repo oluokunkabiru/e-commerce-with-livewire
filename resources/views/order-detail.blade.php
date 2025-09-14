@@ -32,7 +32,7 @@
             <div class="col-md- col-sm-6 text-right">
                 <p class="f-500 small-font my-0">{{ $order->name }}</p>
                 <p class="f-500 small-font my-0">{{ $order->email }}</p>
-                <p class="f-500 small-font my-0">{{ $order->city }}, {{ $order->state }}</p>
+                <p class="f-500 small-font my-0">{{ $order->city->name??null }}, {{ $order->state->name??null }}</p>
                 <p class="f-500 small-font my-0">{{ $order->address }}({{ $order->zip }})</p>
             </div>
         </div>

@@ -201,7 +201,7 @@
                     <div class="col invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
                         <h2 class="to">{{ $order->name }}</h2>
-                        <div class="address">{{ $order->city }}, {{ $order->state }}</div>
+                        <div class="address">{{ $order->city->name??"NILL" }}, {{ $order->state->name??"NILL" }}</div>
                         <div class="address">{{ $order->address }}({{ $order->zip }})</div>
                         <div class="email">{{ $order->email }}</div>
                     </div>
@@ -223,7 +223,7 @@
                         @foreach ($order->orderDetail as $item)
                             <tr>
                                 <td class="text-left">
-                                    <h4>{{ $item->product->name }}</h4>
+                                    <h4>{{ $item->product->name??"NIL" }}</h4>
                                     <p><span style="font-family: DejaVu Sans;">&#x20A6;</span>{{ number_format($item->productDetails->price,2) }}</p>
                                 </td>
                                 <td class="unit">
