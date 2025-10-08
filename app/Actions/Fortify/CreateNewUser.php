@@ -21,12 +21,19 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
+            // 'name'     => ['required', 'string', 'max:255'],
             'name'     => ['required', 'string', 'max:255'],
-            'mobile'   => ['required', 'max:255'],
+
+            'mobile'   => [
+                
+                'required',
+                'digits_between:10,12',
+                'regex:/^0[789][0-9]{9}$/',
+                'unique:users,phone',
+            ],
             'referral_code'=>'sometimes|nullable|string',Rule::exists('users', 'referral_code'),
             'email'    => [
                 'required',
-                'string',
                 'email',
                 'max:255',
                 Rule::unique(User::class),
