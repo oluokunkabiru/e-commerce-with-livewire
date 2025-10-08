@@ -2,7 +2,7 @@
     <label class="form-label">{{ $label }} </label>
     <br>
     @if ($warning)
-        <small class="text-danger smaller-font"> {{$warning}} </small>
+        <small class="text-warning smaller-font"> {{$warning}} </small>
     @endif 
 
     <input value="{{ $value }}" {{ $others }} {{ $autofocus ? 'autofocus' : null }} type="{{ $type }}" name="{{ $name }}"

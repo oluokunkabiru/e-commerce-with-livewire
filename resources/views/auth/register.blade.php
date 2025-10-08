@@ -33,7 +33,7 @@
                         @if ($referralCode )
                         <x-input others="readonly" value="{{ $referralCode }}" type="text" aria-readonly readonly name="referral_code" />
                         @endif
-                        <x-input type="password" name="password" />
+                        <x-input type="password" name="password" warning="Password must uppercase, lowercase, numbers and special characters" />
                         <x-input type="password" name="password_confirmation" warning="Password must uppercase, lowercase, numbers and special characters" label="Password Confirmation" />
 
                         @if (session()->has('status'))
