@@ -34,7 +34,7 @@
                         <x-input others="readonly" value="{{ $referralCode }}" type="text" aria-readonly readonly name="referral_code" />
                         @endif
                         <x-input type="password" name="password" />
-                        <x-input type="password" name="password_confirmation" label="Password Confirmation" />
+                        <x-input type="password" name="password_confirmation" warning="Password must uppercase, lowercase, numbers and special characters" label="Password Confirmation" />
 
                         @if (session()->has('status'))
                             <h3 class="py-3 shadow-3 px-4 mb-2 rounded-3 bg-secondary smaller-font f-500 text-light">

@@ -28,8 +28,14 @@ class Admin extends Component
     {
         $permissions = Permission::all()->toArray();
         if (!auth()->user()->hasAnyPermission($permissions)) {
-            abort(404);
+            // abort();
+        return redirect()->route('profile');
+
         }
+        
+        // else{
+        //     return redirect()->route('profile');
+        // }
 
         if (can('view dashboard')) {
             $y     = date('Y');

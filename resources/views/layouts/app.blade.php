@@ -184,8 +184,8 @@
     </div>
     <!--Footer-->
 
-    <script async="async" data-cfasync="false" src="//pl22413347.toprevenuegate.com/05c35568f419bebde28efae27a682954/invoke.js"></script>
-    <div id="container-05c35568f419bebde28efae27a682954"></div>
+    {{-- <script async="async" data-cfasync="false" src="//pl22413347.toprevenuegate.com/05c35568f419bebde28efae27a682954/invoke.js"></script>
+    <div id="container-05c35568f419bebde28efae27a682954"></div> --}}
     
     
 

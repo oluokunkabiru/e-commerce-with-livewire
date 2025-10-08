@@ -12,13 +12,14 @@ class Input extends Component
     public $type;
     public $value;
     public $others;
+    public $warning;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $label = null, $autofocus = false, $type = 'text', $value = null, $others=null)
+    public function __construct($name, $label = null, $autofocus = false, $type = 'text', $value = null, $others=null, $warning=null)
     {
         $this->name      = $name;
         $this->label     = $label ?? ucwords($name);
@@ -26,6 +27,7 @@ class Input extends Component
         $this->type      = $type;
         $this->value     = $value;
         $this->others =  $others;
+        $this->warning =  $warning;
     }
 
     /**

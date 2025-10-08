@@ -22,14 +22,20 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             // 'name'     => ['required', 'string', 'max:255'],
-            'name'     => ['required', 'string', 'max:255'],
+            'name'     => [  'required',
+                                'string',
+                                'max:30',
+                                'regex:/^[A-Za-z]+(?:\s+[A-Za-z]+)+$/'
+                            ],
+
+            
 
             'mobile'   => [
-                
+
                 'required',
                 'digits_between:10,12',
                 'regex:/^0[789][0-9]{9}$/',
-                'unique:users,phone',
+                'unique:users,mobile',
             ],
             'referral_code'=>'sometimes|nullable|string',Rule::exists('users', 'referral_code'),
             'email'    => [
