@@ -59,7 +59,8 @@ class UpdateProfile extends Component
 
         $user->save();
 
-        session()->flash('success_msg', 'Profile information updated.');
+        session()->flash('success_msg', 'Congratulation, Profile information updated.');
+        return $this->redirect(route('shop'));
     }
 
     public function mount()
