@@ -148,7 +148,7 @@
         <p class="mb-4 text-danger smaller-font">{{ session('card_error') }}</p>
     @endif
 
-    <button type="submit" class="input-control btn btn-lg btn-dark btn-block mb-3">Place your contact</button>
+    <button type="submit" class="input-control btn btn-lg btn-dark btn-block mb-3">Place your order</button>
 </form>
 
 @push('extra-js')

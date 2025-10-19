@@ -72,7 +72,7 @@ class CheckoutForm extends Component
             'mobile'   => "required|string",
             'zip'      => "required|numeric",
             'address'  => "required|string",
-            'city'     => "required|numeric",
+            'city'     => "sometimes|nullable|numeric",
             'country'     => "required|numeric",
             "state"    => "required|numeric",
             "company"  => "nullable|string",

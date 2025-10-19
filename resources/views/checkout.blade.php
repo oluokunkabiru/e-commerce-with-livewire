@@ -23,7 +23,7 @@
             @if ($cartCount > 0)
 
                 <div class="col-md-8 col-sm-12">
-                    <h4 class="big-font text-uppercase text-center bg-white p-4 mb-4">Contact Agents</h4>
+                    <h4 class="big-font text-uppercase text-center bg-white p-4 mb-4">Profile Information</h4>
 
                     @livewire('child.checkout-form')
 

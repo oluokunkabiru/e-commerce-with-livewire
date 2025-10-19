@@ -90,7 +90,7 @@ Route::get('/about-us/{category}', [FrontController::class, 'categoryAbout'])->n
 Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('contactUs');
 
 Route::get('/contact-list', Cart::class)->name('cart');
-Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
+Route::get('/reaching-out-to-us', [FrontController::class, 'checkout'])->name('checkout');
 
 Route::get('/property/{slug}', PropertyDetail::class)->name('property.detail');
 
