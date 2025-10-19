@@ -140,8 +140,7 @@
             <input type="number" style="width: 80px;" wire:model.defer="qty" min="1" max="{{ $attributeArr->qty }}"
                 class="form-control py-1 px-3 bg-transparent">
         </div> --}}
-        <button wire:click="addToCart" class="btn btn-dark rounded-0">Add to
-            contact</button>
+        <button wire:click="addToCart" class="btn btn-dark rounded-0">Place Order</button>
         <button wire:click="addTowishlist" class="btn btn__primary rounded-0">Add to wishlist</button>
 
         @if (session()->has('product_success_msg'))

@@ -78,7 +78,7 @@ class ProductDetailPartial extends Component
 
         if ($preCart) {
             $preCart->update(['qty' => $qty]);
-            session()->flash('product_success_msg', 'Contact List quantity updated.');
+            session()->flash('product_success_msg', 'Order List quantity updated.');
         } else {
             Cart::create([
                 'user_id'         => $user_id,
@@ -87,7 +87,7 @@ class ProductDetailPartial extends Component
                 'property_id'      => $pid,
                 'property_attr_id' => $aid,
             ]);
-            session()->flash('product_success_msg', 'Property added to contact list.');
+            session()->flash('product_success_msg', 'Property added to order list.');
             if ($isEmit) {
                 $this->emit('cartUpdated');
             }

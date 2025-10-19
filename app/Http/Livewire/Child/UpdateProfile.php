@@ -23,7 +23,7 @@ class UpdateProfile extends Component
     public $state;
     public $states = [];
 
-    public $city;
+    public $city=null;
     public $cities = [];
 
 

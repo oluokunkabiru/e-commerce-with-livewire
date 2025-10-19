@@ -31,10 +31,10 @@ class CheckoutForm extends Component
     public $countries=[];
 
 
-    public $state;
+    public $state=null;
     public $states = [];
 
-    public $city;
+    public $city=null;
     public $cities = [];
 
     protected $listeners = ["submit"];
