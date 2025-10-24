@@ -13,6 +13,7 @@ use Livewire\Component;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
 use App\Models\PropertyDetail;
+use App\Notifications\AdminOrderPlaced;
 use Illuminate\Validation\Rule;
 use App\Notifications\OrderPlaced;
 use Illuminate\Support\Facades\Auth;
@@ -171,6 +172,11 @@ class CheckoutForm extends Component
                 $data = ["name" => auth()->user()->name, "link" => route("order.detail", $order->id)];
 
                 Notification::send(auth()->user(), new OrderPlaced($data));
+            }
+
+            $admins = User::role('admin')->get(); // Spatie Laravel-Permission syntax
+            if ($admins->count()) {
+                Notification::send($admins, new AdminOrderPlaced($data));
             }
 
             session()->flash('order_placed', 'We have received your request successfully.');

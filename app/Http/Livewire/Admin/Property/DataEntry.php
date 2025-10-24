@@ -416,7 +416,7 @@ class DataEntry extends Component
 
         $this->hasAttr = count($this->attributes) > 0 ? true : false;
 
-        $this->categories = Category::where('status', 1)->get(['name', 'id'])->toArray();
+        $this->categories = Category::where('status', 1)->whereIn('id',[3,4])->get(['name', 'id'])->toArray();
         $this->countries = Country::get();
         $this->states = $this->states;
         $this->cities = $this->cities;
