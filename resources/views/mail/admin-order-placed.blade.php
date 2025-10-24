@@ -149,6 +149,78 @@
                             <p style="margin: 0;text-align: center;">We're excited that you have place order.</p>
                         </td>
                     </tr>
+                    <!-- ORDER ITEMS -->
+                    <tr>
+                        <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 20px 30px;">
+                            <h3 style="font-family: 'Poppins'; font-size: 20px; margin-bottom: 10px;">Order Items</h3>
+                            <table width="100%" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th align="left">Image</th>
+                                        <th align="left">Name</th>
+                                        <th align="left">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($data['order_items'] ?? [] as $item)
+                                        <tr>
+                                            <td><img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" width="60" height="60" style="object-fit:cover;border-radius:6px;"></td>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>{{ $item['qty'] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- END ORDER ITEMS -->
+                    <!-- USER INFO -->
+                    <tr>
+                        <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 20px 30px;">
+                            <h3 style="font-family: 'Poppins'; font-size: 20px; margin-bottom: 10px;">Customer Information</h3>
+                            <table width="100%" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+                                <tbody>
+                                    <tr>
+                                        <td style="font-weight:bold;">Name:</td>
+                                        <td>{{ $data['name'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">Email:</td>
+                                        <td>{{ $data['email'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">Mobile:</td>
+                                        <td>{{ $data['mobile'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">Address:</td>
+                                        <td>{{ $data['address'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">City:</td>
+                                        <td>{{ $data['city_name'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">State:</td>
+                                        <td>{{ $data['state_name'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">Country:</td>
+                                        <td>{{ $data['country_name'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">Zip:</td>
+                                        <td>{{ $data['zip'] ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">Company:</td>
+                                        <td>{{ $data['company'] ?? '' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- END USER INFO -->
                     <tr>
                         <td bgcolor="#ffffff" align="left">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">

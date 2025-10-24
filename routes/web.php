@@ -94,6 +94,8 @@ Route::get('/reaching-out-to-us', [FrontController::class, 'checkout'])->name('c
 
 Route::get('/property/{slug}', PropertyDetail::class)->name('property.detail');
 
+Route::get('public-order-detail/{id}', [FrontController::class, 'orderDetail'])->name('public-order-detail');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/wishlist', Wishlist::class)->name('wishlist')->middleware('verified');
     Route::get('/profile', [FrontController::class, 'profile'])->name('profile')->middleware('verified');

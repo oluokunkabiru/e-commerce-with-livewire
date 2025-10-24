@@ -177,6 +177,38 @@ class CheckoutForm extends Component
             }
 
             if ($admins->count()) {
+                // Prepare order items for email
+                $orderItems = [];
+                foreach ($order->orderDetail as $detail) {
+                    $property = $detail->property;
+                    $image = $property && $property->image ? asset($property->image) : null;
+                    $orderItems[] = [
+                        'name' => $property ? $property->name : '',
+                        'qty' => $detail->qty,
+                        'image' => $image,
+                        'property_id' => $detail->property_id,
+                        'property_attr_id' => $detail->property_attr_id,
+                    ];
+                }
+                // Prepare user and order info for email
+                $data = [
+                    'name' => auth()->user()->name,
+                    'email' => auth()->user()->email,
+                    'mobile' => auth()->user()->mobile,
+                    'address' => auth()->user()->address,
+                    'city_name' => optional($order->city)->name,
+                    'state_name' => optional($order->state)->name,
+                    'country_name' => optional($order->country)->name,
+                    'zip' => auth()->user()->zip,
+                    'company' => auth()->user()->company,
+                    'link' => route('public-order-detail', $order->id),
+                    'order_id' => $order->id,
+                    'order_date' => $order->created_at,
+                    'total_price' => $order->total_price,
+                    'tax' => $order->tax,
+                    'final_price' => $order->final_price,
+                    'order_items' => $orderItems,
+                ];
                 Notification::send($admins, new AdminOrderPlaced($data));
             }
 

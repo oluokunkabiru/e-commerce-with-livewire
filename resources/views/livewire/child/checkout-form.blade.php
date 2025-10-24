@@ -108,6 +108,8 @@
         @enderror
     </div>
 
+    {{-- {{  route('public-order-detail', 1) }} --}}
+
     @guest
         <div class="small-font text-center p-2 rounded-3 mb-2 bg-warning">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
