@@ -45,7 +45,7 @@ class AdminOrderPlaced extends Notification implements ShouldQueue
         return (new MailMessage)
             
             ->subject("New Customer Order Book placed")
-            ->view("mail.order-placed", ["data" => $this->data]);
+            ->view("mail.admin-order-placed", ["data" => $this->data]);
     }
 
     /**

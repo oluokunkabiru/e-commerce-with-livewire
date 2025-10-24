@@ -86,7 +86,9 @@ class CheckoutForm extends Component
         // dd($token);
         $validatedData = $this->validate();
 
+        $admins = User::role(['Super Admin', 'Admin'])->get(); // Spatie Laravel-Permission syntax for multiple roles
 
+        // dd($admins);
         $validatedData['city_id']    = $this->city;
         $validatedData['state_id']   = $this->state;
         $validatedData['country_id'] = $this->country;
@@ -174,7 +176,6 @@ class CheckoutForm extends Component
                 Notification::send(auth()->user(), new OrderPlaced($data));
             }
 
-            $admins = User::role('admin')->get(); // Spatie Laravel-Permission syntax
             if ($admins->count()) {
                 Notification::send($admins, new AdminOrderPlaced($data));
             }
